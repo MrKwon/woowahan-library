@@ -4,31 +4,16 @@
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
         <v-toolbar flat dense dark class="black">
-          <v-toolbar-title>로그인</v-toolbar-title>
+          <v-toolbar-title>로그인이 필요합니다.</v-toolbar-title>
         </v-toolbar>
-
-        <div class="pl-4 pr-4 pt-2 pb-2">
-          <v-text-field
-            label="Email"
-            v-model="email"
-          ></v-text-field>
-          <br>
-          <v-text-field
-            label="Password"
-            v-model="password"
-          ></v-text-field>
-          <br>
-          <div class="error" v-html="error" />
-          <br>
-          <v-layout>
-            <v-btn
-              dark
-              class="black"
-              @click="login">
-              Login
-            </v-btn>
-          </v-layout>
-        </div>
+        <v-layout class="pa-5" align-center justify-center>
+          <v-btn
+            dark
+            class="black"
+            v-on:click="buttonClick">
+            Github Login
+          </v-btn>
+        </v-layout>
       </div>
     </v-flex>
   </v-layout>
@@ -36,13 +21,21 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
-  name: 'home',
-  data: () => ({
-    email: '',
-    password: '',
-    error: null
-  })
+  methods: {
+    buttonClick: () => {
+      //TODO: async await 로 리팩토링
+      axios.get('http://localhost:8081/manage/github')
+      .then((res) => {
+        window.location.href = res.data;
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err)
+      })
+    }
+  }
 }
 </script>

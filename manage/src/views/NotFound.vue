@@ -1,11 +1,7 @@
 <template>
-  <v-container>
-    <v-layout>
-      <div>
-        로그인 창 만들기
-      </div>
-    </v-layout>
-  </v-container>
+  <div>
+    Not Found
+  </div>
 </template>
 
 <script>

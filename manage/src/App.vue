@@ -17,6 +17,9 @@ export default {
 
 
 <style>
+#app {
+  font-family: 'Do Hyeon', sans-serif;
+}
 .toolbar {
   border-bottom: 2px solid #E7ECF4;
 }
