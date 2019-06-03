@@ -1,26 +1,41 @@
 <template>
-  <div id="app">
-    <ToolBar />
-    <router-view/>
+  <div>
+    <v-app>
+      <Toolbar/>
+      <v-content>
+        <router-view/>
+      </v-content>
+    </v-app>
   </div>
 </template>
 
 <script>
-import ToolBar from '@/components/ToolBar'
+import Toolbar from './components/Toolbar'
 
 export default {
+  name: 'App',
   components: {
-    ToolBar
+    Toolbar
+  },
+  data () {
+    return {
+      //
+    }
   }
 }
 </script>
 
-
 <style>
 #app {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
-.toolbar {
-  border-bottom: 2px solid #E7ECF4;
+
+.toolbar-title {
+  font-family: 'Do Hyeon', sans-serif;
 }
 </style>

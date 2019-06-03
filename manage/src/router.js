@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import GithubLogin from './views/GithubLogin'
-import ManageMain from './views/ManageMain'
-import NotFound from './views/NotFound'
+import About from './views/About.vue'
+import Signin from './views/Signin.vue'
 
 Vue.use(Router)
 
@@ -11,9 +10,25 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '/', name: 'home', component: Home },
-    { path: '/githublogin', name: 'githublogin', component: GithubLogin },
-    { path: '/main', name: 'managemain', component: ManageMain},
-    { path: '*', component: NotFound },
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
+      path: '/signin',
+      name: 'about',
+      component: Signin
+    }
   ]
 })
+
+// route level code-splitting
+// this generates a separate chunk (about.[hash].js) for this route
+// which is lazy-loaded when the route is visited.
+// component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
