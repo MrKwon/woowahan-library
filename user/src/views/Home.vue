@@ -27,7 +27,7 @@ export default {
   methods: {
     buttonClick: () => {
       //TODO: async await 로 리팩토링
-      axios.get('http://localhost:8081/manage/github')
+      axios.get('http://localhost:8081/user/github')
       .then((res) => {
         window.location.href = res.data;
       })

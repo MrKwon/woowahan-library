@@ -5,7 +5,7 @@ const morgan = require('morgan')
 // const path = require('path')
 
 const indexRouter = require('./routes')
-const manageRouter = require('./routes/manage')
+const userRouter = require('./routes/user')
 
 const app = express()
 // app.set('view engine', 'html')
@@ -15,6 +15,6 @@ app.use(cors()) // {origin: 'http://localhost:8081'}
 // app.use(express.static(path.join(__dirname, 'dist')))
 
 app.use('/', indexRouter)
-app.use('/manage', manageRouter)
+app.use('/user', manageRouter)
 
 app.listen(process.env.PORT || 8081)

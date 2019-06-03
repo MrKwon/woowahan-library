@@ -31,7 +31,7 @@ export default {
   created() {
     const redirect = this.redirect
     if(this.$route.query.service === 'github') {
-      axios.get('http://localhost:8081/manage/user?token=' + this.$route.query.token)
+      axios.get('http://localhost:8081/user/user?token=' + this.$route.query.token)
       .then((resp) => {
         this.user = true
         this.userInfo = resp

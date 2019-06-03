@@ -22,7 +22,7 @@ export default {
   },
   created() {
     const redirect = this.redirect
-    axios.get('http://localhost:8081/manage/login?code=' + this.$route.query.code + '&state=' + this.$route.query.state)
+    axios.get('http://localhost:8081/user/login?code=' + this.$route.query.code + '&state=' + this.$route.query.state)
     .then(function(res) {
       if(!res.data) {
         alert('뭔가 잘못됨');
