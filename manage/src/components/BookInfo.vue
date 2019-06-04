@@ -1,43 +1,74 @@
 <template>
   <v-layout column>
     <v-flex xs6 ma-2 pa-2>
-      <div>이미지</div>
-      <v-img
-        v-bind:src="book.img_url"
-        max-height="500px"
-        max-width="200px"
-        aspect-ratio="1"/>
+      <h3>이미지</h3>
+      <v-layout row align-center justify-center>
+        <v-img
+          v-bind:src="bookInfo.img_url"
+          max-height="500px"
+          max-width="200px"
+          aspect-ratio="0.7"/>
+      </v-layout>
       <v-text-field
         label="제목"
-        v-model="book.title"
+        v-model="bookInfo.title"
+        v-bind:disabled="true"
       ></v-text-field>
       <v-text-field
         label="저자"
-        v-model="book.author"
+        v-model="bookInfo.author"
+        v-bind:disabled="true"
       ></v-text-field>
       <v-text-field
         label="출판사"
-        v-model="book.publisher"
+        v-model="bookInfo.publisher"
+        v-bind:disabled="true"
       ></v-text-field>
       <v-text-field
         label="ISBN"
-        v-model="book.isbn"
+        v-model="bookInfo.isbn"
+        v-bind:disabled="true"
       ></v-text-field>
+      <v-text-field
+        label="수량"
+        v-model="bookNumbers"
+        type="number"
+      ></v-text-field>
+      <v-btn
+        dark
+        class="primary">
+        등록하기
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 export default {
-  props: ['book'],
+  props: ['bookInfo'],
   data: () => ({
+    bookNumbers: 0,
     // book: {
     //   title: '',
     //   author: '',
     //   publisher: '',
     //   isbn: '',
     // }
-  })
+    registerNumber: [
+      { text: '1' },
+      { text: '2' },
+      { text: '3' },
+      { text: '4' },
+      { text: '5' },
+      { text: '6' },
+      { text: '7' },
+      { text: '8' },
+      { text: '9' },
+      { text: '10' }
+      ]
+  }),
+  methods: {
+  }
 }
 </script>
 

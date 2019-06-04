@@ -15,5 +15,6 @@ db.Sequelize = Sequelize
 
 // using table `Users` // MySQL
 db.User = require('./User')(sequelize, Sequelize)
+db.Book = require('./Book')(sequelize, Sequelize)
 
 module.exports = db

@@ -20,23 +20,11 @@
                 v-on:click="naverBookSearchResquest">
                 검색하기
               </v-btn>
-              <v-btn
-                color="primary"
-                dark
-                @click="itemsDialog = true">
-                다이알로그
-              </v-btn>
             </v-flex>
           </v-layout>
         </v-flex>
-        <BookInfo v-bind:book="book"/>
+        <BookInfo v-bind:bookInfo="book"/>
       </v-layout>
-      <v-btn
-        dark
-        class="primary"
-        v-on:click="showSearchItems">
-        등록하기
-      </v-btn>
     </v-layout>
     <v-dialog v-model="itemsDialog" max-width="750px">
         <v-card>
@@ -44,6 +32,11 @@
             책 선택하기
           </v-card-title>
           <v-card-text>
+            <v-progress-circular
+              indeterminate
+              color="primary"
+              v-if="searchItems === null"
+            ></v-progress-circular>
             <v-list>
               <v-list-tile
                 v-for="(item, i) in searchItems"
@@ -87,10 +80,11 @@ export default {
     BookInfo
   },
   methods: {
-    showSearchItems() {
-      alert(this.searchItems)
-    },
     async naverBookSearchResquest() {
+      if (this.toSearchTitle === '') {
+        alert('검색어를 입력해주세요')
+        return
+      }
       this.itemsDialog = true
       try {
         const response = await BookService.search({
@@ -98,13 +92,11 @@ export default {
         })
         this.searchItems = response.data.items
         // eslint-disable-next-line
-        // console.log(this.searchItems)
       } catch (error) {
         this.message = error
       }
     },
     selectedItem(item) {
-      // console.log(item)
       this.book.img_url = item.image
       this.book.title = item.title
       this.book.author = item.author
@@ -112,6 +104,7 @@ export default {
       this.book.isbn = item.isbn
       this.book.desc = item.description
       this.itemsDialog = false
+      this.toSearchTitle = ''
     }
   }
 }

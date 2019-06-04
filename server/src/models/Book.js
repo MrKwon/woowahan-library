@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Book = sequelize.define('Book', {
+    img_url: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     title: {
       type: DataTypes.STRING(30),
       allowNull: false,
-      unique: false
-    },
-    identificator: {
-      type: DataTypes.INTEGER,
-      allowNull: false, // 필수 입력
       unique: true
     },
     author: {
@@ -22,9 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(30),
       allowNull: false,
     },
-    image: {
+    desc: {
       type: DataTypes.STRING(255),
       allowNull: true,
+      defaultValue: '내용 없음'
     }
   }, {
     timestamps: true,

@@ -11,5 +11,9 @@ module.exports = {
   },
   authentication: {
     jwtSecret: process.env.JWT_SECRET || 'secret'
+  },
+  naverAPI: {
+    clientId: process.env.NAVER_API_CLIENT_ID,
+    clientSecret: process.env.NAVER_API_CLIENT_SECRET
   }
 }
