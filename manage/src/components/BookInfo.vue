@@ -36,7 +36,8 @@
       ></v-text-field>
       <v-btn
         dark
-        class="primary">
+        class="primary"
+        v-on:click="bookRegister">
         등록하기
       </v-btn>
     </v-flex>
@@ -44,30 +45,35 @@
 </template>
 
 <script>
+import BookService from '@/services/BookService'
+
 export default {
-  props: ['bookInfo'],
+  props: {
+    bookInfo: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     bookNumbers: 0,
-    // book: {
-    //   title: '',
-    //   author: '',
-    //   publisher: '',
-    //   isbn: '',
-    // }
-    registerNumber: [
-      { text: '1' },
-      { text: '2' },
-      { text: '3' },
-      { text: '4' },
-      { text: '5' },
-      { text: '6' },
-      { text: '7' },
-      { text: '8' },
-      { text: '9' },
-      { text: '10' }
-      ]
   }),
   methods: {
+    async bookRegister() {
+      try {
+        const response = await BookService.bookRegister({
+          img_url: this.bookInfo.img_url,
+          title: this.bookInfo.title,
+          author: this.bookInfo.author,
+          publisher: this.bookInfo.publisher,
+          isbn: this.bookInfo.isbn,
+          desc: this.bookInfo.desc
+        })
+        // alert(response.data.message)
+        this.$router.push('/')
+      } catch(error) {
+        this.error = error.response.data.error
+      }
+    }
   }
 }
 </script>

@@ -1,9 +1,22 @@
 const { Book } = require('../models')
 
 module.exports = {
+  async index (req, res) {
+    try {
+      const books = await Book.findAll({
+        limit: 10
+      })
+      res.send(books)
+    } catch (err) {
+      res.status(500).send({
+        error: '도서들을 fetch 시도 하는 중에 에러 발생'
+      })
+    }
+  },
   async bookRegister (req, res) {
     try {
       const { img_url, title, author, publisher, isbn, desc } = req.body
+      // req.body 로 바로 생성할 수 있을 것 같음
       const book = await Book.create({
         img_url,
         title,
@@ -14,7 +27,7 @@ module.exports = {
       })
       const bookJson = book.toJSON()
       console.log(bookJson)
-      res.status(200).send({
+      res.send({
         message: `[${bookJson.title}] 등록 성공`
       })
     } catch (err) {

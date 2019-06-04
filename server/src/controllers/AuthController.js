@@ -43,14 +43,14 @@ module.exports = {
 
       if (!user) {
         return res.status(403).send({
-          error: '로그인 정보가 정확하지 않습니다.[ID]'
+          error: '로그인 정보가 정확하지 않습니다.'
         })
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: '로그인 정보가 정확하지 않습니다.[PW]'
+          error: '로그인 정보가 정확하지 않습니다.'
         })
       }
 

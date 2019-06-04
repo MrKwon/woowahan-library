@@ -16,6 +16,8 @@
             <v-text-field
               label="PASSWORD"
               v-model="password"
+              type="password"
+              hint="At least 8 characters"
             ></v-text-field>
             <br>
             <div class="error" v-html="error" />
@@ -34,7 +36,6 @@
 </template>
 
 <script>
-/* eslint-disable no-console */
 import AuthService from '@/services/AuthService'
 
 export default {

@@ -45,6 +45,11 @@ router.post('/book/search', (req, res, next) => {
   })
 })
 
+// Books 에 저장된 데이터들을 조회하는 endpoint
+router.get('/books',
+  BookController.index
+)
+
 router.post('/book/register',
   BookController.bookRegister
 )

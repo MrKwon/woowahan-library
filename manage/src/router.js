@@ -21,8 +21,8 @@ export default new Router({
       component: About
     },
     {
-      path: '/bookadd',
-      name: 'bookadd',
+      path: '/book/add',
+      name: 'bookAdd',
       component: BookAdd
     }
   ]
