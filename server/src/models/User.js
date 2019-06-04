@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING(100),
       allowNull: false // 필수 입력
+    },
+    authorization: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     }
   }, {
     timestamps: true,

@@ -17,7 +17,7 @@ module.exports = {
       const hash = await bcrypt.hash(password, 12)
       const user = await User.create({
         uid,
-        password: hash,
+        password: hash
       })
       const userJson = user.toJSON()
       console.log(jwtSignUser(userJson))
@@ -27,7 +27,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        error: '이 이메일 주소는 이미 사용 중 입니다.'
+        error: '이 아이디는 이미 사용 중 입니다.'
       })
     }
   },
@@ -43,14 +43,14 @@ module.exports = {
 
       if (!user) {
         return res.status(403).send({
-          error: '로그인 정보가 정확하지 않습니다.'
+          error: '로그인 정보가 정확하지 않습니다.[ID]'
         })
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: '로그인 정보가 정확하지 않습니다.'
+          error: '로그인 정보가 정확하지 않습니다.[PW]'
         })
       }
 

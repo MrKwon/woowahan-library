@@ -7,13 +7,24 @@
     <v-btn flat icon color="black" to="/">
       <v-icon>home</v-icon>
     </v-btn>
-    <v-btn flat icon color="black" to="/signin">
+    <v-btn flat icon color="black" 
+      v-if="$store.state.isUserLoggedIn"
+      v-on:click="logout">
       <v-icon>account_circle</v-icon>
     </v-btn>
   </v-toolbar>
 </template>
 
 <script>
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push('/')
+    }
+  }
+}
 
 </script>
 
