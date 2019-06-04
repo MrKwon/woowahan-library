@@ -35,6 +35,9 @@ router.post('/book/search', (req, res, next) => {
       }
     }
   ).then((response) => {
+    response.data.items.forEach(item => {
+      item.title = item.title.replace(/(<([^>]+)>)/ig,"")
+    })
     res.send({
       items: response.data.items
     })

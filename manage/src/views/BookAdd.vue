@@ -27,38 +27,45 @@
       </v-layout>
     </v-layout>
     <v-dialog v-model="itemsDialog" max-width="750px">
-        <v-card>
-          <v-card-title>
-            책 선택하기
-          </v-card-title>
-          <v-card-text>
-            <v-progress-circular
-              indeterminate
-              color="primary"
-              v-if="searchItems === null"
-            ></v-progress-circular>
-            <v-list>
-              <v-list-tile
-                v-for="(item, i) in searchItems"
-                :key="i"
-                label="A Select List"
-                :item-value="item.title"
-                @click="selectedItem(item)">
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" flat @click="itemsDialog = false">Close</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <v-card>
+        <v-card-title justify-center>
+          책 선택하기
+        </v-card-title>
+        <v-card-text>
+          <v-progress-circular
+            indeterminate
+            color="primary"
+            v-if="searchItems === null"
+          ></v-progress-circular>
+          <v-list>
+            <SearchListHeader />
+            <v-list-tile
+              v-for="(item, i) in searchItems"
+              :key="i"
+              :item-value="item.title"
+              @click="selectedItem(item)">
+              <v-list-tile-title>
+                <SearchListItem
+                  v-bind:title="item.title"
+                  v-bind:author="item.author"
+                  v-bind:publisher="item.publisher"/>
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" flat @click="dialogCloseHandler()">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import BookService from '@/services/BookService'
 import BookInfo from '@/components/BookInfo'
+import SearchListHeader from '@/components/SearchListHeader'
+import SearchListItem from '@/components/SearchListItem'
 
 export default {
   data: () => ({
@@ -73,11 +80,14 @@ export default {
     message: '',
     toSearchTitle: '',
     searchItems: null,
+    isOnSearchingProcess: true,
     itemsDialog: false,
     select: null,
   }),
   components: {
-    BookInfo
+    BookInfo,
+    SearchListHeader,
+    SearchListItem
   },
   methods: {
     async naverBookSearchResquest() {
@@ -91,7 +101,7 @@ export default {
           title: this.toSearchTitle
         })
         this.searchItems = response.data.items
-        // eslint-disable-next-line
+        this.onSearchingProcessHandler()
       } catch (error) {
         this.message = error
       }
@@ -104,7 +114,16 @@ export default {
       this.book.isbn = item.isbn
       this.book.desc = item.description
       this.itemsDialog = false
+      this.searchItems = null
       this.toSearchTitle = ''
+    },
+    dialogCloseHandler() {
+      this.searchItems = null
+      if (this.itemsDialog) {
+        this.itemsDialog = false
+      } else {
+        this.itemsDialog = true
+      }
     }
   }
 }

@@ -34,6 +34,9 @@
         v-model="bookNumbers"
         type="number"
       ></v-text-field>
+      <div class="error-box">
+        {{this.error}}
+      </div>
       <v-btn
         dark
         class="primary"
@@ -56,6 +59,7 @@ export default {
   },
   data: () => ({
     bookNumbers: 0,
+    error: ''
   }),
   methods: {
     async bookRegister() {
@@ -68,7 +72,6 @@ export default {
           isbn: this.bookInfo.isbn,
           desc: this.bookInfo.desc
         })
-        // alert(response.data.message)
         this.$router.push('/')
       } catch(error) {
         this.error = error.response.data.error
@@ -80,5 +83,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.error-box {
+  margin: 16px
+}
 </style>

@@ -16,7 +16,6 @@ module.exports = {
   async bookRegister (req, res) {
     try {
       const { img_url, title, author, publisher, isbn, desc } = req.body
-      // req.body 로 바로 생성할 수 있을 것 같음
       const book = await Book.create({
         img_url,
         title,
@@ -26,7 +25,6 @@ module.exports = {
         desc
       })
       const bookJson = book.toJSON()
-      console.log(bookJson)
       res.send({
         message: `[${bookJson.title}] 등록 성공`
       })

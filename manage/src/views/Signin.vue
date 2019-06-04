@@ -11,11 +11,13 @@
             <v-text-field
               label="ID"
               v-model="uid"
+              color="black"
             ></v-text-field>
             <br>
             <v-text-field
               label="PASSWORD"
               v-model="password"
+              color="black"
               type="password"
               hint="At least 8 characters"
             ></v-text-field>
