@@ -5,11 +5,7 @@ const AuthControllerPolicy = require('../policies/AuthContollerPolicy')
 const BookController = require('../controllers/BookController')
 const NaverAPIController = require('../controllers/NaverAPIController')
 
-router.get('/', (req, res) => {
-  res.send({
-    message: 'this is manage router'
-  })
-})
+// TODO: isAuthentificated 미들웨어 구현
 
 router.post('/register',
   AuthControllerPolicy.register,
