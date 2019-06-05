@@ -8,6 +8,8 @@
 4. QR코드 리더
 5. 로그인
 
+메모 : http://www.devkuma.com/books/pages/1175
+
 # user
 
 ## Project setup

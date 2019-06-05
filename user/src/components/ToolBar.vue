@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar class="toolbar elevation-2" flat color="white" fixed>
+  <v-toolbar class="toolbar elevation-2" app flat color="white" fixed>
     <v-layout row>
       <v-flex xs2>
         <v-layout row align-center justify-start fill-height>
