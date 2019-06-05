@@ -5,20 +5,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     title: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(255),
       allowNull: false,
       unique: true
     },
     author: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(255),
       allowNull: false
     },
     publisher: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(255),
       allowNull: true,
     },
     isbn: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
     desc: {

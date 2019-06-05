@@ -34,21 +34,64 @@
             <v-toolbar-title>도서 목록</v-toolbar-title>
           </v-toolbar>
           <!--TODO: 리스트 컴포넌트로 발전시키기-->
+          <v-layout row ma-2>
+            <v-flex xs1>
+              커버
+            </v-flex>
+            <v-flex xs2>
+              제목
+            </v-flex>
+            <v-flex xs2>
+              저자
+            </v-flex>
+            <v-flex xs2>
+              출판사
+            </v-flex>
+            <v-flex xs4>
+              요약
+            </v-flex>
+            <v-flex xs1>
+              대여중
+            </v-flex>
+            <v-flex xs1>
+              비치중
+            </v-flex>
+            <v-flex xs2>
+              자세히
+            </v-flex>
+          </v-layout>
           <div v-for="book in books"
             :key="book.title">
-            <v-img
-              v-bind:src="book.img_url"
-              max-height="300px"
-              max-width="100px"
-              aspect-ratio="0.7"/>
-            -
-            {{ book.title }}
-            -
-            {{ book.author }}
-            -
-            {{ book.publisher }}
-            -
-            {{ book.desc }}
+            <v-layout row ma-2>
+              <v-flex xs1>
+                <v-img
+                  v-bind:src="book.img_url"
+                  max-height="300px"
+                  max-width="100px"
+                  aspect-ratio="0.7"/>
+              </v-flex>
+              <v-flex xs2>
+                {{ book.title }}
+              </v-flex>
+              <v-flex xs2>
+                {{ book.author }}
+              </v-flex>
+              <v-flex xs2>
+                {{ book.publisher }}
+              </v-flex>
+              <v-flex xs4>
+                {{ book.desc }}
+              </v-flex>
+              <v-flex xs1>
+                대여중
+              </v-flex>
+              <v-flex xs1>
+                비치중
+              </v-flex>
+              <v-flex xs2>
+                자세히
+              </v-flex>
+            </v-layout>
           </div>
         </v-layout>
       </v-flex>

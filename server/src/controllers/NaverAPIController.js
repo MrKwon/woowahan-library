@@ -19,7 +19,6 @@ module.exports = {
       response.data.items.forEach(item => {
         parsedItems.push(JSON.parse(JSON.stringify(item).replace(/(<([^>]+)>)/ig,"")))
       })
-      console.log(parsedItems)
       res.send({
         items: parsedItems
       })

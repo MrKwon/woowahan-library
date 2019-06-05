@@ -1,13 +1,19 @@
 <template>
   <v-layout row>
     <v-flex xs8>
-      {{ title }}
+      <div>
+        {{ title }}
+      </div>
     </v-flex>
     <v-flex xs2>
-      {{ author }}
+      <div>
+        {{ author }}
+      </div>
     </v-flex>
     <v-flex xs2>
-      {{ publisher }}
+      <div>
+        {{ publisher }}
+      </div>
     </v-flex>
   </v-layout>
 </template>

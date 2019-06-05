@@ -29,6 +29,7 @@ module.exports = {
         message: `[${bookJson.title}] 등록 성공`
       })
     } catch (err) {
+      console.log(err)
       res.status(400).send({
         error: '등록 실패'
       })
