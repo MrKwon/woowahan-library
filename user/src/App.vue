@@ -1,7 +1,19 @@
 <template>
-  <div id="app">
+  <!-- <div id="app"> -->
+  <!-- <v-app>
     <ToolBar />
-    <router-view/>
+    <v-content>
+      <router-view/>
+    </v-content>
+  </v-app>
+   -->
+  <div id="app">
+    <v-app>
+      <ToolBar />
+      <v-content>
+        <router-view/>
+      </v-content>
+    </v-app>
   </div>
 </template>
 
