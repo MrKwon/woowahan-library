@@ -1,7 +1,7 @@
 <template>
-  <v-continer>
+  <v-content>
     <BookGridList />
-  </v-continer>
+  </v-content>
 </template>
 
 <script>
