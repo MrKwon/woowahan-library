@@ -1,19 +1,34 @@
 <template>
-  <v-toolbar class="toolbar" flat color="white">
-    <v-toolbar-title>우아한 도서관</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat to="/">
-        <v-icon>
-          home
-        </v-icon>
-      </v-btn>
-    </v-toolbar-items>
+  <v-toolbar class="toolbar elevation-2" flat color="white">
+    <v-layout row>
+      <v-flex xs2>
+        <v-layout row align-center justify-start fill-height>
+          <v-btn small flat icon color="black">
+            <v-icon>account_circle</v-icon>
+          </v-btn>
+        </v-layout>
+      </v-flex>
+      <v-flex xs8>
+        <v-layout column align-center justify-center fill-height>
+          <div class="toolbar-title">
+            우아한 테크 도서관
+          </div>
+        </v-layout>
+      </v-flex>
+      <v-flex xs2>
+        <v-layout row align-center justify-end fill-height>
+          <v-btn small flat icon color="black">
+            <v-icon>search</v-icon>
+          </v-btn>
+        </v-layout>
+      </v-flex>
+    </v-layout>
   </v-toolbar>
 </template>
 
 <style>
-.toolbar {
-  border-bottom: 2px solid #E7ECF4;
+.toolbar-title {
+  text-align: center;
+  font-size: 24px;
 }
 </style>
