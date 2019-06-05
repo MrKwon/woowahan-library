@@ -64,6 +64,8 @@ export default {
   methods: {
     async bookRegister() {
       try {
+        // TODO: 성공 여부 Dialog 띄워줘야 함 
+        // eslint-disable-next-line
         const response = await BookService.bookRegister({
           img_url: this.bookInfo.img_url,
           title: this.bookInfo.title,
