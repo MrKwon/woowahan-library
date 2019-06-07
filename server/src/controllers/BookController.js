@@ -13,6 +13,7 @@ module.exports = {
       })
     }
   },
+  
   async bookRegister (req, res) {
     try {
       const { img_url, title, author, publisher, isbn, desc } = req.body

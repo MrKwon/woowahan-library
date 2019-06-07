@@ -1,7 +1,13 @@
 import Api from '@/services/Api'
 
 export default {
-  index() {
-    return Api().get('books')
+  total() {
+    return Api().get('total')
+  },
+  index(params) {
+    return Api().post('books', params)
+  },
+  search(keyword) {
+    return Api().post('search', keyword)
   }
 }

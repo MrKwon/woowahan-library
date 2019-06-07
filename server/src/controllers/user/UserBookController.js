@@ -1,9 +1,27 @@
 const { Book } = require('../../models')
 
 module.exports = {
+  async total (req, res) {
+    try {
+      const lastId = await Book.findAll()
+      res.send({
+        lastId: lastId.length
+      })
+    } catch (err) {
+      res.status(500).send({
+        error: '에러 발생'
+      })
+    }
+  },
   async index (req, res) {
     try {
+      const { page } = req.body
+      let offset = 0
+      if (page > 1) {
+        offset = 10 * (page - 1);
+      }
       const books = await Book.findAll({
+        offset,
         limit: 10
       })
       const parsedBooks = []

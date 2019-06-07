@@ -7,7 +7,8 @@
           dark
           color="#A4A4A4"
           v-model="page"
-          :length="3"
+          :length="this.length"
+          v-if="this.length !== 1"
           circle
         ></v-pagination>
       </div>
@@ -23,12 +24,27 @@ export default {
   data: () => ({
     books: [],
     page: 1,
+    length: 1,
   }),
+
+  watch: {
+    page: async function(newPage) {
+      this.books = (await BookService.index({ page: this.page })).data
+    }
+  },
+
   components: {
     BookList,
   },
+
+  methods: {
+    
+  },
+
   async beforeMount() {
-    this.books = (await BookService.index()).data
-  }
+    console.log('mount')
+    this.books = (await BookService.index({ page: this.page })).data
+    this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
+  },
 }
 </script>
