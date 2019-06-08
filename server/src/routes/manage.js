@@ -20,7 +20,11 @@ router.post('/book/search',
   NaverAPIController.bookSearch
 )
 
-router.get('/books',
+router.get('/book/total',
+  BookController.total
+)
+
+router.post('/book/index',
   BookController.index
 )
 

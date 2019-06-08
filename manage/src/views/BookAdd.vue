@@ -4,8 +4,8 @@
       <v-toolbar flat dense class="primary" dark>
         <v-toolbar-title>새 책 등록</v-toolbar-title>
       </v-toolbar>
-      <v-layout row>
-        <v-flex xs6 ma-2 pa-2>
+      <v-layout column>
+        <v-flex xs10 pa-2>
           <v-layout row align-center justify-center>
             <v-flex xs8>
               <v-text-field
@@ -13,7 +13,7 @@
                 v-model="toSearchTitle"
               ></v-text-field>
             </v-flex>
-            <v-flex xs4>
+            <v-flex xs2>
               <v-btn
                 dark
                 class="primary"

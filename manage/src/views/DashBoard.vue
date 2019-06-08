@@ -15,19 +15,6 @@
             </v-layout>
           </v-layout>
         </v-flex>
-        <v-flex xs6>
-          <v-layout class="white elevation-2" column ma-2 xs6>
-            <v-toolbar flat dense class="black" dark>
-              <v-toolbar-title>책 관리</v-toolbar-title>
-            </v-toolbar>
-            <v-btn
-              dark
-              class="primary"
-              to='book/add'>
-              새로운 도서 추가
-            </v-btn>
-          </v-layout>
-        </v-flex>
       </v-layout>
       <v-flex xs12>
         <v-layout class="white elevation-2" column ma-2>
@@ -84,9 +71,19 @@
               <v-flex xs1 v-if="editMode">
                 <v-btn
                   flat dark color="primary"
-                  v-on:click="login">
+                  v-on:click="clickclick(book.title)">
                   수정하기
                 </v-btn>
+              </v-flex>
+            </v-layout>
+          </div>
+           <div class="text-xs-center">
+            <v-layout justify-center ma-3>
+              <v-flex xs8>
+                <v-pagination
+                  v-model="page"
+                  :length="this.length"
+                ></v-pagination>
               </v-flex>
             </v-layout>
           </div>
@@ -102,16 +99,27 @@ import BookService from '@/services/BookService'
 export default {
   data: () => ({
     books: null,
-    editMode: false
+    editMode: false,
+    page: 1,
+    length: 1
   }),
-  async mounted () {
-    this.books = (await BookService.index()).data
+
+  watch: {
+    page: async function(newPage) {
+      this.books = (await BookService.index({ page: this.page })).data
+    }
   },
+
   methods: {
     clickclick(param) {
       alert(param)
     }
-  }
+  },
+
+  async beforeMount () {
+    this.books = (await BookService.index({ page: this.page})).data
+    this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
+  },
 }
 </script>
 

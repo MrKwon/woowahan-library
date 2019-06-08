@@ -42,7 +42,6 @@ export default {
   },
 
   async beforeMount() {
-    console.log('mount')
     this.books = (await BookService.index({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },

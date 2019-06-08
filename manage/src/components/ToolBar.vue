@@ -7,6 +7,10 @@
     <v-btn flat icon color="black" to="/">
       <v-icon>home</v-icon>
     </v-btn>
+    <v-btn flat icon color="black" to="book/add"
+      v-if="$store.state.isUserLoggedIn">
+      <v-icon>add</v-icon>
+    </v-btn>
     <v-btn flat icon color="black" 
       v-if="$store.state.isUserLoggedIn"
       v-on:click="logout">
