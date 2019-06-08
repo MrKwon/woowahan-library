@@ -13,13 +13,7 @@
 2. [ ] 검색 기능
 3. [ ] 도서 간략 정보 확인
 4. [ ] 도서 한줄 코멘트 ?
-
-## TODOS
-1. PWA 적용하기
-
-
-
-메모 : http://www.devkuma.com/books/pages/1175
+5. [ ] PWA
 
 # user
 
