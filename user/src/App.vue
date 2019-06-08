@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <ToolBar />
+      <ToolBar/>
       <router-view/>
     </v-app>
   </div>
@@ -11,6 +11,10 @@
 import ToolBar from '@/components/ToolBar'
 
 export default {
+  data: () => ({
+    drawer: false
+  }),
+
   components: {
     ToolBar
   }

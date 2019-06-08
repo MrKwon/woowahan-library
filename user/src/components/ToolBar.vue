@@ -1,49 +1,70 @@
 <template>
   <v-layout column>
     <v-toolbar class="toolbar elevation-2" app flat color="white">
-      <v-layout row v-if="!searchBar">
-        <v-flex xs2>
-          <v-layout row align-center justify-start fill-height>
-            <v-btn small flat icon color="black">
-              <v-icon>account_circle</v-icon>
-            </v-btn>
-          </v-layout>
-        </v-flex>
-        <v-flex xs8>
-          <v-layout column align-center justify-center fill-height >
-            <div class="toolbar-title">
-              우아한 테크 도서관
-            </div>
-          </v-layout>
-        </v-flex>
-        <v-flex xs2>
-          <v-layout row align-center justify-end fill-height>
-            <v-btn small flat icon color="black" v-on:click="searchBar = !searchBar">
-              <v-icon>search</v-icon>
-            </v-btn>
-          </v-layout>
-        </v-flex>
-      </v-layout>
-      <v-layout row v-if="searchBar" white>
-        <v-flex xs10>
-          <v-layout class="text-field" row align-center justify-end fill-height>
-            <v-text-field
-              flat
-              rows="1"
-              label="검색"
-              solo
-            ></v-text-field>
-          </v-layout>
-        </v-flex>
-        <v-flex xs2>
-          <v-layout row align-center justify-end fill-height>
-            <v-btn small flat icon color="black" v-on:click="searchBar = !searchBar">
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-layout row>
+          <v-flex xs12>
+            <v-layout column align-center justify-center fill-height v-if="!searchBar">
+              <v-layout row align-center>
+                <img height="80" src="../assets/dark_logo.png"/>
+              </v-layout>
+            </v-layout>
+            <v-layout column align-center justify-center fill-height v-if="searchBar">
+              <v-layout row align-center>
+                <v-text-field
+                  flat
+                  rows="1"
+                  label="검색"
+                  solo
+                ></v-text-field>
+              </v-layout>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      <v-spacer></v-spacer>
+      <v-btn small flat icon color="black" v-on:click="searchBar = !searchBar" v-if="!searchBar">
+        <v-icon>search</v-icon>
+      </v-btn>
+      <v-btn small flat icon color="black" v-on:click="searchBar = !searchBar" v-if="searchBar">
+        <v-icon>close</v-icon>
+      </v-btn>
     </v-toolbar>
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      clipped
+      app
+    >
+      <v-toolbar flat class="transparent pt-3 pb-3">
+        <v-list class="pa-0">
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="../assets/unknown_user.png">
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>서비스 준비중</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-divider></v-divider>
+      <v-list dense class="pt-2">
+        <v-list-tile
+          v-for="item in items"
+          :key="item.title"
+          v-bind:to="item.to"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
   </v-layout>
 </template>
 
@@ -51,6 +72,10 @@
 export default {
   data: () => ({
     searchBar: false,
+    drawer: false,
+    items: [
+      { title: 'Home', icon: 'home', to: '/' },
+    ],
   })
 }
 </script>
@@ -58,7 +83,8 @@ export default {
 
 <style>
 .toolbar-title {
-  text-align: center;
+  align-content: center;
+  justify-content: center;
   font-size: 24px;
 }
 .v-input {

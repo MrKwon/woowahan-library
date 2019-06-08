@@ -1,7 +1,7 @@
 <template>
-  <v-layout column>
-    <v-layout v-if="grid">
-      <v-flex xs12 sm6 offset-sm3>
+  <v-layout column fill-height>
+    <!-- <v-layout> -->
+      <v-flex xs12 sm6 offset-sm3 v-if="grid">
         <v-container grid-list-lg fluid>
           <v-layout row wrap>
             <v-flex
@@ -21,9 +21,9 @@
           </v-layout>
         </v-container>
       </v-flex>
-    </v-layout>
-    <v-layout v-if="!grid">
-      <v-flex xs12>
+    <!-- </v-layout>
+    <v-layout> -->
+      <v-flex xs12 v-if="!grid">
         <div
           v-for="book in books"
           :key="book.title">
@@ -58,7 +58,7 @@
           </v-layout>
         </div>
       </v-flex>
-    </v-layout>
+    <!-- </v-layout> -->
     <v-btn fixed bottom right fab dark small color="black" v-on:click="grid = !grid">
       <v-icon dark v-if="grid">list</v-icon>
       <v-icon dark v-if="!grid">grid_on</v-icon>
