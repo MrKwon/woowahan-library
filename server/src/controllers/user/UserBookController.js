@@ -1,4 +1,5 @@
 const { Book } = require('../../models')
+const { Op } = require("sequelize")
 
 module.exports = {
   async total (req, res) {
@@ -13,6 +14,7 @@ module.exports = {
       })
     }
   },
+
   async index (req, res) {
     try {
       const { page } = req.body
@@ -39,6 +41,26 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: '도서들을 fetch 시도 하는 중에 에러 발생'
+      })
+    }
+  },
+
+  async search (req, res) {
+    try {
+      const { keyword } = req.query
+      const searchResult = await Book.findAll({
+        attributes: ['id', 'title'],
+        where: {
+          title: {
+            [Op.like]: "%" + keyword + "%"
+          }
+        },
+        limit: 10
+      })
+      res.send(searchResult)
+    } catch (err) {
+      res.status(500).send({
+        error: '검색 중에 에러 발생'
       })
     }
   }

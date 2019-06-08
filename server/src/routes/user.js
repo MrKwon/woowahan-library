@@ -10,4 +10,8 @@ router.post('/books',
   UserBookController.index
 )
 
+router.get('/search',
+  UserBookController.search
+)
+
 module.exports = router
