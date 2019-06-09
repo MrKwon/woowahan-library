@@ -1,44 +1,21 @@
 <template>
   <v-layout column>
-    <v-toolbar class="toolbar elevation-2" app flat color="white">
+    <v-toolbar class="toolbar elevation-1" app flat color="white">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-flex xs12>
           <v-layout column>
-            <v-layout column align-center justify-center fill-height v-if="!searchBar">
+            <v-layout column align-center justify-center fill-height>
               <v-layout row align-center>
-                <img height="30" src="../assets/dark_logo_fit.png"/>
-              </v-layout>
-            </v-layout>
-            <v-layout fixed column v-if="searchBar">
-              <v-layout>
-                <v-text-field
-                  flat
-                  rows="1"
-                  label="검색"
-                  solo
-                  v-model="keyword"
-                  @input="searchChangeHander()"
-                ></v-text-field>
+                <img height="30" src="../assets/dark_only_icon.png"/>
               </v-layout>
             </v-layout>
           </v-layout>
         </v-flex>
       <v-spacer></v-spacer>
-      <v-btn small flat icon color="black" v-on:click="searchBar = !searchBar" v-if="!searchBar">
+      <v-btn small flat icon color="black" to="/search">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn small flat icon color="black" v-on:click="closeSearchBarButtonHandler()" v-if="searchBar">
-        <v-icon>keyboard_arrow_up</v-icon>
-      </v-btn>
     </v-toolbar>
-
-    <v-layout class="auto-completion mt-5 pa-3" column>
-      <div
-        v-for="(searchItem, i) in searchItems"
-        :key="i">
-        {{ searchItem.title }}
-      </div>
-    </v-layout>
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -77,39 +54,18 @@
     </v-navigation-drawer>
   </v-layout>
 </template>
-
 <script>
-import BookService from '@/services/BookService'
 export default {
   data: () => ({
-    searchBar: false,
     drawer: false,
-    keyword: '',
     items: [
       { title: 'Home', icon: 'home', to: '/' },
     ],
-    searchItems: [],
     error: null
   }),
 
   methods: {
-    async searchChangeHander() {
-      if (this.keyword === null || this.keyword.length <= 1) {
-        return
-      }
-      try {
-        const response = await BookService.search({ keyword: this.keyword })
-        this.searchItems = response.data
-      } catch (err) {
-        this.error = err
-      }
-    },
-    
-    closeSearchBarButtonHandler() {
-      this.searchItems = []
-      this.keyword = null
-      this.searchBar = !this.searchBar
-    }
+
   }
 }
 </script>

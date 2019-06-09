@@ -1,26 +1,8 @@
 <template>
   <div id="app">
-    <v-app>
-      <ToolBar/>
-      <router-view/>
-    </v-app>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import ToolBar from '@/components/ToolBar'
-
-export default {
-  data: () => ({
-    drawer: false
-  }),
-
-  components: {
-    ToolBar
-  }
-}
-</script>
-
 
 <style>
 #app {

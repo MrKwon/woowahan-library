@@ -1,5 +1,13 @@
 <template>
   <v-layout column fill-height>
+    <v-toolbar flat dense class="black" dark>
+      <v-toolbar-title>우아한 도서목록</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn fab dark small color="black" v-on:click="grid = !grid">
+        <v-icon dark v-if="grid">list</v-icon>
+        <v-icon dark v-if="!grid">grid_on</v-icon>
+      </v-btn>
+    </v-toolbar>
     <v-flex xs12 sm6 offset-sm3 v-if="grid">
       <v-container grid-list-lg fluid>
         <v-layout row wrap>
@@ -8,7 +16,7 @@
             :key="i"
             xs6
           >
-            <v-card class="image-container elevation-2" flat tile ma-2>
+            <v-card class="image-container" flat tile ml-2 mr-2>
               <v-img
                 :src="book.img_url"
                 max-height="500px"
@@ -20,45 +28,45 @@
         </v-layout>
       </v-container>
     </v-flex>
-    <v-flex xs12 v-if="!grid">
+    <v-flex xs12 pa-2 v-if="!grid">
       <div
         v-for="book in books"
         :key="book.title">
         <v-layout
           class="list-item" row ma-2>
-          <v-flex xs2 pa-1>
-            <v-img
-              v-bind:src="book.img_url"
-              aspect-ratio="0.7"/>
-          </v-flex>
-          <v-flex xs8>
-            <v-layout column align-center justify-center fill-height pa-1>
-              <v-flex xs6>
-                <div class="book-title">
-                  {{ book.title }}
+          <!-- <v-layout ma-2> -->
+            <v-flex class="book-image-box" xs2>
+              <v-layout row align-center justify-center fill-height>
+                <v-img
+                  v-bind:src="book.img_url"
+                  max-height="90px"/>
+              </v-layout>
+            </v-flex>
+            <v-flex xs8>
+              <v-layout column align-center justify-center fill-height pa-1>
+                <v-flex xs6>
+                  <div class="book-title">
+                    {{ book.title }}
+                  </div>
+                </v-flex>
+                <v-flex xs6 pt-2>
+                  <div class="book-author">
+                    {{ book.author }}
+                  </div>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs2>
+              <v-layout column align-center justify-center fill-height pa-1>
+                <div class="book-publisher">
+                  {{ book.publisher }}
                 </div>
-              </v-flex>
-              <v-flex xs6 pt-2>
-                <div class="book-author">
-                  {{ book.author }}
-                </div>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-          <v-flex xs2>
-            <v-layout column align-center justify-center fill-height pa-1>
-              <div class="book-publisher">
-                {{ book.publisher }}
-              </div>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        <!-- </v-layout> -->
       </div>
     </v-flex>
-    <v-btn fixed bottom right fab dark small color="black" v-on:click="grid = !grid">
-      <v-icon dark v-if="grid">list</v-icon>
-      <v-icon dark v-if="!grid">grid_on</v-icon>
-    </v-btn>
   </v-layout>
 </template>
 
@@ -78,6 +86,9 @@ export default {
 
 
 <style>
+.book-image-box {
+  border-radius: 10px;
+}
 .book-title {
   text-align: center;
   font-family: 'Nanum Gothic', sans-serif;
@@ -96,13 +107,17 @@ export default {
   font-weight: 400;
   font-size: 10px;
 }
+.theme--light.v-sheet {
+  background-color: #fff;
+  border: 1px solid #D8D8D8;
+}
 .image-container {
   border-radius: 10px;
 }
 .list-item {
-  height: 80px;
-  /* border-bottom: 1px solid gray; */
-  box-shadow: 1px 1px 1px 1px #BDBDBD;
-  border-radius: 10px
+  height: 100px;
+  border-bottom: 1px solid #D8D8D8;
+  /* box-shadow: 1px 1px 1px 1px #BDBDBD; */
+  /* border-radius: 10px */
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
+<v-app>
+  <ToolBar />
   <v-content>
     <BookList v-bind:books="books"/>
-    <v-layout row justify-center mb-2 mt-2>
+    <v-layout row justify-center mb-2>
       <v-pagination
         dark
         color="#A4A4A4"
@@ -12,9 +14,11 @@
       ></v-pagination>
     </v-layout>
   </v-content>
+</v-app>
 </template>
 
 <script>
+import ToolBar from '@/components/ToolBar'
 import BookList from '@/components/BookList'
 import BookService from '@/services/BookService'
 
@@ -32,6 +36,7 @@ export default {
   },
 
   components: {
+    ToolBar,
     BookList,
   },
 
