@@ -5,12 +5,18 @@ export default {
     return Api().get('total')
   },
 
-  index(params) {
+  books(params) {
     return Api().post('books', params)
   },
 
   search(params) {
     return Api().get('search', {
+      params: params
+    })
+  },
+
+  book(params) {
+    return Api(). get('bookinfo', {
       params: params
     })
   }

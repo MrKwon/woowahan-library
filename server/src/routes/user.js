@@ -7,11 +7,15 @@ router.get('/total',
 )
 
 router.post('/books',
-  UserBookController.index
+  UserBookController.books
 )
 
 router.get('/search',
   UserBookController.search
+)
+
+router.get('/bookinfo',
+  UserBookController.book
 )
 
 module.exports = router

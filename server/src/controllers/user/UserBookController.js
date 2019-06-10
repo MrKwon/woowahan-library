@@ -15,7 +15,7 @@ module.exports = {
     }
   },
 
-  async index (req, res) {
+  async books (req, res) {
     try {
       const { page } = req.body
       let offset = 0
@@ -61,6 +61,24 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: '검색 중에 에러 발생'
+      })
+    }
+  },
+
+  async book (req, res) {
+    try {
+      const { id } = req.query
+      const searchResult = await Book.findOne({
+        where: {
+          id: {
+            [Op.eq]: id
+          }
+        }
+      })
+      res.send(searchResult)
+    } catch (err) {
+      res.status(500).send({
+        error: '해당 도서가 존재하지 않음'
       })
     }
   }

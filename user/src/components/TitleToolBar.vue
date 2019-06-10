@@ -1,0 +1,38 @@
+<template>
+  <v-toolbar class="toolbar elevation-2" app flat color="white">
+    <v-toolbar-side-icon>
+      <v-btn small flat icon color="black" @click="$router.go(-1)">
+        <v-icon>keyboard_arrow_left</v-icon>
+      </v-btn>
+    </v-toolbar-side-icon>
+    <v-flex xs12>
+      <v-layout column>
+        <v-layout column align-center justify-center fill-height>
+          <v-layout row align-center>
+            <div class="title-text">
+              상세 정보
+            </div>
+          </v-layout>
+        </v-layout>
+      </v-layout>
+    </v-flex>
+    <v-spacer></v-spacer>
+    <v-btn small flat icon disabled> <!-- 레이아웃 배치용,, 기능 없는 버튼 -->
+      <v-icon></v-icon>
+    </v-btn>
+  </v-toolbar>
+</template>
+
+<script>
+export default {
+  
+}
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.title-text {
+  font-size: 24px;
+}
+</style>

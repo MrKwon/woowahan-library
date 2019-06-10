@@ -1,7 +1,7 @@
 <template>
 <v-app>
-  <ToolBar />
-  <v-content>
+  <MainToolBar />
+  <v-content align-start>
     <BookList v-bind:books="books"/>
     <v-layout row justify-center mb-2>
       <v-pagination
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ToolBar from '@/components/ToolBar'
+import MainToolBar from '@/components/MainToolBar'
 import BookList from '@/components/BookList'
 import BookService from '@/services/BookService'
 
@@ -31,12 +31,12 @@ export default {
 
   watch: {
     page: async function(newPage) {
-      this.books = (await BookService.index({ page: this.page })).data
+      this.books = (await BookService.books({ page: this.page })).data
     }
   },
 
   components: {
-    ToolBar,
+    MainToolBar,
     BookList,
   },
 
@@ -45,7 +45,7 @@ export default {
   },
 
   async beforeMount() {
-    this.books = (await BookService.index({ page: this.page })).data
+    this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },
 }

@@ -1,16 +1,16 @@
 <template>
-  <v-layout column>
+  <div>
     <v-toolbar class="toolbar elevation-1" app flat color="white">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-flex xs12>
-          <v-layout column>
-            <v-layout column align-center justify-center fill-height>
-              <v-layout row align-center>
-                <img height="30" src="../assets/dark_only_icon.png"/>
-              </v-layout>
+      <v-flex xs12>
+        <v-layout column>
+          <v-layout column align-center justify-center fill-height>
+            <v-layout row align-center>
+              <img height="30" src="../assets/dark_only_icon.png"/>
             </v-layout>
           </v-layout>
-        </v-flex>
+        </v-layout>
+      </v-flex>
       <v-spacer></v-spacer>
       <v-btn small flat icon color="black" to="/search">
         <v-icon>search</v-icon>
@@ -52,7 +52,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-  </v-layout>
+  </div>
 </template>
 <script>
 export default {

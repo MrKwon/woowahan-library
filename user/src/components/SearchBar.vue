@@ -26,10 +26,16 @@
       <div class="search-item-box"
         v-for="(searchItem, i) in searchItems"
         :key="i"
-        @click="() => clickclick(searchItem.id)"
+        @click="() => moveToSelected(searchItem)"
         >
         {{ searchItem.title }}
       </div>
+      <!-- <div class="no-result-box" v-if="this.keyword.length !== 0 && this.searchItems.length === 0">
+        <v-layout row align-center justify-center>
+          <v-icon>error</v-icon>
+          <div>결과 없음</div>
+        </v-layout>
+      </div> -->
     </v-layout>
   </v-layout>
 </template>
@@ -47,6 +53,7 @@ export default {
   methods: {
     async searchChangeHander() {
       if (this.keyword === null || this.keyword.length <= 1) {
+        this.searchItems = []
         return
       }
       try {
@@ -57,8 +64,8 @@ export default {
       }
     },
 
-    clickclick(param) {
-      alert(param)
+    moveToSelected(item) {
+      this.$router.push({path: '/book', query : { id: item.id }});
     }
   }
 }
@@ -71,5 +78,11 @@ export default {
   height: 40px;
   line-height: 40px;
   border-bottom: 1px solid #D8D8D8;
+}
+
+.no-result-box {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
 }
 </style>
