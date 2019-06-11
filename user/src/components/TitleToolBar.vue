@@ -10,7 +10,7 @@
         <v-layout column align-center justify-center fill-height>
           <v-layout row align-center>
             <div class="title-text">
-              상세 정보
+              {{ title }}
             </div>
           </v-layout>
         </v-layout>
@@ -25,7 +25,11 @@
 
 <script>
 export default {
-  
+  props: {
+    title: {
+      type: String
+    }
+  }
 }
 
 </script>

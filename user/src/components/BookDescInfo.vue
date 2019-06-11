@@ -47,7 +47,6 @@ export default {
   props: {
     bookinfo: {
       type: Object,
-      
     }
   }
 }

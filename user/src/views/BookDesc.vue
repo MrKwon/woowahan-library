@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <TitleToolBar/>
+    <TitleToolBar title="상세 정보"/>
     <v-content>
       <v-layout column>
         <v-layout column>
@@ -20,12 +20,14 @@
           </v-flex>
         </v-layout>
       </v-layout>
+      <!-- <NotFound v-if="bookinfo.title === ''"/>  v-if="bookinfo.title !== ''" -->
     </v-content>
   </v-app>
 </template>
 
 <script>
 import BookService from '@/services/BookService'
+// import NotFound from '@/views/NotFound'
 import TitleToolBar from '@/components/TitleToolBar'
 import BookDescInfo from '@/components/BookDescInfo'
 
@@ -47,7 +49,8 @@ export default {
 
   components: {
     TitleToolBar,
-    BookDescInfo
+    BookDescInfo,
+    // NotFound
   },
 
   methods: {
