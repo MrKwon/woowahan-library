@@ -13,8 +13,11 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-// using table `Users` // MySQL
 db.User = require('./User')(sequelize, Sequelize)
 db.Book = require('./Book')(sequelize, Sequelize)
+// db.Serial = require('./Serial')(sequelize, Sequelize)
+
+// db.Book.hasMany(db.Serial, { foreignKey: 'book_id', sourceKey: 'id' })
+// db.Serial.belongsTo(db.Book, { foreignKey: 'book_id', sourceKey: 'id' })
 
 module.exports = db

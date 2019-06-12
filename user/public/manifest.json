@@ -1,6 +1,6 @@
 {
   "name": "우아한테크도서관",
-  "short_name": "우테도",
+  "short_name": "우아한테크도서관",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -43,8 +43,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#D8D8D8",
+  "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
 }

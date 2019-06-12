@@ -36,7 +36,7 @@ export default {
   }),
 
   watch: {
-    page: async function(newPage) {
+    page: async () => {
       this.books = (await BookService.books({ page: this.page })).data
     }
   },
