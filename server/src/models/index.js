@@ -4,10 +4,10 @@ const config = require('../config/config')
 const db = {}
 
 const sequelize = new Sequelize(
-  config.db.database,
-  config.db.username,
-  config.db.password,
-  config.db
+  process.env.NODE_ENV === 'production' ? config.production.database : config.development.database,
+  process.env.NODE_ENV === 'production' ? config.production.username : config.development.username,
+  process.env.NODE_ENV === 'production' ? config.production.password : config.development.password,
+  process.env.NODE_ENV === 'production' ? config.production : config.development
 )
 
 db.sequelize = sequelize
