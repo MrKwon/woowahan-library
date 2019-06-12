@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export default () => {
   return axios.create({
-    baseURL: `http://localhost:8081/user/`
+    baseURL: `http://ec2-15-164-100-148.ap-northeast-2.compute.amazonaws.com/user`
   })
 }
