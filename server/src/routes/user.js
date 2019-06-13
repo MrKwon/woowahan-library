@@ -10,11 +10,11 @@ router.post('/books',
   UserBookController.books
 )
 
-router.get('/search',
+router.post('/search',
   UserBookController.search
 )
 
-router.get('/bookinfo',
+router.post('/bookinfo',
   UserBookController.book
 )
 
