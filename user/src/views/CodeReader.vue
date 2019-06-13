@@ -40,7 +40,7 @@ import TitleToolBar from '@/components/TitleToolBar'
 
 export default {
   data: () => ({
-    dialog: true,
+    dialog: false,
     error: null,
   }),
 

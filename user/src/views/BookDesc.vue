@@ -27,7 +27,6 @@
 
 <script>
 import BookService from '@/services/BookService'
-// import NotFound from '@/views/NotFound'
 import TitleToolBar from '@/components/TitleToolBar'
 import BookDescInfo from '@/components/BookDescInfo'
 
@@ -50,7 +49,6 @@ export default {
   components: {
     TitleToolBar,
     BookDescInfo,
-    // NotFound
   },
 
   methods: {
@@ -63,7 +61,7 @@ export default {
   },
 
   async beforeMount() {
-    this.bookinfo = (await BookService.book({ id: this.id })).data
+    this.bookinfo = (await BookService.book({ id: this.id }))
   }
 }
 

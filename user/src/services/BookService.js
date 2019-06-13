@@ -10,14 +10,10 @@ export default {
   },
 
   search(params) {
-    return Api().get('search', {
-      params: params
-    })
+    return Api().get('search', params)
   },
 
   book(params) {
-    return Api(). get('bookinfo', {
-      params: params
-    })
+    return Api().get('bookinfo', params)
   }
 }
