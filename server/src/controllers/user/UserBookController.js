@@ -47,7 +47,7 @@ module.exports = {
 
   async search (req, res) {
     try {
-      const { keyword } = req.query
+      const { keyword } = req.body
       const searchResult = await Book.findAll({
         attributes: ['id', 'title'],
         where: {
@@ -67,7 +67,7 @@ module.exports = {
 
   async book (req, res) {
     try {
-      const { id } = req.query
+      const { id } = req.body
       const searchResult = await Book.findOne({
         where: {
           id: {
