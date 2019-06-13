@@ -36,8 +36,8 @@ export default {
   }),
 
   watch: {
-    page: async () => {
-      this.books = (await BookService.books({ page: this.page })).data
+    page: async function(nextPage) {
+      this.books = (await BookService.books({ page: nextPage })).data
     }
   },
 
@@ -47,7 +47,9 @@ export default {
   },
 
   methods: {
-    
+    async getBooks() {
+      this.books = (await BookService.books({ page: this.page })).data
+    }
   },
 
   async beforeMount() {
