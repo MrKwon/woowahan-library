@@ -61,7 +61,7 @@ export default {
   },
 
   async beforeMount() {
-    this.bookinfo = (await BookService.book({ id: this.id }))
+    this.bookinfo = (await BookService.book({ id: this.id })).data
   }
 }
 

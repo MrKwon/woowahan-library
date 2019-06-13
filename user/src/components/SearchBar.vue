@@ -30,12 +30,7 @@
         >
         {{ searchItem.title }}
       </div>
-      <!-- <div class="no-result-box" v-if="this.keyword.length !== 0 && this.searchItems.length === 0">
-        <v-layout row align-center justify-center>
-          <v-icon>error</v-icon>
-          <div>결과 없음</div>
-        </v-layout>
-      </div> -->
+
     </v-layout>
   </v-layout>
 </template>

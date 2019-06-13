@@ -10,10 +10,10 @@ export default {
   },
 
   search(params) {
-    return Api().get('search', params)
+    return Api().post('search', params)
   },
 
   book(params) {
-    return Api().get('bookinfo', params)
+    return Api().post('bookinfo', params)
   }
 }

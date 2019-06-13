@@ -46,12 +46,6 @@ export default {
     BookList,
   },
 
-  methods: {
-    async getBooks() {
-      this.books = (await BookService.books({ page: this.page })).data
-    }
-  },
-
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
