@@ -14,11 +14,11 @@
 3. - [x] 도서 간략 정보 확인
 
 ## 30th June Update Plan TODOList
-- [ ] 희망 도서 신청 기능
-- [ ] 자잘한 버그 수정
-- [ ] pwa 도입
-- [ ] 버튼으로 대여, 반납
+1. - [ ] 희망 도서 신청 기능
+2. - [ ] 자잘한 버그 수정
+3. - [ ] pwa 도입
+4. - [ ] 버튼으로 대여, 반납
 
 ## July Update Plan TODOList
-- [ ] QR code 대여, 반납
+1. - [ ] QR code 대여, 반납
 
