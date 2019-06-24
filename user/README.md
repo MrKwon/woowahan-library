@@ -9,38 +9,16 @@
 5. 로그인
 
 ## beta version Features
-1. [x] 도서 목록 뿌려주는 기능
-2. [ ] 검색 기능
-3. [ ] 도서 간략 정보 확인
-4. [ ] 도서 한줄 코멘트 ?
-5. [ ] PWA
+1. - [x] 도서 목록 뿌려주는 기능
+2. - [x] 검색 기능
+3. - [x] 도서 간략 정보 확인
 
-# user
+## 30th June Update Plan TODOList
+- [ ] 희망 도서 신청 기능
+- [ ] 자잘한 버그 수정
+- [ ] pwa 도입
+- [ ] 버튼으로 대여, 반납
 
-## Project setup
-```
-npm install
-```
+## July Update Plan TODOList
+- [ ] QR code 대여, 반납
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
