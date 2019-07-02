@@ -1,4 +1,5 @@
 <template>
+<!-- TODO: drawer props 직접 수정 ㄴㄴ -->
   <v-navigation-drawer
     v-model="drawer"
     fixed
@@ -50,11 +51,11 @@ export default {
     // drawer: false,
     items: [
       { title: '홈', icon: 'home', to: '/' },
-      { title: '희망도서 신청', icon: 'book', to: '/' },
-      { title: '대여현황', icon: 'import_contacts', to: '/' },
-      { title: '예약현황', icon: 'assignment', to: '/' },
-      { title: '즐겨찾기', icon: 'favorite', to: '/' },
-      { title: '대여기록', icon: 'history', to: '/' },
+      { title: '희망도서 신청', icon: 'book', to: '/request_book' },
+      { title: '대여현황', icon: 'import_contacts', to: '/current_rental' },
+      { title: '예약현황', icon: 'assignment', to: '/reservation' },
+      { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
+      { title: '대여기록', icon: 'history', to: '/history' },
     ],
   }),
 
