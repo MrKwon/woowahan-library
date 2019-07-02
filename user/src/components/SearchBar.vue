@@ -22,15 +22,16 @@
         </v-layout>
       </v-flex>
     </v-toolbar>
-    <v-layout class="auto-completion mt-5 pa-3" column>
-      <div class="search-item-box"
-        v-for="(searchItem, i) in searchItems"
-        :key="i"
-        @click="() => moveToSelected(searchItem)"
-        >
-        {{ searchItem.title }}
-      </div>
-
+    <v-layout class="auto-completion mt-5" column>
+      <v-container>
+        <div class="search-item-box"
+          v-for="(searchItem, i) in searchItems"
+          :key="i"
+          @click="() => moveToSelected(searchItem)"
+          >
+          {{ searchItem.title }}
+        </div>
+      </v-container>
     </v-layout>
   </v-layout>
 </template>
@@ -70,9 +71,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .search-item-box {
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   border-bottom: 1px solid #D8D8D8;
+  overflow: hidden;
 }
 
 .no-result-box {
