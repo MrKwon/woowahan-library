@@ -1,20 +1,11 @@
 <template>
   <v-app>
-    <MainToolBar />
-    <v-content align-start>
-      Reservation Page
-    </v-content>
+    Reservation Page
   </v-app>
 </template>
 
 <script>
-import MainToolBar from '@/components/MainToolBar'
 
-export default {
-  components: {
-    MainToolBar,
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

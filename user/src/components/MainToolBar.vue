@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar class="toolbar elevation-1" app flat color="white">
+    <v-toolbar class="toolbar" app flat color="white">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-flex xs12>
         <v-layout column>
@@ -16,7 +16,7 @@
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
-    <!-- <v-navigation-drawer
+    <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
@@ -30,7 +30,7 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>드로어 공사중</v-list-tile-title>
+            <v-list-tile-title>로그인이 필요합니다</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -51,19 +51,22 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer> -->
-    <MainDrawer v-bind:drawer="drawer"/>
+    </v-navigation-drawer>
   </div>
 </template>
 <script>
-import MainDrawer from './MainDrawer'
-
 export default {
   data: () => ({
     drawer: false,
-    // items: [
-    //   { title: 'Home', icon: 'home', to: '/' },
-    // ],
+    items: [
+      { title: '홈', icon: 'home', to: '/' },
+      { title: '희망도서 신청', icon: 'book', to: '/request_book' },
+      { title: '대여현황', icon: 'import_contacts', to: '/current_rental' },
+      { title: '예약현황', icon: 'assignment', to: '/reservation' },
+      { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
+      { title: '대여기록', icon: 'history', to: '/history' },
+    ],
+    
     error: null
   }),
 
@@ -72,7 +75,6 @@ export default {
   },
 
   components: {
-    MainDrawer
   }
 }
 </script>

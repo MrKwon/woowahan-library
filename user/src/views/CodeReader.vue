@@ -1,14 +1,16 @@
 <template>
 <v-app>
   <TitleToolBar title="대여하기"/>
-  <v-content>
-    <v-alert
-      :value="true"
-      type="error"
-      v-if="error !== null"
-    >
-      {{ error }}
-    </v-alert>
+  <v-layout column>
+    <div>
+      <v-alert
+        :value="true"
+        type="error"
+        v-if="error !== null"
+      >
+        {{ error }}
+      </v-alert>
+    </div>
     <qrcode-stream @decode="onDecode" @init="onInit"/>
     <v-dialog
       v-model="dialog"
@@ -31,7 +33,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-content>
+  </v-layout>
 </v-app>
 </template>
 

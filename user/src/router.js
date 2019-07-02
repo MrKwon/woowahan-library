@@ -5,6 +5,7 @@ import Main from '@/views/Main.vue'
 import Search from '@/views/Search'
 import BookDesc from '@/views/BookDesc'
 import CodeReader from '@/views/CodeReader'
+import Login from '@/views/Login'
 
 import RequestBook from '@/views/RequestBook'
 import CurrentRental from '@/views/CurrentRental'
@@ -24,6 +25,7 @@ export default new Router({
     { path: '/search', name: 'search', component: Search },
     { path: '/book', name: 'book', component: BookDesc, props: (route) => ({ id: route.query.id }) },
     { path: '/rent', name: 'rent', component: CodeReader },
+    { path: '/login', name: 'login', component: Login },
     { path: '/request_book', name: 'request_book', component: RequestBook },
     { path: '/current_rental', name: 'current_rental', component: CurrentRental },
     { path: '/reservation', name: 'reservation', component: Reservation },
