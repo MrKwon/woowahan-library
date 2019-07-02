@@ -1,9 +1,7 @@
 <template>
   <v-toolbar class="toolbar" fixed flat color="white">
     <v-toolbar-side-icon>
-      <v-btn small flat icon color="black" @click="$router.go(-1)">
-        <v-icon>keyboard_arrow_left</v-icon>
-      </v-btn>
+      <v-icon @click="$router.go(-1)">keyboard_arrow_left</v-icon>
     </v-toolbar-side-icon>
     <v-flex xs12>
       <v-layout column>

@@ -12,8 +12,11 @@
         </v-layout>
       </v-flex>
       <v-spacer></v-spacer>
-      <v-btn small flat icon color="black" to="/search">
+      <v-btn small flat icon color="black" to="/search" v-if="$router.currentRoute.path === '/'">
         <v-icon>search</v-icon>
+      </v-btn>
+      <v-btn small flat icon disabled v-if="$router.currentRoute.path !== '/'"> <!-- 레이아웃 배치용,, 기능 없는 버튼 -->
+        <v-icon></v-icon>
       </v-btn>
     </v-toolbar>
     <v-navigation-drawer
@@ -23,14 +26,14 @@
       app
     >
       <v-toolbar flat class="transparent pt-3 pb-3">
-        <v-list class="pa-0">
+        <v-list class="pa-0" @click="console.log('click')">
           <v-list-tile avatar>
             <v-list-tile-avatar>
               <img src="../assets/unknown_user.png">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-            <v-list-tile-title>로그인이 필요합니다</v-list-tile-title>
+              <v-list-tile-title>로그인이 필요합니다</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -71,7 +74,10 @@ export default {
   }),
 
   methods: {
-
+    currentRoute(string) {
+      console.log(string)
+      return true
+    }
   },
 
   components: {
