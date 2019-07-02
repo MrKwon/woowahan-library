@@ -16,7 +16,7 @@
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
@@ -51,21 +51,28 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
+    <MainDrawer v-bind:drawer="drawer"/>
   </div>
 </template>
 <script>
+import MainDrawer from './MainDrawer'
+
 export default {
   data: () => ({
     drawer: false,
-    items: [
-      { title: 'Home', icon: 'home', to: '/' },
-    ],
+    // items: [
+    //   { title: 'Home', icon: 'home', to: '/' },
+    // ],
     error: null
   }),
 
   methods: {
 
+  },
+
+  components: {
+    MainDrawer
   }
 }
 </script>
