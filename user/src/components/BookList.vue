@@ -40,7 +40,7 @@
             <v-layout column align-center justify-center fill-height pa-1>
               <v-flex xs6>
                 <div class="book-title">
-                  {{ titleParser(book.title) }}
+                  {{ book.title }}
                 </div>
               </v-flex>
               <v-flex xs6 pt-2>
@@ -75,13 +75,6 @@ export default {
     grid: true,
   }),
   methods: {
-    titleParser(title) {
-      if (title.length >= 30) {
-        return `${title.substring(0, 30)} ...`
-      }
-      return title
-    },
-
     moveToSelected(item) {
       this.$router.push({path: '/book', query : { id: item.id }});
     }
@@ -124,5 +117,8 @@ export default {
   border-bottom: 1px solid #D8D8D8;
   /* box-shadow: 1px 1px 1px 1px #BDBDBD; */
   /* border-radius: 10px */
+}
+.book-title {
+  overflow: hidden;
 }
 </style>

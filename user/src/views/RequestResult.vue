@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <ViewTitle title="로그인"/>
-    <v-layout column justify-center align-center>
-      <v-btn color="black" dark round large>
-        Github 로그인
-      </v-btn>
+    <ViewTitle title="신청결과"/>
+    <v-layout column fill-height justify-center align-center>
+      <div>
+        {{JSON.stringify(item)}}
+      </div>
     </v-layout>
   </v-app>
 </template>
@@ -13,6 +13,13 @@
 import ViewTitle from '@/components/ViewTitle'
 
 export default {
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    }
+  },
+
   components: {
     ViewTitle
   }

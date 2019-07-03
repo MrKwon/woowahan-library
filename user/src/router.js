@@ -8,6 +8,7 @@ import CodeReader from '@/views/CodeReader'
 import Login from '@/views/Login'
 
 import RequestBook from '@/views/RequestBook'
+import RequestResult from '@/views/RequestResult'
 import CurrentRental from '@/views/CurrentRental'
 import Reservation from '@/views/Reservation'
 import Favorite from '@/views/Favorite'
@@ -27,6 +28,7 @@ export default new Router({
     { path: '/rent', name: 'rent', component: CodeReader },
     { path: '/login', name: 'login', component: Login },
     { path: '/request_book', name: 'request_book', component: RequestBook },
+    { path: '/request_result', name: 'request_result', component: RequestResult, props: { book: null }},
     { path: '/current_rental', name: 'current_rental', component: CurrentRental },
     { path: '/reservation', name: 'reservation', component: Reservation },
     { path: '/favorite', name: 'favorite', component: Favorite },

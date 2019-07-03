@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import MainToolBar from '@/components/MainToolBar'
 import BookList from '@/components/BookList'
 import BookService from '@/services/BookService'
 
@@ -39,7 +38,6 @@ export default {
   },
 
   components: {
-    MainToolBar,
     BookList,
   },
 

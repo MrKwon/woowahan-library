@@ -19,22 +19,25 @@
         <v-icon></v-icon>
       </v-btn>
     </v-toolbar>
+    <!-- TODO: refactor navigation drawer -->
     <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
       app
     >
-      <v-toolbar flat class="transparent pt-3 pb-3">
-        <v-list class="pa-0" @click="console.log('click')">
+      <v-toolbar flat class="transparent pt-3 pb-3" v-on:click="$router.push('/login')">
+        <v-list class="pa-0">
           <v-list-tile avatar>
-            <v-list-tile-avatar>
-              <img src="../assets/unknown_user.png">
-            </v-list-tile-avatar>
+              <v-list-tile-avatar>
+                <img src="../assets/unknown_user.png">
+              </v-list-tile-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title>로그인이 필요합니다</v-list-tile-title>
-            </v-list-tile-content>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  <div @onclick="$router.push('login')">로그인이 필요합니다</div>
+                </v-list-tile-title>
+              </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-toolbar>
@@ -69,16 +72,8 @@ export default {
       { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
       { title: '대여기록', icon: 'history', to: '/history' },
     ],
-    
     error: null
   }),
-
-  methods: {
-    currentRoute(string) {
-      console.log(string)
-      return true
-    }
-  },
 
   components: {
   }
@@ -108,5 +103,9 @@ export default {
 .theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
   border: 1px solid gray;
   border-radius: 10px;
+}
+
+.to_login {
+  color: black;
 }
 </style>
