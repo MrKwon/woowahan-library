@@ -33,6 +33,7 @@ export default {
 
   watch: {
     page: async function(nextPage) {
+      this.scrollToTop()
       this.books = (await BookService.books({ page: nextPage })).data
     }
   },
@@ -45,5 +46,11 @@ export default {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },
+
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0,0)
+    }
+  }
 }
 </script>
