@@ -10,6 +10,7 @@ const helmet = require('helmet')
 const hpp = require('hpp')
 
 const indexRouter = require('./routes')
+const naverApiRouter = require('./routes/naverApi')
 const userRouter = require('./routes/user')
 const manageRouter = require('./routes/manage')
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(bodyParser.json())
 
 app.use('/', indexRouter)
+app.use('/naverApi', naverApiRouter)
 app.use('/user', userRouter)
 app.use('/manage', manageRouter)
 

@@ -11,7 +11,7 @@ module.exports = {
         },
         params: {
           "query": req.body.title,
-          "display": "5",
+          "display": "10",
           "start": "1"
         }
       })

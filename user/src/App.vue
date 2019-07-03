@@ -1,8 +1,21 @@
 <template>
   <div id="app">
-    <router-view/>
+    <MainToolBar />
+    <v-content align-start>
+      <router-view/>
+    </v-content>
   </div>
 </template>
+
+<script>
+import MainToolBar from '@/components/MainToolBar'
+
+export default {
+  components: {
+    MainToolBar,
+  }
+}
+</script>
 
 <style>
 #app {

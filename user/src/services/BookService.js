@@ -2,18 +2,18 @@ import Api from '@/services/Api'
 
 export default {
   total() {
-    return Api().get('total')
+    return Api.user().get('total')
   },
 
   books(params) {
-    return Api().post('books', params)
+    return Api.user().post('books', params)
   },
 
   search(params) {
-    return Api().post('search', params)
+    return Api.user().post('search', params)
   },
 
   book(params) {
-    return Api().post('bookinfo', params)
+    return Api.user().post('bookinfo', params)
   }
 }

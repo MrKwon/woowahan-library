@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar class="toolbar elevation-1" app flat color="white">
+    <v-toolbar class="toolbar" app flat color="white">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-flex xs12>
         <v-layout column>
@@ -12,26 +12,32 @@
         </v-layout>
       </v-flex>
       <v-spacer></v-spacer>
-      <v-btn small flat icon color="black" to="/search">
+      <v-btn small flat icon color="black" to="/search" v-if="$router.currentRoute.path === '/'">
         <v-icon>search</v-icon>
       </v-btn>
+      <v-btn small flat icon disabled v-if="$router.currentRoute.path !== '/'"> <!-- 레이아웃 배치용,, 기능 없는 버튼 -->
+        <v-icon></v-icon>
+      </v-btn>
     </v-toolbar>
+    <!-- TODO: refactor navigation drawer -->
     <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
       app
     >
-      <v-toolbar flat class="transparent pt-3 pb-3">
+      <v-toolbar flat class="transparent pt-3 pb-3" v-on:click="$router.push('/login')">
         <v-list class="pa-0">
           <v-list-tile avatar>
-            <v-list-tile-avatar>
-              <img src="../assets/unknown_user.png">
-            </v-list-tile-avatar>
+              <v-list-tile-avatar>
+                <img src="../assets/unknown_user.png">
+              </v-list-tile-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title>드로어 공사중</v-list-tile-title>
-            </v-list-tile-content>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  <div @onclick="$router.push('login')">로그인이 필요합니다</div>
+                </v-list-tile-title>
+              </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-toolbar>
@@ -59,13 +65,17 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      { title: 'Home', icon: 'home', to: '/' },
+      { title: '홈', icon: 'home', to: '/' },
+      { title: '희망도서 신청', icon: 'book', to: '/request_book' },
+      { title: '대여현황', icon: 'import_contacts', to: '/current_rental' },
+      { title: '예약현황', icon: 'assignment', to: '/reservation' },
+      { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
+      { title: '대여기록', icon: 'history', to: '/history' },
     ],
     error: null
   }),
 
-  methods: {
-
+  components: {
   }
 }
 </script>
@@ -93,5 +103,9 @@ export default {
 .theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
   border: 1px solid gray;
   border-radius: 10px;
+}
+
+.to_login {
+  color: black;
 }
 </style>
