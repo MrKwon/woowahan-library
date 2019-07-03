@@ -34,5 +34,8 @@ export default new Router({
     { path: '/favorite', name: 'favorite', component: Favorite },
     { path: '/history', name: 'history', component: History },
     { path: '*', component: NotFound }
-  ]
+  ],
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
