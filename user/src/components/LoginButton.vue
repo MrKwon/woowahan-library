@@ -13,7 +13,6 @@ export default {
     async buttonClick() {
       try {
         const response = await GithubService.login()
-        console.log(response.data)
         window.location.href = response.data
       } catch (error) {
         console.log(error)

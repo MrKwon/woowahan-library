@@ -13,6 +13,7 @@ const indexRouter = require('./routes')
 const naverApiRouter = require('./routes/naverApi')
 const userRouter = require('./routes/user')
 const manageRouter = require('./routes/manage')
+const githubRouter = require('./routes/github')
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use('/', indexRouter)
 app.use('/naverApi', naverApiRouter)
 app.use('/user', userRouter)
 app.use('/manage', manageRouter)
+app.use('/github', githubRouter)
 
 // const sessionOption = {
 //   resave: false,

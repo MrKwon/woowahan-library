@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import LoginButton from '@/components/LoginButton.vue';
+import LoginButton from '@/components/LoginButton'
 import ViewTitle from '@/components/ViewTitle'
 
 export default {
   components: {
     ViewTitle,
-    LoginButton,
+    LoginButton
   }
 }
 

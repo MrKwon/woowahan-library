@@ -6,8 +6,6 @@ import Search from '@/views/Search'
 import BookDesc from '@/views/BookDesc'
 import CodeReader from '@/views/CodeReader'
 import Login from '@/views/Login'
-import GithubRedirection from '@/views/GithubRedirection'
-import GithubLogin from '@/views/GithubLogin'
 
 import RequestBook from '@/views/RequestBook'
 import RequestResult from '@/views/RequestResult'
@@ -29,8 +27,6 @@ export default new Router({
     { path: '/book', name: 'book', component: BookDesc, props: (route) => ({ id: route.query.id }) },
     { path: '/rent', name: 'rent', component: CodeReader },
     { path: '/login', name: 'login', component: Login },
-    { path: '/githubredirection', name: 'githubredirection', component: GithubRedirection },
-    { path: '/githublogin', name: 'githublogin', component: GithubLogin },
     { path: '/request_book', name: 'request_book', component: RequestBook },
     { path: '/request_result', name: 'request_result', component: RequestResult, props: { book: null }},
     { path: '/current_rental', name: 'current_rental', component: CurrentRental },

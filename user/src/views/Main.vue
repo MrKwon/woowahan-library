@@ -51,6 +51,26 @@ export default {
     scrollToTop() {
       window.scrollTo(0,0)
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    if (to.query.hasOwnProperty('code')) {
+      axios.get('http://localhost:8081/github/user/?code=' + to.query.code)
+      .then(function(res) {
+        if(!res.data) {
+          alert('something went wrong. can\'t get access token.')
+        } else {
+          // TODO: set vuex data
+          alert(JSON.stringify(res.data))
+        }
+      })
+      .catch(function(err) {
+        alert('something went wrong. request failed.');
+        console.log(err)
+        redirect('/')
+      })
+    }
+    next()
   }
 }
 </script>
