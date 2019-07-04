@@ -23,5 +23,9 @@ module.exports = {
   naverAPI: {
     clientId: process.env.NAVER_API_CLIENT_ID,
     clientSecret: process.env.NAVER_API_CLIENT_SECRET
+  },
+  gitOauth: {
+    clientId: process.env.GIT_OAUTH_CLIENT_ID,
+    clientSecret: process.env.GIT_OAUTH_CLIENT_SECRET
   }
 }

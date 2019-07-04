@@ -16,8 +16,6 @@ const manageRouter = require('./routes/manage')
 
 const app = express()
 
-app.use(cors())
-
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'))
   app.use(helmet())
@@ -27,6 +25,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(bodyParser.json())
+
+app.use(cors())
 
 app.use('/', indexRouter)
 app.use('/naverApi', naverApiRouter)
