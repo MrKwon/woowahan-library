@@ -15,9 +15,21 @@ db.Sequelize = Sequelize
 
 db.User = require('./User')(sequelize, Sequelize)
 db.Book = require('./Book')(sequelize, Sequelize)
-// db.Serial = require('./Serial')(sequelize, Sequelize)
+db.Serial = require('./Serial')(sequelize, Sequelize)
+db.Request = require('./Request')(sequelize, Sequelize)
+db.RentStatus = require('./RentStatus')(sequelize, Sequelize)
 
-// db.Book.hasMany(db.Serial, { foreignKey: 'book_id', sourceKey: 'id' })
-// db.Serial.belongsTo(db.Book, { foreignKey: 'book_id', sourceKey: 'id' })
+// Book 1 : N Serial
+db.Book.hasMany(db.Serial, { foreignKey: 'book_id', sourceKey: 'id' })
+db.Serial.belongsTo(db.Book, { foreignKey: 'book_id', sourceKey: 'id' })
+
+// User 1 : N RentStatus
+db.User.hasMany(db.RentStatus, { foreignKey: 'user_id', sourceKey: 'id' })
+db.RentStatus.belongsTo(db.User, { foreignKey: 'user_id', sourceKey: 'id' })
+
+// User 1 : N Request
+db.User.hasMany(db.Request, { foreignKey: 'user_id', sourceKey: 'id' })
+db.Request.belongsTo(db.User, { foreignKey: 'user_id', sourceKey: 'id' })
+
 
 module.exports = db
