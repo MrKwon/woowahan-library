@@ -1,17 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const Serial = sequelize.define('Serial', {
-    serial_no: {
-      type: DataTypes.INTEGER,
+    status: {
+      type: DataTypes.ENUM('rent', 'hold'),
       allowNull: false,
-      autoIncrement: true,
-      unique: true,
+      defaultValue: 'hold'
     }
    }, {
-    timestamps: true,
-    paranoid: true,
+    timestamps: false,
     charset: 'utf8',
     collate: 'utf8_general_ci'
   })
 
-  return Book
+  return Serial
 }

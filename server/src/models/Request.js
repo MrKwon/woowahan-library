@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Book = sequelize.define('Request', {
+  const Request = sequelize.define('Request', {
     img_url: {
       type: DataTypes.STRING(255),
       allowNull: true,
@@ -33,5 +33,5 @@ module.exports = (sequelize, DataTypes) => {
     collate: 'utf8_general_ci'
   })
 
-  return Book
+  return Request
 }
