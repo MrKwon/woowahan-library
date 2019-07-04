@@ -30,5 +30,7 @@ This directory is for woowahan-library server. Using Node framework.
 * Node.js Server Side Framework
 * MariaDB
 
-## TODO LIST
-- token 이 없을 때 주소로 접근 못하게 하는거 해야 함
+## TODO LIST 7 / 5
+
+- [ ] github oauth 를 가져와서 **첫 로그인 시에** Users Table 에 저장
+- [ ] Users Table 의 authorization 을 Vuex 의 상태에 저장할 수 있도록 함, 이에 따라 Drawer 의 아이템을 보여줄지 안보여줄 지 결정하도록 함
