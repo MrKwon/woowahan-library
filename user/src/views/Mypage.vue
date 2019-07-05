@@ -23,6 +23,9 @@
         >
           <div>{{ $store.state.user.email }}</div>
         </v-layout>
+        <v-layout pa-2>
+          <AuthStateChip :authorization="$store.state.user.authorization"/>
+        </v-layout>
       </v-layout>
     </div>
   </v-app>
@@ -30,10 +33,12 @@
 
 <script>
 import ViewTitle from '../components/ViewTitle'
+import AuthStateChip from '../components/AuthStateChip'
 
 export default {
   components: {
-    ViewTitle
+    ViewTitle,
+    AuthStateChip,
   }
 }
 

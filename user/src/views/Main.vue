@@ -67,7 +67,7 @@ export default {
     // const dispatchUser = this.dispatchUser
     if (to.query.hasOwnProperty('code')) {
       try {
-        const response = await GithubService.user({params: { code: to.query.code }})
+        const response = await GithubService.user({ params: { code: to.query.code } })
         if (!response.data) {
           alert('something went wrong. can\'t get access token.')
         } else {
