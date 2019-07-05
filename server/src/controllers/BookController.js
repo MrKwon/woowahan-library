@@ -32,18 +32,6 @@ module.exports = {
       })
     }
   },
-  // async index (req, res) {
-  //   try {
-  //     const books = await Book.findAll({
-  //       limit: 10
-  //     })
-  //     res.send(books)
-  //   } catch (err) {
-  //     res.status(500).send({
-  //       error: '도서들을 fetch 시도 하는 중에 에러 발생'
-  //     })
-  //   }
-  // },
   
   async bookRegister (req, res) {
     try {

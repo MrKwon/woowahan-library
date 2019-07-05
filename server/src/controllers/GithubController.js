@@ -1,7 +1,7 @@
 const { getOauthUrl, getToken, getUserData } = require('./github/GithubOauth')
 
 module.exports = {
-  async oauth(req, res) {
+  async getOauth(req, res) {
     res.send(getOauthUrl())
   },
 

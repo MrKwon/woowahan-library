@@ -3,7 +3,7 @@ const router = express.Router()
 const GithubController = require('../controllers/GithubController')
 
 router.get('/oauth', 
-  GithubController.oauth
+  GithubController.getOauth
 )
 
 router.get('/user',
