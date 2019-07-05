@@ -72,12 +72,10 @@ export default {
           alert('something went wrong. can\'t get access token.')
         } else {
           const user = response.data
-          console.log(user)
           store.dispatch('setUser', user)
           next('/')
         }
       } catch (error) {
-        console.log(error)
         alert('something went wrong. request failed.');
         next('/')
       }
