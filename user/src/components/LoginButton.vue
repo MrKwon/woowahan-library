@@ -15,7 +15,7 @@ export default {
         const response = await GithubService.login()
         window.location.href = response.data
       } catch (error) {
-        console.log(error)
+        alert(error)
       }
     }
   },

@@ -11,7 +11,11 @@
         circle
       ></v-pagination>
     </v-layout>
-    <v-btn fixed bottom right fab dark color="black" to="/rent">
+    <v-btn
+      v-if="$store.state.isUserLoggedIn"
+      fixed bottom right fab dark color="black"
+      to="/rent"
+    >
       <v-img
         max-height="20"
         max-width="20"
@@ -23,6 +27,8 @@
 <script>
 import BookList from '@/components/BookList'
 import BookService from '@/services/BookService'
+import GithubService from '@/services/GithubService'
+import store from '../store'
 
 export default {
   data: () => ({
@@ -50,25 +56,31 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo(0,0)
+    },
+
+    dispatchUser(user) {
+      this.$store.dispatch('setUser', user)
     }
   },
 
-  beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter(to, from, next) {
+    // const dispatchUser = this.dispatchUser
     if (to.query.hasOwnProperty('code')) {
-      axios.get('http://localhost:8081/github/user/?code=' + to.query.code)
-      .then(function(res) {
-        if(!res.data) {
+      try {
+        const response = await GithubService.user({params: { code: to.query.code }})
+        if (!response.data) {
           alert('something went wrong. can\'t get access token.')
         } else {
-          // TODO: set vuex data
-          alert(JSON.stringify(res.data))
+          const user = response.data
+          console.log(user)
+          store.dispatch('setUser', user)
+          next('/')
         }
-      })
-      .catch(function(err) {
+      } catch (error) {
+        console.log(error)
         alert('something went wrong. request failed.');
-        console.log(err)
-        redirect('/')
-      })
+        next('/')
+      }
     }
     next()
   }
