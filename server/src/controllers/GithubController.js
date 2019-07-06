@@ -11,7 +11,7 @@ module.exports = {
       const userData = await getUserData(req, res, token)
       res.send(userData)
     } catch(error) {
-      console.log(error)
+      res.status(404).send({ error })
     }
   }
 }

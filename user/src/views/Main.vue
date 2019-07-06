@@ -21,6 +21,20 @@
         max-width="20"
         :src="require('@/assets/qr-code.png')"></v-img>
     </v-btn>
+    <v-snackbar
+      v-model="snackbar.snackbar"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+    >
+      {{ snackbar.error }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -30,11 +44,25 @@ import BookService from '@/services/BookService'
 import GithubService from '@/services/GithubService'
 import store from '../store'
 
+const _snackBarTimeout = 2000
+const _error = 'error'
+const _success = 'success'
+
+const _requestFailedErrorMessage = 'something went wrong. request failed.'
+const _invalidTokenErrorMessage = 'something went wrong. can\'t get access token.'
+const _successLoginMessage = 'Welcome ! '
+
 export default {
   data: () => ({
     books: [],
     page: 1,
     length: 1,
+    snackbar: {
+      snackbar: false,
+      color: 'error',
+      timeout: _snackBarTimeout,
+      error: '',
+    }
   }),
 
   watch: {
@@ -51,6 +79,7 @@ export default {
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
+    this.userLogin()
   },
 
   methods: {
@@ -60,27 +89,42 @@ export default {
 
     dispatchUser(user) {
       this.$store.dispatch('setUser', user)
-    }
-  },
+    },
 
-  async beforeRouteEnter(to, from, next) {
-    // const dispatchUser = this.dispatchUser
-    if (to.query.hasOwnProperty('code')) {
-      try {
-        const response = await GithubService.user({ params: { code: to.query.code } })
-        if (!response.data) {
-          alert('something went wrong. can\'t get access token.')
-        } else {
-          const user = response.data
-          store.dispatch('setUser', user)
-          next('/')
+    initializeSnackBar() {
+      setTimeout(() => {
+        this.snackbar.error = ''
+        this.snackbar.color = ''
+      }, _snackBarTimeout + 500)
+    },
+
+    popSnackbar(message, color) {
+      this.snackbar.snackbar = true
+      this.snackbar.error = message
+      this.snackbar.color = color
+    },
+
+    async userLogin() {
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('code')) {
+        const code = params.get('code')
+        try {
+          const response = await GithubService.user({ params: { code } })
+          if (!response.data) {
+            this.popSnackbar(_invalidTokenErrorMessage, _error)
+            this.initializeSnackBar()
+          } else {
+            this.popSnackbar(_successLoginMessage, _success)
+            this.dispatchUser(response.data)
+            this.$router.push('/')
+          }
+        } catch (error) {
+          this.setSnackbarError(_requestFailedErrorMessage, _error)
+          this.initializeSnackBar()
+          this.$router.push('/')
         }
-      } catch (error) {
-        alert('something went wrong. request failed.');
-        next('/')
       }
     }
-    next()
   }
 }
 </script>
