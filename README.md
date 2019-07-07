@@ -1,7 +1,7 @@
 # Woowahan-Library
 ![Alt text](https://raw.githubusercontent.com/MrKwon/woowahan-library/master/dark_logo.png)
 
-이 디렉터리는 우아한테크코스의 도서 관리 시스템의 레포지토리 입니다.
+이 디렉터리는 우아한테크코스의 도서 관리 시스템(테코브러리 (techcourse library))의 레포지토리 입니다.
 
 ## 기본 정보
 * 작성자 : Luffy

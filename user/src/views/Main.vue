@@ -11,6 +11,7 @@
         circle
       ></v-pagination>
     </v-layout>
+    <!-- TODO: 컴포넌트로 분리 -->
     <v-btn
       v-if="$store.state.isUserLoggedIn"
       fixed bottom right fab dark color="black"
@@ -21,6 +22,8 @@
         max-width="20"
         :src="require('@/assets/qr-code.png')"></v-img>
     </v-btn>
+
+    <!-- TODO: 컴포넌트로 분리 -->
     <v-snackbar
       v-model="snackbar.snackbar"
       :color="snackbar.color"
@@ -32,7 +35,7 @@
         flat
         @click="snackbar = false"
       >
-        Close
+        닫기
       </v-btn>
     </v-snackbar>
   </v-app>
@@ -42,15 +45,15 @@
 import BookList from '@/components/BookList'
 import BookService from '@/services/BookService'
 import GithubService from '@/services/GithubService'
-import store from '../store'
 
 const _snackBarTimeout = 2000
+
 const _error = 'error'
 const _success = 'success'
 
-const _requestFailedErrorMessage = 'something went wrong. request failed.'
-const _invalidTokenErrorMessage = 'something went wrong. can\'t get access token.'
-const _successLoginMessage = 'Welcome ! '
+const _requestFailedErrorMessage = '요청에 실패 하였습니다.'
+const _invalidTokenErrorMessage = '액세스 토큰을 받아올 수 없습니다.'
+const _successLoginMessage = '환영합니다 ! '
 
 export default {
   data: () => ({
@@ -87,23 +90,6 @@ export default {
       window.scrollTo(0,0)
     },
 
-    dispatchUser(user) {
-      this.$store.dispatch('setUser', user)
-    },
-
-    initializeSnackBar() {
-      setTimeout(() => {
-        this.snackbar.error = ''
-        this.snackbar.color = ''
-      }, _snackBarTimeout + 500)
-    },
-
-    popSnackbar(message, color) {
-      this.snackbar.snackbar = true
-      this.snackbar.error = message
-      this.snackbar.color = color
-    },
-
     async userLogin() {
       const params = new URLSearchParams(window.location.search)
       if (params.has('code')) {
@@ -111,20 +97,37 @@ export default {
         try {
           const response = await GithubService.user({ params: { code } })
           if (!response.data) {
-            this.popSnackbar(_invalidTokenErrorMessage, _error)
-            this.initializeSnackBar()
+            this._popSnackbar(_invalidTokenErrorMessage, _error)
+            this._initializeSnackBar()
           } else {
-            this.popSnackbar(_successLoginMessage, _success)
-            this.dispatchUser(response.data)
+            this._dispatchUser(response.data)
+            this._popSnackbar(_successLoginMessage + this.$store.state.user.name + '님', _success)
             this.$router.push('/')
           }
         } catch (error) {
-          this.setSnackbarError(_requestFailedErrorMessage, _error)
-          this.initializeSnackBar()
+          this._popSnackbar(_requestFailedErrorMessage, _error)
+          this._initializeSnackBar()
           this.$router.push('/')
         }
       }
-    }
+    },
+
+    _dispatchUser(user) {
+      this.$store.dispatch('setUser', user)
+    },
+
+    _initializeSnackBar() {
+      setTimeout(() => {
+        this.snackbar.error = ''
+        this.snackbar.color = ''
+      }, _snackBarTimeout + 500)
+    },
+
+    _popSnackbar(message, color) {
+      this.snackbar.snackbar = true
+      this.snackbar.error = message
+      this.snackbar.color = color
+    },
   }
 }
 </script>

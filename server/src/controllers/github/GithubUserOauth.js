@@ -2,13 +2,13 @@ const axios = require('axios')
 const qs = require('querystring')
 
 const { User } = require('../../models')
-const { gitOauth } = require('../../config/config')
+const { gitUserOauth } = require('../../config/config')
 const { config, headers } = require('./headers')
 
-const clientId = gitOauth.clientId
-const clientSecret = gitOauth.clientSecret
+const clientId = gitUserOauth.clientId
+const clientSecret = gitUserOauth.clientSecret
 
-const getOauthUrl = () => {
+const getOauthUserUrl = () => {
   const url = 'https://github.com/login/oauth/authorize?'
   const query = qs.stringify({
     client_id: clientId,
@@ -18,7 +18,7 @@ const getOauthUrl = () => {
   return url + query
 }
 
-const getToken = async (req, res) => {
+const getUserToken = async (req, res) => {
   const returnCode = req.query.code
   console.log(returnCode)
   const githubTargetUrl = "https://github.com/login/oauth/access_token" +
@@ -83,7 +83,7 @@ const _getEmail = async (token) => {
 }
 
 module.exports = {
-  getOauthUrl,
-  getToken,
+  getOauthUserUrl,
+  getUserToken,
   getUserData,
 }

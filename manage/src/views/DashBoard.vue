@@ -18,11 +18,11 @@
       </v-layout>
       <v-flex xs12>
         <v-layout class="white elevation-2" column ma-2>
-          <v-toolbar flat dense class="book_list_toolbar white">
+          <v-toolbar class="book_list_toolbar black" flat dense dark>
             <v-toolbar-title>도서 목록</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn flat dark color="primary" v-if="!editMode" @click="editMode = !editMode">수정</v-btn>
-            <v-btn flat dark color="primary" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
+            <v-btn flat color="white" v-if="!editMode" @click="editMode = !editMode">수정</v-btn>
+            <v-btn flat color="white" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
           </v-toolbar>
           <!--TODO: 리스트 컴포넌트로-->
           <v-layout row ma-2 pt-2 pb-2 pr-4 pl-4>
@@ -105,7 +105,7 @@ export default {
   }),
 
   watch: {
-    page: async function(newPage) {
+    page: async function () {
       this.books = (await BookService.index({ page: this.page })).data
     }
   },
@@ -117,7 +117,7 @@ export default {
   },
 
   async beforeMount () {
-    this.books = (await BookService.index({ page: this.page})).data
+    this.books = (await BookService.index({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },
 }
