@@ -54,7 +54,8 @@ export default {
     drawer: true,
     items: [
       { title: '대시보드', icon: 'home', to: '/dashboard' },
-      { title: '신청도서 확인', icon: 'book', to: '/requested' },
+      { title: '보유장서', icon: 'book', to: '/books' },
+      { title: '신청도서 확인', icon: 'assignment', to: '/requested' },
     ]
   }),
 
