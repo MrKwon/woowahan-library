@@ -16,79 +16,6 @@
           </v-layout>
         </v-flex>
       </v-layout>
-      <v-flex xs12>
-        <v-layout class="white elevation-2" column ma-2>
-          <v-toolbar flat dense class="book_list_toolbar white">
-            <v-toolbar-title>도서 목록</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn flat dark color="primary" v-if="!editMode" @click="editMode = !editMode">수정</v-btn>
-            <v-btn flat dark color="primary" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
-          </v-toolbar>
-          <!--TODO: 리스트 컴포넌트로-->
-          <v-layout row ma-2 pt-2 pb-2 pr-4 pl-4>
-            <v-flex xs1>
-              커버
-            </v-flex>
-            <v-flex xs3>
-              제목
-            </v-flex>
-            <v-flex xs2>
-              저자
-            </v-flex>
-            <v-flex xs2>
-              출판사
-            </v-flex>
-            <v-flex xs4>
-              요약
-            </v-flex>
-            <v-flex xs1 v-if="editMode">
-              수정
-            </v-flex>
-          </v-layout>
-          <div v-for="book in books"
-            :key="book.title">
-            <v-layout row ma-2 pr-4 pl-4
-              v-on:click="clickclick(book.title)">
-              <v-flex xs1>
-                <v-img
-                  v-bind:src="book.img_url"
-                  max-height="300px"
-                  max-width="100px"
-                  aspect-ratio="0.7"/>
-              </v-flex>
-              <v-flex xs3>
-                {{ book.title }}
-              </v-flex>
-              <v-flex xs2>
-                {{ book.author }}
-              </v-flex>
-              <v-flex xs2>
-                {{ book.publisher }}
-              </v-flex>
-              <v-flex xs4>
-                {{ book.desc }}
-              </v-flex>
-              <v-flex xs1 v-if="editMode">
-                <v-btn
-                  flat dark color="primary"
-                  v-on:click="clickclick(book.title)">
-                  수정하기
-                </v-btn>
-              </v-flex>
-            </v-layout>
-          </div>
-           <div class="text-xs-center">
-            <v-layout justify-center ma-3>
-              <v-flex xs8>
-                <v-pagination
-                  v-model="page"
-                  :length="this.length"
-                ></v-pagination>
-              </v-flex>
-            </v-layout>
-          </div>
-        </v-layout>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -105,7 +32,7 @@ export default {
   }),
 
   watch: {
-    page: async function(newPage) {
+    page: async function () {
       this.books = (await BookService.index({ page: this.page })).data
     }
   },
@@ -117,7 +44,7 @@ export default {
   },
 
   async beforeMount () {
-    this.books = (await BookService.index({ page: this.page})).data
+    this.books = (await BookService.index({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },
 }

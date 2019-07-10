@@ -6,6 +6,7 @@ import Search from '@/views/Search'
 import BookDesc from '@/views/BookDesc'
 import CodeReader from '@/views/CodeReader'
 import Login from '@/views/Login'
+import Mypage from '@/views/Mypage'
 
 import RequestBook from '@/views/RequestBook'
 import RequestResult from '@/views/RequestResult'
@@ -16,7 +17,17 @@ import History from '@/views/History'
 
 import NotFound from '@/views/NotFound'
 
+import store from '@/store'
+
 Vue.use(Router)
+
+const requireAuth = (from, to, next) => {
+  const isUserLoggedIn = store.state.isUserLoggedIn
+  if (!isUserLoggedIn) {
+    next('/login')
+  }
+  next()
+}
 
 export default new Router({
   mode: 'history',
@@ -25,14 +36,15 @@ export default new Router({
     { path: '/', name: 'main', component: Main },
     { path: '/search', name: 'search', component: Search },
     { path: '/book', name: 'book', component: BookDesc, props: (route) => ({ id: route.query.id }) },
-    { path: '/rent', name: 'rent', component: CodeReader },
+    { path: '/rent', name: 'rent', component: CodeReader, beforeEnter: requireAuth },
     { path: '/login', name: 'login', component: Login },
-    { path: '/request_book', name: 'request_book', component: RequestBook },
-    { path: '/request_result', name: 'request_result', component: RequestResult, props: { book: null }},
-    { path: '/current_rental', name: 'current_rental', component: CurrentRental },
-    { path: '/reservation', name: 'reservation', component: Reservation },
-    { path: '/favorite', name: 'favorite', component: Favorite },
-    { path: '/history', name: 'history', component: History },
+    { path: '/mypage', name: 'mypage', component: Mypage, beforeEnter: requireAuth },
+    { path: '/request_book', name: 'request_book', component: RequestBook, beforeEnter: requireAuth },
+    { path: '/request_result', name: 'request_result', component: RequestResult, props: { book: null }, beforeEnter: requireAuth},
+    { path: '/current_rental', name: 'current_rental', component: CurrentRental, beforeEnter: requireAuth },
+    { path: '/reservation', name: 'reservation', component: Reservation, beforeEnter: requireAuth },
+    { path: '/favorite', name: 'favorite', component: Favorite, beforeEnter: requireAuth },
+    { path: '/history', name: 'history', component: History, beforeEnter: requireAuth },
     { path: '*', component: NotFound }
   ],
   scrollBehavior () {

@@ -86,7 +86,7 @@
           <v-btn
             color="blue darken-1"
             flat="flat"
-            @click="dialog = false"
+            @click="dialog = false; $router.push('/')"
           >
             신청하기
           </v-btn>

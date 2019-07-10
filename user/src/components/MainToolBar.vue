@@ -6,76 +6,51 @@
         <v-layout column>
           <v-layout column align-center justify-center fill-height>
             <v-layout row align-center>
-              <img height="30" src="../assets/dark_only_icon.png"/>
+              <div @onclick="this.$router.push('/')">
+                <img height="30" src="../assets/dark_only_icon.png"/>
+              </div>
             </v-layout>
           </v-layout>
         </v-layout>
       </v-flex>
       <v-spacer></v-spacer>
-      <v-btn small flat icon color="black" to="/search" v-if="$router.currentRoute.path === '/'">
+      <v-btn
+        small flat icon color="black"
+        to="/search"
+        v-if="$router.currentRoute.path === '/'">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn small flat icon disabled v-if="$router.currentRoute.path !== '/'"> <!-- 레이아웃 배치용,, 기능 없는 버튼 -->
+      <v-btn small flat icon disabled
+        v-if="$router.currentRoute.path !== '/'"> <!-- 레이아웃 배치용,, 기능 없는 버튼 -->
         <v-icon></v-icon>
       </v-btn>
     </v-toolbar>
-    <!-- TODO: refactor navigation drawer -->
     <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
       app
     >
-      <v-toolbar flat class="transparent pt-3 pb-3" v-on:click="$router.push('/login')">
-        <v-list class="pa-0">
-          <v-list-tile avatar>
-              <v-list-tile-avatar>
-                <img src="../assets/unknown_user.png">
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <div @onclick="$router.push('login')">로그인이 필요합니다</div>
-                </v-list-tile-title>
-              </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-toolbar>
+      <DrawerToolbar />
       <v-divider></v-divider>
-      <v-list dense class="pt-2">
-        <v-list-tile
-          v-for="item in items"
-          :key="item.title"
-          v-bind:to="item.to"
-        >
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+      <DrawerItems />
     </v-navigation-drawer>
   </div>
 </template>
+
 <script>
+import DrawerToolbar from '@/components/DrawerToolbar'
+import DrawerItems from '@/components/DrawerItems'
+
 export default {
   data: () => ({
     drawer: false,
-    items: [
-      { title: '홈', icon: 'home', to: '/' },
-      { title: '희망도서 신청', icon: 'book', to: '/request_book' },
-      { title: '대여현황', icon: 'import_contacts', to: '/current_rental' },
-      { title: '예약현황', icon: 'assignment', to: '/reservation' },
-      { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
-      { title: '대여기록', icon: 'history', to: '/history' },
-    ],
     error: null
   }),
 
   components: {
+    DrawerToolbar,
+    DrawerItems,
   }
 }
 </script>

@@ -13,10 +13,9 @@ const indexRouter = require('./routes')
 const naverApiRouter = require('./routes/naverApi')
 const userRouter = require('./routes/user')
 const manageRouter = require('./routes/manage')
+const githubRouter = require('./routes/github')
 
 const app = express()
-
-app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'))
@@ -26,27 +25,19 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'))
 }
 
+app.set('jwt-secret', config.authentication.jwtSecret)
+
 app.use(bodyParser.json())
+
+app.use(cors())
+
+require('./passport')
 
 app.use('/', indexRouter)
 app.use('/naverApi', naverApiRouter)
 app.use('/user', userRouter)
 app.use('/manage', manageRouter)
-
-// const sessionOption = {
-//   resave: false,
-//   saveUninitialized: false,
-//   secret: process.env.COOKIE_SECRET,
-//   cookie: {
-//     httpOnly: true,
-//     secure: false,
-//   },
-// }
-// if (process.env.NODE_ENV === 'production') {
-//   sessionOption.proxy = true
-//   sessionOption.cookie.secure = true
-// }
-// app.use(session(sessionOption))
+app.use('/github', githubRouter)
 
 sequelize.sync()
   .then(() => {

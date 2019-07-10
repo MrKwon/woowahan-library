@@ -1,13 +1,13 @@
 const axios = require('axios')
-const config = require('../config/config')
+const { naverAPI } = require('../config/config')
 
 module.exports = {
   async bookSearch (req, res) {
     try {
       const response = await axios.get(`https://openapi.naver.com/v1/search/book.json`, {
         headers: {
-          "X-Naver-Client-Id": config.naverAPI.clientId,
-          "X-Naver-Client-Secret": config.naverAPI.clientSecret,
+          "X-Naver-Client-Id": naverAPI.clientId,
+          "X-Naver-Client-Secret": naverAPI.clientSecret,
         },
         params: {
           "query": req.body.title,

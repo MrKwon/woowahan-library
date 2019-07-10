@@ -2,7 +2,7 @@
   <v-layout column>
     <v-toolbar class="toolbar" fixed flat color="white">
       <v-toolbar-side-icon>
-        <v-icon @click="$router.go(-1)">keyboard_arrow_left</v-icon>
+        <v-icon @click="$router.push('/')">keyboard_arrow_left</v-icon>
       </v-toolbar-side-icon>
       <v-flex xs12>
         <v-layout column>

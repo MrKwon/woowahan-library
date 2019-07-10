@@ -2,19 +2,19 @@
   <v-app>
     <ViewTitle title="로그인"/>
     <v-layout column justify-center align-center>
-      <v-btn color="black" dark round large>
-        Github 로그인
-      </v-btn>
+      <LoginButton />
     </v-layout>
   </v-app>
 </template>
 
 <script>
+import LoginButton from '@/components/LoginButton'
 import ViewTitle from '@/components/ViewTitle'
 
 export default {
   components: {
-    ViewTitle
+    ViewTitle,
+    LoginButton
   }
 }
 

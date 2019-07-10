@@ -1,7 +1,28 @@
 import axios from 'axios'
+import config from '../config/config'
 
-export default () => {
-  return axios.create({
-    baseURL: `http://localhost:8081/manage/`
-  })
+export default {
+  base() {
+    return axios.create({
+      baseURL: config.hostUrl
+    })
+  },
+
+  manager() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/manage` //`https://d10qpmwsutokcb.cloudfront.net/manager/`
+    })
+  },
+
+  naverApi() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/naverApi` //`https://d10qpmwsutokcb.cloudfront.net/naverApi`
+    })
+  },
+
+  github() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/github`
+    })
+  }
 }
