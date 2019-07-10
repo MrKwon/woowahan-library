@@ -7,5 +7,9 @@ export default {
   
   user(params) {
     return Api.github().get('user', params)
+  },
+
+  tokenAuth(header) {
+    return Api.githubAuth(header).get('tokenauthenticate')
   }
 }

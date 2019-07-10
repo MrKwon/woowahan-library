@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import store from '@/store'
 
 export default {
   base() {
@@ -22,6 +23,15 @@ export default {
   github() {
     return axios.create({
       baseURL: `http://localhost:8081/github`
+    })
+  },
+
+  githubAuth(header) {
+    return axios.create({
+      baseURL: `http://localhost:8081/github`,
+      headers: {
+        Authorization: `Bearer ${header}`
+      }
     })
   }
 }

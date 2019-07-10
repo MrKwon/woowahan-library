@@ -82,7 +82,8 @@ export default {
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
-    this.userLogin()
+    this.userGithubLogin()
+    this.tokenLogin()
   },
 
   methods: {
@@ -90,7 +91,7 @@ export default {
       window.scrollTo(0,0)
     },
 
-    async userLogin() {
+    async userGithubLogin() {
       const params = new URLSearchParams(window.location.search)
       if (params.has('code')) {
         const code = params.get('code')
@@ -112,8 +113,9 @@ export default {
       }
     },
 
-    _dispatchUser(user) {
-      this.$store.dispatch('setUser', user)
+    _dispatchUser(data) {
+      this.$store.dispatch('setUser', data.user)
+      this.$store.dispatch('setToken', data.token)
     },
 
     _initializeSnackBar() {
@@ -128,6 +130,18 @@ export default {
       this.snackbar.error = message
       this.snackbar.color = color
     },
+
+    async tokenLogin() {
+      if (localStorage.token) {
+        try {
+          const response = await GithubService.tokenAuth(localStorage.token)
+          this._dispatchUser(response.data)
+          this._popSnackbar(_successLoginMessage + this.$store.state.user.name + '님', _success)
+        } catch (error) {
+          this._popSnackbar(error, _error)
+        }
+      }
+    }
   }
 }
 </script>

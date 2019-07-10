@@ -4,6 +4,7 @@
     <div>
       <v-layout class="profile-contianer"
         pa-4
+        v-if="$store.state.user !== null"
         column justify-center align-center>
         <v-layout pa-4>
           <v-avatar
@@ -26,6 +27,7 @@
         <v-layout pa-2>
           <AuthStateChip :authorization="$store.state.user.authorization"/>
         </v-layout>
+        <v-btn dark round color="black" @click="this.logout">로그아웃</v-btn>
       </v-layout>
     </div>
   </v-app>
@@ -39,6 +41,13 @@ export default {
   components: {
     ViewTitle,
     AuthStateChip,
+  },
+
+  methods: {
+    logout: function() {
+      this.$store.dispatch('removeUser')
+      this.$router.push('/')
+    }
   }
 }
 

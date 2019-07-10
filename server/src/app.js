@@ -25,9 +25,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'))
 }
 
+app.set('jwt-secret', config.authentication.jwtSecret)
+
 app.use(bodyParser.json())
 
 app.use(cors())
+
+require('./passport')
 
 app.use('/', indexRouter)
 app.use('/naverApi', naverApiRouter)
