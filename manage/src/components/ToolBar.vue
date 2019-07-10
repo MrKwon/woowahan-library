@@ -9,16 +9,6 @@
         <span class="toolbar-title">우아한 테크도서관 [관리자]</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat icon color="black"
-        to="/dashboard"
-        v-if="$store.state.isUserLoggedIn">
-        <v-icon>home</v-icon>
-      </v-btn>
-      <v-btn flat icon color="black"
-        to="/book/add"
-        v-if="$store.state.isUserLoggedIn">
-        <v-icon>add</v-icon>
-      </v-btn>
       <v-btn flat icon color="black" 
         v-if="$store.state.isUserLoggedIn"
         v-on:click="logout">

@@ -1,34 +1,34 @@
 import axios from 'axios'
-// import store from '@/store'
+import config from '../config/config'
 
 export default {
   base() {
     return axios.create({
-      baseURL: `http://localhost:8081`
+      baseURL: config.hostUrl
     })
   },
 
   user() {
     return axios.create({
-      baseURL: `http://localhost:8081/user` //`https://d10qpmwsutokcb.cloudfront.net/user/`
+      baseURL: `${config.hostUrl}/user`
     })
   },
 
   naverApi() {
     return axios.create({
-      baseURL: `http://localhost:8081/naverApi` //`https://d10qpmwsutokcb.cloudfront.net/naverApi`
+      baseURL: `${config.hostUrl}/naverApi`
     })
   },
 
   github() {
     return axios.create({
-      baseURL: `http://localhost:8081/github`
+      baseURL: `${config.hostUrl}/github`
     })
   },
 
   githubAuth(header) {
     return axios.create({
-      baseURL: `http://localhost:8081/github`,
+      baseURL: `${config.hostUrl}/github`,
       headers: {
         Authorization: `Bearer ${header}`
       }

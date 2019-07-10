@@ -39,21 +39,6 @@ app.use('/user', userRouter)
 app.use('/manage', manageRouter)
 app.use('/github', githubRouter)
 
-// const sessionOption = {
-//   resave: false,
-//   saveUninitialized: false,
-//   secret: process.env.COOKIE_SECRET,
-//   cookie: {
-//     httpOnly: true,
-//     secure: false,
-//   },
-// }
-// if (process.env.NODE_ENV === 'production') {
-//   sessionOption.proxy = true
-//   sessionOption.cookie.secure = true
-// }
-// app.use(session(sessionOption))
-
 sequelize.sync()
   .then(() => {
     app.listen(process.env.PORT || 8081)

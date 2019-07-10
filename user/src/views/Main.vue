@@ -132,7 +132,7 @@ export default {
     },
 
     async tokenLogin() {
-      if (localStorage.token) {
+      if (localStorage.token && this.$store.state.user === null) {
         try {
           const response = await GithubService.tokenAuth(localStorage.token)
           this._dispatchUser(response.data)
