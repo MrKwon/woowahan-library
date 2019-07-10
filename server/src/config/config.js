@@ -26,10 +26,12 @@ module.exports = {
   },
   gitUserOauth: {
     clientId: process.env.GIT_OAUTH_USER_CLIENT_ID,
-    clientSecret: process.env.GIT_OAUTH_USER_CLIENT_SECRET
+    clientSecret: process.env.GIT_OAUTH_USER_CLIENT_SECRET,
+    redirectUri: process.env.GIT_OAUTH_USER_REDIRECT_URI
   },
   gitManagerOauth: {
-    clientId: process.env.GIT_OAUTH_MANAGER_CLIENT_ID,
-    clientSecret: process.env.GIT_OAUTH_MANAGER_CLIENT_SECRET
+    clientId: process.env.GIT_OAUTH_MANAGE_CLIENT_ID,
+    clientSecret: process.env.GIT_OAUTH_MANAGE_CLIENT_SECRET,
+    redirectUri: process.env.GIT_OAUTH_MANAGE_REDIRECT_URI
   }
 }

@@ -3,7 +3,7 @@
     <v-toolbar app>
       <v-toolbar-side-icon
         @click.stop="drawer = !drawer"
-        v-if="this.$store.state.user !== null"
+        v-if="$store.state.user !== null"
       ></v-toolbar-side-icon>
       <v-toolbar-title class="headline text-uppercase">
         <span class="toolbar-title">우아한 테크도서관 [관리자]</span>
@@ -16,7 +16,7 @@
       </v-btn>
     </v-toolbar>
     <v-navigation-drawer
-      v-if="this.$store.state.user !== null"
+      v-if="$store.state.user !== null"
       v-model="drawer"
       fixed
       clipped

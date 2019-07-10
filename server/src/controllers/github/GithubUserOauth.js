@@ -7,12 +7,13 @@ const { config, headers } = require('./headers')
 
 const clientId = gitUserOauth.clientId
 const clientSecret = gitUserOauth.clientSecret
+const redirectUri = gitUserOauth.redirectUri
 
 const getOauthUserUrl = () => {
   const url = 'https://github.com/login/oauth/authorize?'
   const query = qs.stringify({
     client_id: clientId,
-    redirect_uri: "http://localhost:8080/",
+    redirect_uri: redirectUri,
     scope: 'user',
   })
   return url + query

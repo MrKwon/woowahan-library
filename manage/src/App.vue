@@ -8,17 +8,12 @@
 </template>
 
 <script>
-import Toolbar from './components/Toolbar'
+import Toolbar from './components/ToolBar'
 
 export default {
   name: 'App',
   components: {
     Toolbar
-  },
-  data () {
-    return {
-      //
-    }
   }
 }
 </script>
