@@ -47,6 +47,7 @@ export default {
       { title: '대시보드', icon: 'home', to: '/dashboard' },
       { title: '보유장서', icon: 'book', to: '/books' },
       { title: '신청도서 확인', icon: 'assignment', to: '/requested' },
+      { title: '유저관리', icon: 'assignment_ind', to: '/users' },
     ]
   }),
 
