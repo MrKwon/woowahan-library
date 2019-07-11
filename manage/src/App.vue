@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Toolbar/>
-    <v-content>
+    <v-app align-start>
       <router-view/>
-    </v-content>
+    </v-app>
   </div>
 </template>
 

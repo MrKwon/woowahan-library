@@ -3,7 +3,7 @@
     <v-img xs4 pa-2
       contain
       min-width="100"
-      max-height="400"
+      max-height="200"
       :src="bookinfo.img_url"/>
     <v-layout column xs8 ma-2>
       <v-layout row>

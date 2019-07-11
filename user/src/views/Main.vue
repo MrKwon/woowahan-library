@@ -81,9 +81,10 @@ export default {
 
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
-    this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
+    this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 12) + 1
     this.userGithubLogin()
     this.tokenLogin()
+    this.messageShower()
   },
 
   methods: {
@@ -132,7 +133,7 @@ export default {
     },
 
     async tokenLogin() {
-      if (localStorage.token && this.$store.state.user === null) {
+      if (localStorage.token && !this.$store.state.isUserLoggedIn) {
         try {
           const response = await GithubService.tokenAuth(localStorage.token)
           this._dispatchUser(response.data)
@@ -140,6 +141,15 @@ export default {
         } catch (error) {
           this._popSnackbar(error, _error)
         }
+      }
+    },
+
+    messageShower() {
+      if (this.$route.params.message) {
+        this._popSnackbar(this.$route.params.message, _success)
+      }
+      if (this.$route.params.error) {
+        this._popSnackbar(this.$route.params.error, _error)
       }
     }
   }

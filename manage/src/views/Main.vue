@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-layout align-center justify-center>
       <Signin v-if="!this.loadingDialog"/>
       <v-dialog v-model="dialog" persistent max-width="290">

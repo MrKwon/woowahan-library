@@ -15,7 +15,6 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
-      // localStorage.user = JSON.stringify(user)
       if (user) {
         state.isUserLoggedIn = true
       } else {

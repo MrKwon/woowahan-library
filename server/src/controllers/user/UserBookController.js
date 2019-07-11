@@ -20,11 +20,11 @@ module.exports = {
       const { page } = req.body
       let offset = 0
       if (page > 1) {
-        offset = 10 * (page - 1);
+        offset = 12 * (page - 1);
       }
       const books = await Book.findAll({
         offset,
-        limit: 10
+        limit: 12
       })
       const parsedBooks = []
       books.forEach(element => {
