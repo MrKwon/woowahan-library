@@ -7,7 +7,7 @@ router.get('/oauthuser',
   GithubController.getOauthUser
 )
 
-router.get('/user',
+router.post('/user',
   GithubController.getUser
 )
 
