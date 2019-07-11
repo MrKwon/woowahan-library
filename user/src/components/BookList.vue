@@ -8,13 +8,13 @@
         <v-icon dark v-if="!grid">grid_on</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-flex xs12 sm6 offset-sm3 v-if="grid">
+    <v-flex xs12 v-if="grid">
       <v-container grid-list-lg>
         <v-layout row wrap>
           <v-flex
             v-for="(book, i) in books"
             :key="i"
-            xs6
+            xs4
             @click="() => moveToSelected(book)"
           >
             <v-card class="image-container" flat tile ml-2 mr-2>
@@ -113,10 +113,7 @@ export default {
   border-radius: 10px;
 }
 .list-item {
-  /* height: ; */
   border-bottom: 1px solid #D8D8D8;
-  /* box-shadow: 1px 1px 1px 1px #BDBDBD; */
-  /* border-radius: 10px */
 }
 .book-title {
   overflow: hidden;

@@ -86,19 +86,36 @@
           <v-btn
             color="blue darken-1"
             flat="flat"
-            @click="dialog = false; $router.push('/')"
+            @click="this.requestButtonHandler"
           >
             신청하기
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      v-model="snackbar.snackbar"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+    >
+      {{ snackbar.error }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        닫기
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
 import NaverApiService from '@/services/NaverApiService'
 import ViewTitle from '@/components/ViewTitle'
+import RequestService from '@/services/RequestService'
+
+const _snackBarTimeout = 2000
 
 export default {
   data: () => ({
@@ -108,6 +125,12 @@ export default {
     error: null,
     errorDialog: false,
     dialog: false,
+    snackbar: {
+      snackbar: false,
+      color: 'error',
+      timeout: _snackBarTimeout,
+      error: '',
+    }
   }),
 
   components: {
@@ -136,6 +159,22 @@ export default {
     selectItem(item) {
       this.dialog = true
       this.selectedItem = item
+    },
+
+    requestButtonHandler: async function() {
+      this.dialog = false
+      try {
+        const response = await RequestService.request(this.selectedItem)
+        this.$router.push({ name: 'main', params: { message: response.data.message }})
+      } catch (error) {
+        this._popSnackbar(error.response.data.error, 'error')
+      }
+    },
+
+    _popSnackbar(message, color) {
+      this.snackbar.snackbar = true
+      this.snackbar.error = message
+      this.snackbar.color = color
     }
   }
 }

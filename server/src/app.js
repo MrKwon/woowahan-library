@@ -14,6 +14,7 @@ const naverApiRouter = require('./routes/naverApi')
 const userRouter = require('./routes/user')
 const manageRouter = require('./routes/manage')
 const githubRouter = require('./routes/github')
+const requestRouter = require('./routes/request')
 
 const app = express()
 
@@ -38,6 +39,7 @@ app.use('/naverApi', naverApiRouter)
 app.use('/user', userRouter)
 app.use('/manage', manageRouter)
 app.use('/github', githubRouter)
+app.use('/request', requestRouter)
 
 sequelize.sync()
   .then(() => {
