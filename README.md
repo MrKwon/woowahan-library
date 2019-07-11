@@ -34,5 +34,19 @@ This directory is for woowahan-library server. Using Node framework.
 - [x] ~~github oauth 를 가져와서 **첫 로그인 시에** Users Table 에 저장~~
 - [x] ~~Users Table 의 authorization 을 Vuex 의 상태에 저장할 수 있도록 함, 이에 따라 Drawer 의 아이템을 보여줄지 안보여줄 지 결정하도록 함~~
 
-## TODO LIST 7 / 6
-- [ ] user 페이지와 manager 페이지의 합병?에 대해 생각해보도록 하자. 로그인 관리를 한번에 하려면 하나로 하는 것이 맞을 것 같아.  
+## 배포 메뉴얼
+### check list
+1. server .env github secret
+    - GIT_OAUTH_USER_CLIENT_ID : tecobrary id
+    - GIT_OAUTH_USER_CLIENT_SECRET : tecobrary secret
+    - GIT_OAUTH_USER_REDIRECT_URI : user cloudfront uri
+
+    - GIT_OAUTH_MANAGE_CLIENT_ID : tecobrary-manage id
+    - GIT_OAUTH_MANAGE_CLIENT_SECRET : tecobrary-manage secret
+    - GIT_OAUTH_MANAGE_REDIRECT_URI : manage cloudfront uri
+
+2. user, manage .env HOST_URL to server url
+
+3. github oauth setting
+    - tecobrary redirect uri to user cloudfront uri
+    - tecobrary-manage redirect uri to manage cloudfront uri

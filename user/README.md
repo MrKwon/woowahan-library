@@ -22,19 +22,3 @@
 ## July Update Plan TODOList
 1. - [ ] QR code 대여, 반납
 
-## 배포 메뉴얼
-### check list
-1. server .env github secret
-    - GIT_OAUTH_USER_CLIENT_ID : tecobrary id
-    - GIT_OAUTH_USER_CLIENT_SECRET : tecobrary secret
-    - GIT_OAUTH_USER_REDIRECT_URI : user cloudfront uri
-
-    - GIT_OAUTH_MANAGE_CLIENT_ID : tecobrary-manage id
-    - GIT_OAUTH_MANAGE_CLIENT_SECRET : tecobrary-manage secret
-    - GIT_OAUTH_MANAGE_REDIRECT_URI : manage cloudfront uri
-
-2. user, manage .env HOST_URL to server url
-
-3. github oauth setting
-    - tecobrary redirect uri to user cloudfront uri
-    - tecobrary-manage redirect uri to manage cloudfront uri

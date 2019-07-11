@@ -145,10 +145,6 @@ export default {
   },
 
   methods: {
-    hi: function(user) {
-      console.log(user)
-    },
-
     async _initiateUsers() {
       this.parsedUsers = (await UsersServices.all()).data.users
     },
