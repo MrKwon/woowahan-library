@@ -6,4 +6,12 @@ router.post('/',
   RequestController.requestBook
 )
 
+router.post('/list',
+  RequestController.requestList
+)
+
+router.post('/register',
+  RequestController.register
+)
+
 module.exports = router
