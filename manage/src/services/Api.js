@@ -24,5 +24,17 @@ export default {
     return axios.create({
       baseURL: `${config.hostUrl}/github`
     })
+  },
+
+  request() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/request`
+    })
+  },
+
+  users() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/users`
+    })
   }
 }

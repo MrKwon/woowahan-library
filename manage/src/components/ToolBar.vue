@@ -1,20 +1,5 @@
 <template>
   <div>
-    <v-toolbar app>
-      <v-toolbar-side-icon
-        @click.stop="drawer = !drawer"
-        v-if="$store.state.user !== null"
-      ></v-toolbar-side-icon>
-      <v-toolbar-title class="headline text-uppercase">
-        <span class="toolbar-title">우아한 테크도서관 [관리자]</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn flat icon color="black" 
-        v-if="$store.state.isUserLoggedIn"
-        v-on:click="logout">
-        <v-icon>account_circle</v-icon>
-      </v-btn>
-    </v-toolbar>
     <v-navigation-drawer
       v-if="$store.state.user !== null"
       v-model="drawer"
@@ -35,6 +20,22 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+    <v-toolbar app fixed clipped-left>
+      <v-toolbar-side-icon
+        @click.stop="drawer = !drawer"
+        v-if="$store.state.user !== null"
+      ></v-toolbar-side-icon>
+      <v-toolbar-title class="headline text-uppercase">
+        <span class="toolbar-title">우아한 테크도서관 [관리자]</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn flat icon color="black" 
+        v-if="$store.state.isUserLoggedIn"
+        v-on:click="logout">
+        <v-icon>account_circle</v-icon>
+      </v-btn>
+    </v-toolbar>
+    
   </div>
 </template>
 
@@ -46,6 +47,7 @@ export default {
       { title: '대시보드', icon: 'home', to: '/dashboard' },
       { title: '보유장서', icon: 'book', to: '/books' },
       { title: '신청도서 확인', icon: 'assignment', to: '/requested' },
+      { title: '유저관리', icon: 'assignment_ind', to: '/users' },
     ]
   }),
 

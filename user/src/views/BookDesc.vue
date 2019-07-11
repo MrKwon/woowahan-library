@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <TitleToolBar title="상세 정보"/>
-    <v-content>
+    <div>
       <v-layout column>
         <v-layout column>
           <v-toolbar flat dense dark height="30px" class="black">
@@ -20,8 +20,7 @@
           </v-flex>
         </v-layout>
       </v-layout>
-      <!-- <NotFound v-if="bookinfo.title === ''"/>  v-if="bookinfo.title !== ''" -->
-    </v-content>
+    </div>
   </v-app>
 </template>
 

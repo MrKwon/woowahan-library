@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-layout column>
       <v-layout row>
         <v-flex xs6>
@@ -9,12 +9,13 @@
             </v-toolbar>
             <v-layout column pa-2>
               <!-- TODO: 현재 대출 내역을 보여주는 컴포넌트 구현 -->
-              <div>현재 대출 내역은</div>
+              <!-- <div>현재 대출 내역은</div>
               <div>ㅇㅇㅇ : 1권 / 5권</div>
-              <div>ㅌㅌㅌ : 2권 / 4권</div>
+              <div>ㅌㅌㅌ : 2권 / 4권</div> -->
             </v-layout>
           </v-layout>
         </v-flex>
+        초라한 대시보드...
       </v-layout>
     </v-layout>
   </v-container>

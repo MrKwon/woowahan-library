@@ -24,7 +24,7 @@ Vue.use(Router)
 const requireAuth = (from, to, next) => {
   const isUserLoggedIn = store.state.isUserLoggedIn
   if (!isUserLoggedIn) {
-    next('/login')
+    next('/')
   }
   next()
 }
@@ -33,7 +33,7 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '/', name: 'main', component: Main },
+    { path: '/', name: 'main', component: Main, props: true },
     { path: '/search', name: 'search', component: Search },
     { path: '/book', name: 'book', component: BookDesc, props: (route) => ({ id: route.query.id }) },
     { path: '/rent', name: 'rent', component: CodeReader, beforeEnter: requireAuth },

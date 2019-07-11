@@ -33,5 +33,11 @@ export default {
         Authorization: `Bearer ${header}`
       }
     })
+  },
+
+  request() {
+    return axios.create({
+      baseURL: `${config.hostUrl}/request`,
+    })
   }
 }
