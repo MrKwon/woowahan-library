@@ -19,7 +19,7 @@ router.get('/manager',
   GithubController.getManager
 )
 
-router.get('/tokenauthenticate',
+router.post('/tokenauthenticate',
   TokenAuth,
   GithubController.tokenAuthenticator
 )

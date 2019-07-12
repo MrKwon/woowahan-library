@@ -14,7 +14,7 @@ const getOauthUserUrl = () => {
   const query = qs.stringify({
     client_id: clientId,
     redirect_uri: redirectUri,
-    scope: 'user',
+    scope: 'read:user',
   })
   return url + query
 }
