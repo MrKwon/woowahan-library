@@ -14,7 +14,7 @@ const getOauthUserUrl = () => {
   const query = qs.stringify({
     client_id: clientId,
     redirect_uri: redirectUri,
-    scope: 'read:user',
+    scope: ['read:user', 'user:email'],
   })
   return url + query
 }
@@ -64,7 +64,7 @@ const getUserData = async (req, res, token) => {
 
 const _getUserInfo = async (token) => {
   const userInfoResponse = await axios.get('https://api.github.com/user', config(token))
-  
+  console.log(userInfoResponse)
   const userInfo = {
     name: userInfoResponse.data.name,
     avatar: userInfoResponse.data.avatar_url,
@@ -74,7 +74,10 @@ const _getUserInfo = async (token) => {
 }
 
 const _getEmail = async (token) => {
-  const emailResponse = await axios.get('https://api.github.com/user/public_emails', config(token))
+  console.log(token) // token 은 받아와짐
+  // const emailResponse = await axios.get('https://api.github.com/user/public_emails', config(token))
+  const emailResponse = await axios.get('https://api.github.com/user/emails', config(token))
+  console.log(emailResponse)
   const emailInfo = emailResponse.data.filter(object => {
     return object.primary === true
   })
