@@ -16,6 +16,22 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
+    <v-list dense class="pt-2"
+      v-if="$store.state.isUserLoggedIn && $store.state.user.authorization === 'none'">
+      <v-list-tile
+        v-for="(item, index) in unauthItems"
+        :key="index"
+        v-bind:to="item.to"
+      >
+        <v-list-tile-action>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+
+        <v-list-tile-content>
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
     <v-list dense class="pa-3"
       v-if="$store.state.isUserLoggedIn && $store.state.user.authorization === 'none'"
     >
@@ -34,6 +50,9 @@ export default {
       { title: '예약현황', icon: 'assignment', to: '/reservation' },
       { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
       { title: '대여기록', icon: 'history', to: '/history' },
+    ],
+    unauthItems: [
+      { title: '홈', icon: 'home', to: '/' },
     ]
   }),
 }

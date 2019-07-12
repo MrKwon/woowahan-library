@@ -75,7 +75,7 @@ export default {
         this._loadingDialogChaneger()
         const code = params.get('code')
         try {
-          const response = await GithubService.manager({ params: { code } })
+          const response = await GithubService.manager({ code: code })
           if (!response.data) {
             this._loadingDialogChaneger()
             this._showDialog(_accessTokenFailed, _error)

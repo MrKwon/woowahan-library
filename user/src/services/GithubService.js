@@ -6,10 +6,10 @@ export default {
   },
   
   user(params) {
-    return Api.github().get('user', params)
+    return Api.github().post('user', params)
   },
 
   tokenAuth(header) {
-    return Api.githubAuth(header).get('tokenauthenticate')
+    return Api.githubAuth(header).post('tokenauthenticate')
   }
 }

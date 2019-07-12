@@ -97,7 +97,7 @@ export default {
       if (params.has('code')) {
         const code = params.get('code')
         try {
-          const response = await GithubService.user({ params: { code } })
+          const response = await GithubService.user({ code: code })
           if (!response.data) {
             this._popSnackbar(_invalidTokenErrorMessage, _error)
             this._initializeSnackBar()

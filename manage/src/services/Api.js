@@ -1,40 +1,43 @@
 import axios from 'axios'
-import config from '../config/config'
+// import config from '../config/config'
+
+// const hostUrl = 'https://d10qpmwsutokcb.cloudfront.net'
+const hostUrl = 'http://localhost:8081'
 
 export default {
   base() {
     return axios.create({
-      baseURL: config.hostUrl
+      baseURL: hostUrl
     })
   },
 
   manager() {
     return axios.create({
-      baseURL: `${config.hostUrl}/manage` //`https://d10qpmwsutokcb.cloudfront.net/manager/`
+      baseURL: `${hostUrl}/manage`
     })
   },
 
   naverApi() {
     return axios.create({
-      baseURL: `${config.hostUrl}/naverApi` //`https://d10qpmwsutokcb.cloudfront.net/naverApi`
+      baseURL: `${hostUrl}/naverApi`
     })
   },
 
   github() {
     return axios.create({
-      baseURL: `${config.hostUrl}/github`
+      baseURL: `${hostUrl}/github`
     })
   },
 
   request() {
     return axios.create({
-      baseURL: `${config.hostUrl}/request`
+      baseURL: `${hostUrl}/request`
     })
   },
 
   users() {
     return axios.create({
-      baseURL: `${config.hostUrl}/users`
+      baseURL: `${hostUrl}/users`
     })
   }
 }

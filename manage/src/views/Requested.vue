@@ -137,7 +137,8 @@ export default {
         this.snackbar = true
         this.snackbarMessage = response.data.message
       } catch (error) {
-        console.log(error)
+        this.snackbar = true
+        this.snackbarMessage = error.response.data.message
       }
     },
 

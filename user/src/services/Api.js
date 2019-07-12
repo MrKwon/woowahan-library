@@ -1,34 +1,36 @@
 import axios from 'axios'
-import config from '../config/config'
+
+// const base = "https://d10qpmwsutokcb.cloudfront.net"
+const base = "http://localhost:8081"
 
 export default {
   base() {
     return axios.create({
-      baseURL: config.hostUrl
+      baseURL: base
     })
   },
 
   user() {
     return axios.create({
-      baseURL: `${config.hostUrl}/user`
+      baseURL: `${base}/user`
     })
   },
 
   naverApi() {
     return axios.create({
-      baseURL: `${config.hostUrl}/naverApi`
+      baseURL: `${base}/naverApi`
     })
   },
 
   github() {
     return axios.create({
-      baseURL: `${config.hostUrl}/github`
+      baseURL: `${base}/github`
     })
   },
 
   githubAuth(header) {
     return axios.create({
-      baseURL: `${config.hostUrl}/github`,
+      baseURL: `${base}/github`,
       headers: {
         Authorization: `Bearer ${header}`
       }
@@ -37,7 +39,7 @@ export default {
 
   request() {
     return axios.create({
-      baseURL: `${config.hostUrl}/request`,
+      baseURL: `${base}/request`,
     })
   }
 }

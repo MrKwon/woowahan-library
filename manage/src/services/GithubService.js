@@ -6,6 +6,6 @@ export default {
   },
   
   manager(params) {
-    return Api.github().get('manager', params)
+    return Api.github().post('manager', params)
   }
 }
