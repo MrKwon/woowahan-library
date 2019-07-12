@@ -2,7 +2,7 @@ import Api from '@/services/Api'
 
 export default {
   all() {
-    return Api.users().get('all')
+    return Api.users().post('all')
   },
 
   update(params) {

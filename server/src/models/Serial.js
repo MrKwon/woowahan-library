@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Serial = sequelize.define('Serial', {
     status: {
-      type: DataTypes.ENUM('rent', 'hold'),
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: 'hold'
-    }
+      defaultValue: false
+    },
    }, {
     timestamps: false,
     charset: 'utf8',
