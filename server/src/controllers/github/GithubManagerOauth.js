@@ -21,7 +21,7 @@ const getOauthManagerUrl = () => {
 }
 
 const getManagerToken = async (req, res) => {
-  const returnCode = req.data.code
+  const returnCode = req.body.code
   const githubTargetUrl = "https://github.com/login/oauth/access_token" +
                           "?client_id=" + clientId +
                           "&client_secret=" + clientSecret +
