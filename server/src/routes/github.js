@@ -15,7 +15,7 @@ router.get('/oauthmanager',
   GithubController.getOauthManager
 )
 
-router.get('/manager',
+router.post('/manager',
   GithubController.getManager
 )
 

@@ -74,10 +74,7 @@ const _getUserInfo = async (token) => {
 }
 
 const _getEmail = async (token) => {
-  console.log(token) // token 은 받아와짐
-  // const emailResponse = await axios.get('https://api.github.com/user/public_emails', config(token))
   const emailResponse = await axios.get('https://api.github.com/user/emails', config(token))
-  console.log(emailResponse)
   const emailInfo = emailResponse.data.filter(object => {
     return object.primary === true
   })
