@@ -10,7 +10,6 @@ function parseTitle(title) {
 module.exports = {
   async requestBook (req, res) {
     try {
-      console.log(req.body.book)
       const { image, title, author, publisher, isbn, description } = req.body.book
       const { user_id } = req.body
       const book = await Book.findOne({
@@ -22,6 +21,7 @@ module.exports = {
         res.status(400).send({
           error: '현재 비치된 도서입니다.'
         })
+        return
       }
       const request = await Request.create({
         img_url: image,
