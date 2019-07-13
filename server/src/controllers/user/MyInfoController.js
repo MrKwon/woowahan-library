@@ -20,7 +20,7 @@ module.exports = {
         where: { id: user.id }
       })
       res.send({
-        name: editedUser.name
+        newName: editedUser.name
       })
     } catch (error) {
       res.status(404).send({

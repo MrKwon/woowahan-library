@@ -28,7 +28,7 @@
                 type="text"
                 v-model="newName"
                 autofocus
-                style="text-align: center;"
+                style="text-align: center; border-bottom: 1px solid black;"
                 placeholder="변경할 닉네임"
               />
             </v-layout>
@@ -95,7 +95,7 @@
               <v-btn
                 color="error"
                 flat="flat"
-                @click="nameEditDialog = false"
+                @click="_closeNameEditDialog()"
               >
                 취소
               </v-btn>
@@ -103,13 +103,27 @@
               <v-btn
                 color="primary"
                 flat="flat"
-                @click="nameEditDialog = false"
+                v-on:click="patchNewName(); nameEditDialog = false"
               >
                 확인
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-snackbar
+          v-model="snackbar.snackbar"
+          :color="snackbar.color"
+          :timeout="snackbar.timeout"
+        >
+          {{ snackbar.error }}
+          <v-btn
+            dark
+            flat
+            @click="snackbar = false"
+          >
+            닫기
+          </v-btn>
+        </v-snackbar>
       </v-layout>
     </div>
   </v-app>
@@ -119,6 +133,8 @@
 import ViewTitle from '../components/ViewTitle'
 import AuthStateChip from '../components/AuthStateChip'
 import Divider from '../components/style/Divider'
+
+import UserService from '../services/UserService'
 
 const _nickNamePattern = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]/gi;
 
@@ -136,7 +152,14 @@ export default {
     nameEditDialog: false,
     newName: '',
     nameEditErrorAreaColor: 'white',
-    nameEditError: null
+    nameEditError: null,
+    error: null,
+    snackbar: {
+      snackbar: false,
+      color: '',
+      timeout: 1500,
+      error: ''
+    }
   }),
 
   components: {
@@ -160,7 +183,6 @@ export default {
       this._initNameEditError()
       this._nameEditableChanger()
       this.nameEditDialog = true
-      // TODO: send to server and state.editUserName
     },
 
     _validNewNameLength() {
@@ -211,6 +233,40 @@ export default {
 
     editName() {
       this._nameEditableChanger()
+    },
+
+    async patchNewName() {
+      // TODO: send to server and this.$store.dispatch('editUserName')
+      try {
+        const response = await UserService.editName({
+          user: this.$store.state.user,
+          newName: this.newName
+        })
+        this.$store.dispatch('editUserName', response.data.newName)
+        this._closeNameEditDialog()
+        this._popSnackbar('변경 성공', 'success')
+      } catch (error) {
+        this._popSnackbar(error, 'error')
+      }
+    },
+
+    _closeNameEditDialog() {
+      this.newName = ''
+      this.nameEditDialog = false
+    },
+
+    _popSnackbar(message, color) {
+      this.snackbar.snackbar = true
+      this.snackbar.error = message
+      this.snackbar.color = color
+      this._initializeSnackBar()
+    },
+
+    _initializeSnackBar() {
+      setTimeout(() => {
+        this.snackbar.error = ''
+        this.snackbar.color = ''
+      }, 2000)
     },
   }
 }
