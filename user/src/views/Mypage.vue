@@ -120,6 +120,16 @@ import ViewTitle from '../components/ViewTitle'
 import AuthStateChip from '../components/AuthStateChip'
 import Divider from '../components/style/Divider'
 
+const _nickNamePattern = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]/gi;
+
+const _invalidLengthMsg = '닉네임의 길이는 최소 1자 최대 30자 입니다.'
+const _notNewNameMsg = '기존의 닉네임과 같습니다.'
+const _invalidPatternMsg = '닉네임은 띄어쓰기와 특수문자를 포함할 수 없습니다.'
+
+const _error = 'red'
+const _warning = 'yellow'
+const _none = 'white'
+
 export default {
   data: () => ({
     nameEditable: false,
@@ -142,7 +152,9 @@ export default {
     },
 
     saveNameEdit() {
-      if (!this._validNewNameLength() || !this._isNewName()) {
+      if (!this._validNewNameLength() ||
+        !this._isNewName() ||
+        !this._validPattern()) {
         return
       }
       this._initNameEditError()
@@ -153,8 +165,7 @@ export default {
 
     _validNewNameLength() {
       if (this.newName.length <= 0 || this.newName.length > 30) {
-        this.nameEditErrorAreaColor = 'red'
-        this.nameEditError = '닉네임의 길이는 최소 1자 최대 30자 입니다.'
+        this._nameEditError(_error, _invalidLengthMsg)
         return false
       }
       return true
@@ -163,24 +174,27 @@ export default {
     _isNewName() {
       const userState = this.$store.state.user
       if (this.newName === userState.name) {
-        this.nameEditErrorAreaColor = 'yellow'
-        this.nameEditError = '변경할 닉네임을 입력해주세요.'
+        this._nameEditError(_warning, _notNewNameMsg)
+        return false
+      }
+      return true
+    },
+
+    _validPattern() {
+      if (_nickNamePattern.test(this.newName)) {
+        this._nameEditError(_error, _invalidPatternMsg)
         return false
       }
       return true
     },
 
     _initNameEditError() {
-      this.nameEditErrorAreaColor = 'white'
-      this.nameEditError = null
+      this._nameEditError(_none, null)
     },
 
-    cancelNameChange() {
-      this._nameEditableChanger()
-    },
-
-    editName() {
-      this._nameEditableChanger()
+    _nameEditError(color, message) {
+      this.nameEditErrorAreaColor = color
+      this.nameEditError = message
     },
 
     _nameEditableChanger() {
@@ -189,6 +203,14 @@ export default {
       } else {
         this.nameEditable = true
       }
+    },
+
+    cancelNameChange() {
+      this._nameEditableChanger()
+    },
+
+    editName() {
+      this._nameEditableChanger()
     },
   }
 }
