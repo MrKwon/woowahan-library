@@ -14,20 +14,102 @@
             <img :src="$store.state.user.avatar" alt="avatar">
           </v-avatar>
         </v-layout>
-        <v-layout class="profile-desc"
-          pa-2
-        >
-          <div>{{ $store.state.user.name }}</div>
+        <Divider></Divider>
+        <v-layout class="profile-desc" pa-2 pt-3 pb-3>
+          <v-layout row>
+            <v-layout xs8 justify-center align-center>
+              <div
+                v-if="!nameEditable"
+              >
+                {{ $store.state.user.name }}
+              </div>
+              <input
+                v-if="nameEditable"
+                type="text"
+                v-model="newName"
+                autofocus
+                style="text-align: center;"
+                placeholder="변경할 닉네임"
+              />
+            </v-layout>
+            <v-icon
+              color="black"
+              v-if="!nameEditable"
+              v-on:click="editName"
+            >
+              edit
+            </v-icon>
+            <v-icon
+              color="black"
+              v-if="nameEditable"
+              v-on:click="saveNameEdit"
+              style="padding-right: 10px;"
+            >
+              save
+            </v-icon>
+            <v-icon
+              color="black"
+              v-if="nameEditable"
+              v-on:click="cancelNameChange"
+            >
+              close
+            </v-icon>
+          </v-layout>
         </v-layout>
-        <v-layout class="profile-desc"
-          pa-2
+        <div 
+          v-if="nameEditable"
+          :class="nameEditErrorAreaColor"
+          style="width: 100%; text-align: center;"
         >
+          {{ nameEditError }}
+        </div>
+        <Divider></Divider>
+        <v-layout class="profile-desc" pa-2 pt-3 pb-3 justify-center align-center>
           <div>{{ $store.state.user.email }}</div>
         </v-layout>
-        <v-layout pa-2>
+        <Divider></Divider>
+        <v-layout pa-2 pt-3 pb-3>
           <AuthStateChip :authorization="$store.state.user.authorization"/>
         </v-layout>
-        <v-btn dark round color="black" @click="this.logout">로그아웃</v-btn>
+        <v-btn dark block color="black" @click="this.logout" round>
+          <div style="padding: 8px;">로그아웃</div>
+        </v-btn>
+      </v-layout>
+      <v-layout row justify-center>
+        <v-dialog
+          v-model="nameEditDialog"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title drak class="black">
+              <div style="color: white; font-size: 24px;">알림</div>
+            </v-card-title>
+
+            <v-card-text>
+              닉네임을 변경하시겠습니까?
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="error"
+                flat="flat"
+                @click="nameEditDialog = false"
+              >
+                취소
+              </v-btn>
+
+              <v-btn
+                color="primary"
+                flat="flat"
+                @click="nameEditDialog = false"
+              >
+                확인
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </div>
   </v-app>
@@ -36,18 +118,78 @@
 <script>
 import ViewTitle from '../components/ViewTitle'
 import AuthStateChip from '../components/AuthStateChip'
+import Divider from '../components/style/Divider'
 
 export default {
+  data: () => ({
+    nameEditable: false,
+    nameEditDialog: false,
+    newName: '',
+    nameEditErrorAreaColor: 'white',
+    nameEditError: null
+  }),
+
   components: {
     ViewTitle,
     AuthStateChip,
+    Divider
   },
 
   methods: {
     logout: function() {
       this.$store.dispatch('removeUser')
       this.$router.push('/')
-    }
+    },
+
+    saveNameEdit() {
+      if (!this._validNewNameLength() || !this._isNewName()) {
+        return
+      }
+      this._initNameEditError()
+      this._nameEditableChanger()
+      this.nameEditDialog = true
+      // TODO: send to server and state.editUserName
+    },
+
+    _validNewNameLength() {
+      if (this.newName.length <= 0 || this.newName.length > 30) {
+        this.nameEditErrorAreaColor = 'red'
+        this.nameEditError = '닉네임의 길이는 최소 1자 최대 30자 입니다.'
+        return false
+      }
+      return true
+    },
+
+    _isNewName() {
+      const userState = this.$store.state.user
+      if (this.newName === userState.name) {
+        this.nameEditErrorAreaColor = 'yellow'
+        this.nameEditError = '변경할 닉네임을 입력해주세요.'
+        return false
+      }
+      return true
+    },
+
+    _initNameEditError() {
+      this.nameEditErrorAreaColor = 'white'
+      this.nameEditError = null
+    },
+
+    cancelNameChange() {
+      this._nameEditableChanger()
+    },
+
+    editName() {
+      this._nameEditableChanger()
+    },
+
+    _nameEditableChanger() {
+      if (this.nameEditable) {
+        this.nameEditable = false
+      } else {
+        this.nameEditable = true
+      }
+    },
   }
 }
 
@@ -57,5 +199,6 @@ export default {
 <style scoped>
 .profile-desc {
   font-size: 20px;
+  width: 100%;
 }
 </style>

@@ -22,6 +22,12 @@ export default new Vuex.Store({
       }
     },
 
+    editUserName(state, name) {
+      if (state.isUserLoggedIn) {
+        state.user.name = name
+      }
+    },
+
     setToken(state, token) {
       state.token = token
       localStorage.token = token
@@ -38,6 +44,10 @@ export default new Vuex.Store({
   actions: {
     setUser({ commit }, user) {
       commit('setUser', user)
+    },
+
+    editUserName({ commit }, name) {
+      commit('editUserName', name)
     },
 
     setToken({ commit }, token) {
