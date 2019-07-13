@@ -2,6 +2,13 @@
   <v-app>
     <ViewTitle title="마이페이지"/>
     <div>
+      <v-alert
+        :value="this.$store.state.user.name === '' || this.$store.state.user.name === null"
+        type="error"
+        style="margin: 0px auto;"
+      >
+        닉네임을 설정해주세요.
+      </v-alert>
       <v-layout class="profile-contianer"
         pa-4
         v-if="$store.state.user !== null"
