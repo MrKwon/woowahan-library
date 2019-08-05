@@ -34,6 +34,12 @@ This directory is for woowahan-library server. Using Node framework.
 - [x] ~~github oauth 를 가져와서 **첫 로그인 시에** Users Table 에 저장~~
 - [x] ~~Users Table 의 authorization 을 Vuex 의 상태에 저장할 수 있도록 함, 이에 따라 Drawer 의 아이템을 보여줄지 안보여줄 지 결정하도록 함~~
 
+## TODO LIST JULY
+- [ ] 인증, 인가 서버 로직
+- [ ] 버튼으로 대여 반납 기능
+    - user 페이지에서 대여 버튼을 누르면
+    - 대여 로그에 기록
+
 ## 배포 메뉴얼
 ### check list
 1. server .env github secret
