@@ -3,61 +3,73 @@
     <v-toolbar class="book_list_toolbar black" flat dense dark>
       <v-toolbar-title>도서 목록</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat color="white" v-if="!editMode" @click="editMode = !editMode">수정</v-btn>
+      <v-btn flat color="white" v-if="!editMode" @click="editMode = !editMode">관리모드</v-btn>
       <v-btn flat color="white" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
     </v-toolbar>
     <!--TODO: 리스트 컴포넌트로-->
-    <v-layout row ma-2 pt-2 pb-2 pr-4 pl-4>
+    <v-layout row ma-1 pa-2>
       <v-flex xs1>
         커버
       </v-flex>
       <v-flex xs3>
         제목
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs3>
         저자
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs3>
         출판사
       </v-flex>
-      <v-flex xs4>
-        요약
-      </v-flex>
-      <v-flex xs1 v-if="editMode">
-        수정
+      <v-flex xs3>
+        소장 부수
       </v-flex>
     </v-layout>
-    <div v-for="book in books"
+    <div
+      v-for="book in books"
       :key="book.title">
-      <v-layout row ma-2 pr-4 pl-4
-        v-on:click="clickclick(book.title)">
-        <v-flex xs1>
-          <v-img
-            v-bind:src="book.img_url"
-            max-height="300px"
-            max-width="100px"
-            aspect-ratio="0.7"/>
-        </v-flex>
-        <v-flex xs3>
-          {{ book.title }}
-        </v-flex>
-        <v-flex xs2>
-          {{ book.author }}
-        </v-flex>
-        <v-flex xs2>
-          {{ book.publisher }}
-        </v-flex>
-        <v-flex xs4>
-          {{ book.desc }}
-        </v-flex>
-        <v-flex xs1 v-if="editMode">
-          <v-btn
-            flat dark color="primary"
-            v-on:click="clickclick(book.title)">
-            수정하기
-          </v-btn>
-        </v-flex>
-      </v-layout>
+      <v-hover v-slot:default="{ hover }">
+        <v-card row style="width: 100%"
+          :elevation="hover ? 12 : 0"
+          v-on:click="clickclick(book.title)">
+          <v-layout ma-1 pa-2>
+            <v-flex xs1>
+              <v-img
+                v-bind:src="book.img_url"
+                max-height="300px"
+                max-width="100px"
+                aspect-ratio="0.7"/>
+            </v-flex>
+            <v-flex xs3>
+              <v-layout column justify-center align-center fill-height>
+                <div>
+                  {{ book.title }}
+                </div>
+              </v-layout>
+            </v-flex>
+            <v-flex xs3>
+              <v-layout column justify-center align-center fill-height>
+                <div>
+                  {{ book.author }}
+                </div>
+              </v-layout>
+            </v-flex>
+            <v-flex xs3>
+              <v-layout column justify-center align-center fill-height>
+                <div>
+                  {{ book.publisher }}
+                </div>
+              </v-layout>
+            </v-flex>
+            <v-flex xs3>
+              <v-layout column justify-center align-center fill-height>
+                <div>
+                  1 부
+                </div>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-hover>
     </div>
       <div class="text-xs-center">
       <v-layout justify-center ma-3>
@@ -80,7 +92,7 @@ export default {
     books: null,
     editMode: false,
     page: 1,
-    length: 1
+    length: 1,
   }),
 
   watch: {
@@ -92,7 +104,7 @@ export default {
   methods: {
     clickclick(param) {
       alert(param)
-    }
+    },
   },
 
   async beforeMount () {

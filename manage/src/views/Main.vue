@@ -80,7 +80,9 @@ export default {
             this._loadingDialogChaneger()
             this._showDialog(_accessTokenFailed, _error)
           } else {
-            if (response.data.authorization === 'none' || response.data.authorization === 'user') {
+            const { user } = response.data
+            console.log(user.authorization)
+            if (user.authorization === 'none' || user.authorization === 'user') {
               this._loadingDialogChaneger()
               this._showDialog('권한이 없습니다.', _warning)
             } else {
