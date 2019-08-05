@@ -30,7 +30,7 @@
       <v-hover v-slot:default="{ hover }">
         <v-card row style="width: 100%"
           :elevation="hover ? 12 : 0"
-          v-on:click="clickclick(book.title)">
+          v-on:click="bookEditDialog = true; selectedBook = book;">
           <v-layout ma-1 pa-2>
             <v-flex xs1>
               <v-img
@@ -81,19 +81,81 @@
         </v-flex>
       </v-layout>
     </div>
+    <v-layout row justify-center>
+      <v-dialog v-model="bookEditDialog" persistent max-width="600px">
+        <v-card>
+          <v-toolbar flat dense dark>
+            <v-toolbar-title>
+              <span><b>{{titleParser(selectedBook.title)}}</b> 정보 수정</span>
+            </v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-layout colum pb-2>
+              <v-layout row>
+                <v-flex xs3>
+                  <v-img
+                    v-bind:src="selectedBook.img_url"
+                    max-height="300px"
+                    max-width="100px"
+                    aspect-ratio="0.7"/>
+                </v-flex>
+                <v-flex xs9>
+                  <v-layout column fill-height justify-center>
+                    <v-layout column xs12 justify-center>
+                      <BookEditDialogTitle title="ISBN" v-bind:content="selectedBook.isbn"/>
+                      <BookEditDialogTitle title="저자" v-bind:content="selectedBook.author"/>
+                      <BookEditDialogTitle title="출판사" v-bind:content="selectedBook.publisher"/>
+                    </v-layout>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-layout>
+          </v-card-text>
+          <v-toolbar flat dense dark height="35">
+            <v-toolbar-title>
+              <span>보유 장서 일련번호</span>
+            </v-toolbar-title>
+          </v-toolbar>
+          <div v-for="i in 5"
+            :key="i">
+            <div>1권</div>
+          </div>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="red darken-1" flat @click="bookEditDialog = false">취소</v-btn>
+            <v-btn color="blue darken-1" flat @click="bookEditDialog = false">저장</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
   </v-layout>
 </template>
 
 <script>
 import BookService from '@/services/BookService'
 
+import BookEditDialogTitle from '@/components/BookEditDialogTitle'
+
 export default {
   data: () => ({
     books: null,
+    selectedBook: {
+      img_url: '',
+      title: '',
+      author: '',
+      publisher: '',
+      desc: '',
+      isbn: '',
+    },
     editMode: false,
     page: 1,
     length: 1,
+    bookEditDialog: false,
   }),
+
+  components: {
+    BookEditDialogTitle
+  },
 
   watch: {
     page: async function () {
@@ -105,6 +167,13 @@ export default {
     clickclick(param) {
       alert(param)
     },
+
+    titleParser(title) {
+      if (title.length < 25) {
+        return `[${title}]`
+      }
+      return `[${title.substring(0, 25)}...]`
+    }
   },
 
   async beforeMount () {
@@ -116,5 +185,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
