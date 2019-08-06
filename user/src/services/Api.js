@@ -41,5 +41,11 @@ export default {
     return axios.create({
       baseURL: `${base}/request`,
     })
+  },
+
+  serials() {
+    return axios.create({
+      baseURL: `${base}/serials`
+    })
   }
 }
