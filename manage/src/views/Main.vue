@@ -118,11 +118,6 @@ export default {
       }
     }
 
-  },
-
-  // beforeRouteEnter(to, from, next) {
-  //   console.log(to)
-  //   console.log(from)
-  // }
+  }
 }
 </script>

@@ -39,5 +39,11 @@ export default {
     return axios.create({
       baseURL: `${hostUrl}/users`
     })
+  },
+
+  serials() {
+    return axios.create({
+      baseURL: `${hostUrl}/serials`
+    })
   }
 }

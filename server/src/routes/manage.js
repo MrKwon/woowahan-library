@@ -3,19 +3,19 @@ const router = express.Router()
 const BookController = require('../controllers/BookController')
 const NaverAPIController = require('../controllers/NaverAPIController')
 
-router.post('/book/search',
+router.post('/search',
   NaverAPIController.bookSearch
 )
 
-router.get('/book/total',
+router.get('/total',
   BookController.total
 )
 
-router.post('/book/index',
+router.post('/index',
   BookController.index
 )
 
-router.post('/book/register',
+router.post('/register',
   BookController.bookRegister
 )
 
