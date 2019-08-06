@@ -7,5 +7,9 @@ export default {
 
   addSerial(param) {
     return Api.serials().post('/', param)
+  },
+
+  removeSerial(queryParam) {
+    return Api.serials().delete('/', { params: queryParam })
   }
 }

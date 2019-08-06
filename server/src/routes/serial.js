@@ -10,6 +10,10 @@ router.post('/',
   SerialController.addSerial
 )
 
+router.delete('/',
+  SerialController.removeSerial
+)
+
 // router.delete('/serial', )
 
 module.exports = router

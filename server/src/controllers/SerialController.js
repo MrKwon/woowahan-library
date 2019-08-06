@@ -35,7 +35,26 @@ const addSerial = async(req, res) => {
   }
 }
 
+const removeSerial = async(req, res) => {
+  try {
+    console.log(req)
+    const { id } = req.query
+    await Serial.destroy({
+      where: { id }
+    })
+    res.send({
+      message: '삭제 성공'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(404).send({
+      error
+    })
+  }
+}
+
 module.exports = {
   showBookSerials,
   addSerial,
+  removeSerial,
 }

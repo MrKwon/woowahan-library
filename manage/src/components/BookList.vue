@@ -123,28 +123,42 @@
             </v-btn>
           </v-toolbar>
           <v-layout row pa-2 style="border-bottom: 1px solid black;">
-              <v-flex xs4>
+              <v-flex xs3>
                 <div>일련번호</div>
               </v-flex>
-              <v-flex xs8>
+              <v-flex xs7>
                 <div>도서 상태</div>
               </v-flex>
+              <v-flex xs2>
+                <div>삭제</div>
+              </v-flex>
             </v-layout>
-          <v-layout v-if="selectedBookSerials.length === 0" pa-5 justify-center align-center>
-            <div>
-              No Data
+          <div style="height: 200px; overflow: auto;">
+            <v-layout v-if="selectedBookSerials.length === 0" pa-5 justify-center align-center>
+              <div>
+                No Data
+              </div>
+            </v-layout>
+            <div v-for="(serial, i) in selectedBookSerials"
+              :key="i">
+              <v-layout row pa-2>
+                <v-flex xs3>
+                  <v-layout column fill-height justify-center align-center>
+                    <div>{{ serial.id }}</div>
+                  </v-layout>
+                </v-flex>
+                <v-flex xs7>
+                  <v-layout column fill-height justify-center align-center>
+                    <div>{{ _statusParser(serial.status) }}</div>
+                  </v-layout>
+                </v-flex>
+                <v-flex xs2>
+                  <v-btn flat small class="red" dark round @click="removeButtonHandler(serial.id)">
+                    삭제
+                  </v-btn>
+                </v-flex>
+              </v-layout>
             </div>
-          </v-layout>
-          <div v-for="(serial, i) in selectedBookSerials"
-            :key="i">
-            <v-layout row pa-2>
-              <v-flex xs4>
-                <div>{{ serial.id }}</div>
-              </v-flex>
-              <v-flex xs8>
-                <div>{{ _statusParser(serial.status) }}</div>
-              </v-flex>
-            </v-layout>
           </div>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -220,24 +234,40 @@ export default {
       return `[${title.substring(0, 25)}...]`
     },
 
+    async showBookSerials(bookId) {
+      try {
+        const response = await SerialService.showBookSerials({ bookId })
+        if (response) {
+          this.selectedBookSerials = response.data.bookSerials
+        }
+      } catch (error) {
+        this.snackbarMessage = error.response.data.error
+        this._pushSnackBar()
+      }
+    },
+
     async addSerial(bookId) {
       try {
         const response = await SerialService.addSerial({ bookId })
         if (response) {
           this.snackbarMessage = '등록성공'
           this._pushSnackBar()
+          this.showBookSerials(bookId)
         }
       } catch (error) {
-        this.snackbarMessage = error.response
+        this.snackbarMessage = error.response.data.error
         this._pushSnackBar()
       }
     },
 
-    async showBookSerials(bookId) {
+    async removeSerial(id) {
       try {
-        const response = await SerialService.showBookSerials({ bookId })
+        const response = await SerialService.removeSerial({ id })
         if (response) {
-          this.selectedBookSerials = response.data.bookSerials
+          console.log(response.data.message)
+          this.snackbarMessage = response.data.message
+          this._pushSnackBar()
+          this.showBookSerials(this.selectedBook.id)
         }
       } catch (error) {
         this.snackbarMessage = error.response
@@ -253,6 +283,10 @@ export default {
 
     addButtonHandler() {
       this.addSerial(this.selectedBook.id)
+    },
+
+    removeButtonHandler(id) {
+      this.removeSerial(id)
     },
 
     _pushSnackBar() {
