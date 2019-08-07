@@ -3,7 +3,7 @@
     <ViewTitle title="마이페이지"/>
     <div>
       <v-alert
-        :value="this.$store.state.user.name === '' || this.$store.state.user.name === null"
+        :value="this.$store.state.user.user.name === '' || this.$store.state.user.user.name === null"
         type="error"
         style="margin: 0px auto;"
       >
@@ -18,7 +18,7 @@
             size="150px"
             color="white"
           >
-            <img :src="$store.state.user.avatar" alt="avatar">
+            <img :src="$store.state.user.user.avatar" alt="avatar">
           </v-avatar>
         </v-layout>
         <Divider></Divider>
@@ -28,7 +28,7 @@
               <div
                 v-if="!nameEditable"
               >
-                {{ $store.state.user.name }}
+                {{ $store.state.user.user.name }}
               </div>
               <input
                 v-if="nameEditable"
@@ -72,11 +72,11 @@
         </div>
         <Divider></Divider>
         <v-layout class="profile-desc" pa-2 pt-3 pb-3 justify-center align-center>
-          <div>{{ $store.state.user.email }}</div>
+          <div>{{ $store.state.user.user.email }}</div>
         </v-layout>
         <Divider></Divider>
         <v-layout pa-2 pt-3 pb-3>
-          <AuthStateChip :authorization="$store.state.user.authorization"/>
+          <AuthStateChip :authorization="$store.state.user.user.authorization"/>
         </v-layout>
         <v-btn dark block color="black" @click="this.logout" round>
           <div style="padding: 8px;">로그아웃</div>
