@@ -64,7 +64,6 @@ const getUserData = async (req, res, token) => {
 
 const _getUserInfo = async (token) => {
   const userInfoResponse = await axios.get('https://api.github.com/user', config(token))
-  console.log(userInfoResponse)
   const userInfo = {
     name: userInfoResponse.data.name,
     avatar: userInfoResponse.data.avatar_url,

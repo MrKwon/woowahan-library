@@ -17,6 +17,7 @@ const githubRouter = require('./routes/github')
 const requestRouter = require('./routes/request')
 const usersRouter = require('./routes/users')
 const serialRouter = require('./routes/serial')
+const rentRouter = require('./routes/rent')
 
 const app = express()
 
@@ -44,6 +45,7 @@ app.use('/github', githubRouter)
 app.use('/request', requestRouter)
 app.use('/users', usersRouter)
 app.use('/serials', serialRouter)
+app.use('/rents', rentRouter)
 
 sequelize.sync()
   .then(() => {
