@@ -50,7 +50,7 @@
       <v-btn
         dark
         flat
-        @click="snackbar = false"
+        @click="this.$router.go(-1)"
       >
         닫기
       </v-btn>
@@ -117,47 +117,27 @@ export default {
         const rentInfo = JSON.parse(this.qrText)
         const response = await RentService.rentBook(token, { rentInfo })
         this.dialog = false
-        this._popSnackbar(response.data.message, _success)
         this._initializeSnackBar()
         this._initQrText()
-        console.log(response.data.message)
+        this._popSnackbar(response.data.message, _success)
       } catch (error) {
         this.dialog = false
-        this._popSnackbar(error.response.data.error, _error)
         this._initializeSnackBar()
         this._initQrText()
-        console.log(error.response.data.error)
+        this._popSnackbar(error.response.data.error, _error)
       }
     },
-
-    async returnBook () {
-      const token = this.$store.state.user.token
-      try {
-        const rentInfo = JSON.parse(JSON.stringify(this.qrText))
-        const response = await RentService.returnBook(token, { rentInfo })
-        this.dialog = false
-        this._popSnackbar(response.data.message, _success)
-        this._initializeSnackBar()
-        this._initQrText()
-        console.log(response.data.error)
-      } catch (error) {
-        this.dialog = false
-        this._popSnackbar(error.response.data.error, _error)
-        this._initializeSnackBar()
-        this._initQrText()
-        console.log(error.response.data.error)
-      }
-    },
-
+    
     closeHandler() {
       this.dialog = false
+      setTimeout(() => {
+        this.$router.go(-1)
+      }, _snackBarTimeout)
     },
 
     _initializeSnackBar() {
-      setTimeout(() => {
-        this.snackbar.error = ''
-        this.snackbar.color = ''
-      }, _snackBarTimeout + 500)
+      this.snackbar.error = ''
+      this.snackbar.color = ''
     },
 
     _initQrText() {

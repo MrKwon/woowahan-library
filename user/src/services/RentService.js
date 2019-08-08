@@ -7,5 +7,9 @@ export default {
 
   returnBook (header, param) {
     return Api.rent(header).post('return', param)
+  },
+
+  userRentStatus (header, param) {
+    return Api.rent(header).post('user', param)
   }
 }
