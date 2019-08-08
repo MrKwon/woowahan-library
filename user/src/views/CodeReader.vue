@@ -119,11 +119,13 @@ export default {
         this.dialog = false
         this._popSnackbar(response.data.message, _success)
         this._initializeSnackBar()
+        this._initQrText()
         console.log(response.data.message)
       } catch (error) {
         this.dialog = false
         this._popSnackbar(error.response.data.error, _error)
         this._initializeSnackBar()
+        this._initQrText()
         console.log(error.response.data.error)
       }
     },
@@ -136,11 +138,13 @@ export default {
         this.dialog = false
         this._popSnackbar(response.data.message, _success)
         this._initializeSnackBar()
+        this._initQrText()
         console.log(response.data.error)
       } catch (error) {
         this.dialog = false
         this._popSnackbar(error.response.data.error, _error)
         this._initializeSnackBar()
+        this._initQrText()
         console.log(error.response.data.error)
       }
     },
@@ -154,6 +158,10 @@ export default {
         this.snackbar.error = ''
         this.snackbar.color = ''
       }, _snackBarTimeout + 500)
+    },
+
+    _initQrText() {
+      this.qrText = ''
     },
 
     _popSnackbar(message, color) {
