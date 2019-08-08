@@ -12,7 +12,8 @@ router.post('/list',
 
 // 특정 유저 목록
 router.post('/user',
-
+  AuthorizationChecker.userAuth,
+  RentController.userRentStatus
 )
 
 router.post('/rent',

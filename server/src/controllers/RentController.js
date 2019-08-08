@@ -36,11 +36,11 @@ const rentBook = async(req, res) => {
     console.log(error)
     if (error.message === _BOOK_NOT_FOUND) {
       res.status(404).send({
-        error: '보유중이 아닌 도서입니다.'
+        error: '보유중인 도서가 아닙니다.'
       })
     } else if (error.message === _BOOK_ALREADY_RENT) {
       res.status(404).send({
-        error: '이미 대여 중인 도서입니다.'
+        error: '이미 대출 중인 도서입니다.'
       })
     } else {
       res.status(404).send({
@@ -52,6 +52,7 @@ const rentBook = async(req, res) => {
 
 const returnBook = async(req, res) => {
   const rentInfo = req.rentInfo
+  console.log(rentInfo)
   try {
     const serial = await Serial.findOne({ where: { id: rentInfo.serial } })
     if (serial == null) {
@@ -104,7 +105,7 @@ const allUserRentStatus = async(req, res) => {
       limit: 10
     })
 
-    let responseRentStatus = []
+    const responseRentStatus = []
 
     for (let i = 0; i < rentStatus.length; i++) {
       const { serial_id, user_id } = rentStatus[i]
@@ -130,13 +131,37 @@ const allUserRentStatus = async(req, res) => {
   } 
 }
 
-const allUserRentHistory = (req, res) => {
-  const page = req.page
-}
+const userRentStatus = async(req, res) => {
+  const user_id = req.user
+  try {
+    const rentStatus = await RentStatus.findAll({ where: { user_id: user_id }})
 
+    const responseRentStatus = []
+
+    for (let i = 0; i < rentStatus.length; i++) {
+      const { serial_id } = rentStatus[i]
+      const book = await Serial.findOne({ where: { id: serial_id } })
+      const rentBook = await Book.findOne({ where: { id: book.id } })
+
+      const id = rentStatus[i].id
+      const rentDate = rentStatus[i].createdAt
+      const bookTitle = rentBook.title
+      const serial = serial_id
+
+      responseRentStatus.push({ id, rentDate, bookTitle, serial })
+    }
+    res.send(responseRentStatus)
+  } catch (error) {
+    console.log(error)
+    res.status(404).send({
+      error
+    })
+  }
+}
 
 module.exports = {
   rentBook,
   returnBook,
-  allUserRentStatus
+  allUserRentStatus,
+  userRentStatus
 }

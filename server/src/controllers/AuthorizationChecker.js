@@ -10,20 +10,22 @@ const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user
 
 const userAuth = (req, res, next) => {
   passport.authenticate('jwt', function(err, user) {
-    const userJson = user.toJSON()
+    console.log(err)
     if (err || !user) {
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })
-    } else if (isUserAuthNone(userJson)) {
+    } else if (isUserAuthNone(user)) {
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })
     } else {
-      const serial = req.body.rentInfo.serial
-      req.rentInfo = {
-        user: userJson.id,
-        serial
+      req.user = user.id
+      if (req.body.rentInfo) {
+        req.rentInfo = {
+          user: user.id,
+          serial: req.body.rentInfo.serial
+        }
       }
       next()
     }
@@ -44,10 +46,6 @@ const manageAuth = (req, res, next) => {
     } else {
       const page = req.body.page
       req.page = page
-      // req.rentInfo = {
-      //   user: userJson.id,
-      //   serial
-      // }
       next()
     }
   })(req, res, next)
