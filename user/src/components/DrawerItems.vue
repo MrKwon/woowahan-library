@@ -37,6 +37,8 @@
     >
       <div>이용 권한이 없습니다.</div>
     </v-list>
+    <v-spacer></v-spacer>
+    <v-divider></v-divider>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ export default {
     items: [
       { title: '홈', icon: 'home', to: '/' },
       { title: '희망도서 신청', icon: 'book', to: '/request_book' },
+      { title: '우테코 필독서', icon: 'chrome_reader_mode', to: '/mustread' },
       { title: '대여현황', icon: 'import_contacts', to: '/current_rental' },
       { title: '예약현황', icon: 'assignment', to: '/reservation' },
       { title: '즐겨찾기', icon: 'favorite', to: '/favorite' },
