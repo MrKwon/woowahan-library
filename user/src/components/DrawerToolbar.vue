@@ -13,7 +13,7 @@
           <v-list-tile-avatar
             v-if="$store.state.isUserLoggedIn">
             <img
-              :src="$store.state.user.avatar"/>
+              :src="$store.state.user.user.avatar"/>
           </v-list-tile-avatar>
 
           <v-list-tile-content>
@@ -23,7 +23,7 @@
             </v-list-tile-title>
             <v-list-tile-title
               v-if="$store.state.isUserLoggedIn">
-              <div>{{ $store.state.user.name }}</div>
+              <div>{{ $store.state.user.user.name }}</div>
             </v-list-tile-title>
           </v-list-tile-content>
       </v-list-tile>

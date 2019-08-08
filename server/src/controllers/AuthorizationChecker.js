@@ -1,20 +1,57 @@
 const passport = require('passport')
 
-module.exports = {
-  jwtValidation (req, res, next) {
-    passport.authenticate('jwt', function(err, user) {
-      if (err || !user) {
-        res.status(403).send({
-          error: '접근이 불가능합니다.'
-        })
-      } else {
-        req.user = user.toJSON()
-        next()
-      }
-    })(req, res, next)
-  },
+const _AUTH_NONE = 'none'
+const _AUTH_USER = 'user'
 
-  // check(req, res, next) {
-  //   const authorization = req.user.authorization
-  // }
+const _NO_AUTHORIZATION_ERROR = '권한이 없습니다.'
+
+const isUserAuthNone = (user) => user.authorization == _AUTH_NONE
+const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user.authorization == _AUTH_USER
+
+const userAuth = (req, res, next) => {
+  passport.authenticate('jwt', function(err, user) {
+    console.log(err)
+    if (err || !user) {
+      res.status(403).send({
+        message: _NO_AUTHORIZATION_ERROR
+      })
+    } else if (isUserAuthNone(user)) {
+      res.status(403).send({
+        message: _NO_AUTHORIZATION_ERROR
+      })
+    } else {
+      req.user = user.id
+      if (req.body.rentInfo) {
+        req.rentInfo = {
+          user: user.id,
+          serial: req.body.rentInfo.serial
+        }
+      }
+      next()
+    }
+  })(req, res, next)
+}
+
+const manageAuth = (req, res, next) => {
+  passport.authenticate('jwt', function(err, user) {
+    const userJson = user.toJSON()
+    if (err || !user) {
+      res.status(403).send({
+        message: _NO_AUTHORIZATION_ERROR
+      })
+    } else if (isUserAuthUnderManage(userJson)) {
+      res.status(403).send({
+        message: _NO_AUTHORIZATION_ERROR
+      })
+    } else {
+      const page = req.body.page
+      req.page = page
+      next()
+    }
+  })(req, res, next)
+}
+
+module.exports = {
+  userAuth,
+  manageAuth
 }

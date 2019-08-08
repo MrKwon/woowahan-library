@@ -103,7 +103,7 @@ export default {
             this._initializeSnackBar()
           } else {
             this._dispatchUser(response.data)
-            this._popSnackbar(_successLoginMessage + this.$store.state.user.name + '님', _success)
+            this._popSnackbar(_successLoginMessage + this.$store.state.user.user.name + '님', _success)
             this.$router.push('/')
           }
         } catch (error) {
@@ -115,7 +115,7 @@ export default {
     },
 
     _dispatchUser(data) {
-      this.$store.dispatch('setUser', data.user)
+      this.$store.dispatch('setUser', data)
       this.$store.dispatch('setToken', data.token)
     },
 
@@ -137,7 +137,7 @@ export default {
         try {
           const response = await GithubService.tokenAuth(localStorage.token)
           this._dispatchUser(response.data)
-          this._popSnackbar(_successLoginMessage + this.$store.state.user.name + '님', _success)
+          this._popSnackbar(_successLoginMessage + this.$store.state.user.user.name + '님', _success)
         } catch (error) {
           this._popSnackbar(error, _error)
         }

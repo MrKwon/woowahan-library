@@ -21,7 +21,6 @@ export default {
       required: true
     },
     content: {
-      type: String,
       required: true
     }
   }

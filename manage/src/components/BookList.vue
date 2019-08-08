@@ -6,7 +6,6 @@
       <v-btn flat color="white" v-if="!editMode" @click="editMode = !editMode">관리모드</v-btn>
       <v-btn flat color="white" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
     </v-toolbar>
-    <!--TODO: 리스트 컴포넌트로-->
     <v-layout row ma-1 pa-2>
       <v-flex xs1>
         커버
@@ -30,7 +29,7 @@
       <v-hover v-slot:default="{ hover }">
         <v-card row style="width: 100%"
           :elevation="hover ? 12 : 0"
-          v-on:click="bookEditDialog = true; selectedBook = book;">
+          v-on:click="openBookButtonHandler(book)">
           <v-layout ma-1 pa-2>
             <v-flex xs1>
               <v-img
@@ -102,6 +101,7 @@
                 <v-flex xs9>
                   <v-layout column fill-height justify-center>
                     <v-layout column xs12 justify-center>
+                      <BookEditDialogTitle title="ID" v-bind:content="selectedBook.id"/>
                       <BookEditDialogTitle title="ISBN" v-bind:content="selectedBook.isbn"/>
                       <BookEditDialogTitle title="저자" v-bind:content="selectedBook.author"/>
                       <BookEditDialogTitle title="출판사" v-bind:content="selectedBook.publisher"/>
@@ -115,24 +115,78 @@
             <v-toolbar-title>
               <span>보유 장서 일련번호</span>
             </v-toolbar-title>
+            <v-spacer>
+            </v-spacer>
+            <v-btn small flat @click="addButtonHandler">
+              추가
+            </v-btn>
           </v-toolbar>
-          <div v-for="i in 5"
-            :key="i">
-            <div>1권</div>
+          <v-layout row pa-2 style="border-bottom: 1px solid black;">
+              <v-flex xs3>
+                <div>일련번호</div>
+              </v-flex>
+              <v-flex xs7>
+                <div>도서 상태</div>
+              </v-flex>
+              <v-flex xs2>
+                <div>삭제</div>
+              </v-flex>
+            </v-layout>
+          <div style="height: 200px; overflow: auto;">
+            <v-layout v-if="selectedBookSerials.length === 0" pa-5 justify-center align-center>
+              <div>
+                No Data
+              </div>
+            </v-layout>
+            <div v-for="(serial, i) in selectedBookSerials"
+              :key="i">
+              <v-layout row pa-2>
+                <v-flex xs3>
+                  <v-layout column fill-height justify-center align-center>
+                    <div>{{ serial.id }}</div>
+                  </v-layout>
+                </v-flex>
+                <v-flex xs7>
+                  <v-layout column fill-height justify-center align-center>
+                    <div>{{ _statusParser(serial.status) }}</div>
+                  </v-layout>
+                </v-flex>
+                <v-flex xs2>
+                  <v-btn flat small class="red" dark round @click="removeButtonHandler(serial.id)">
+                    삭제
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+            </div>
           </div>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red darken-1" flat @click="bookEditDialog = false">취소</v-btn>
-            <v-btn color="blue darken-1" flat @click="bookEditDialog = false">저장</v-btn>
+            <v-btn color="blue darken-1" flat @click="bookEditDialog = false">확인</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-layout>
+    <v-snackbar
+      v-model="snackbar"
+      bottom
+      :timeout="snackbarTimeout"
+    >
+      {{ snackbarMessage }}
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-layout>
 </template>
 
 <script>
 import BookService from '@/services/BookService'
+import SerialService from '@/services/SerialService'
 
 import BookEditDialogTitle from '@/components/BookEditDialogTitle'
 
@@ -140,6 +194,7 @@ export default {
   data: () => ({
     books: null,
     selectedBook: {
+      id: '',
       img_url: '',
       title: '',
       author: '',
@@ -147,10 +202,17 @@ export default {
       desc: '',
       isbn: '',
     },
+    selectedBookSerials: [
+      { id: 1, status: false },
+      { id: 2, status: false },
+    ],
     editMode: false,
     page: 1,
     length: 1,
     bookEditDialog: false,
+    snackbar: false,
+    snackbarTimeout: 2000,
+    snackbarMessage: 'temp message',
   }),
 
   components: {
@@ -164,15 +226,77 @@ export default {
   },
 
   methods: {
-    clickclick(param) {
-      alert(param)
-    },
-
     titleParser(title) {
       if (title.length < 25) {
         return `[${title}]`
       }
       return `[${title.substring(0, 25)}...]`
+    },
+
+    async showBookSerials(bookId) {
+      try {
+        const response = await SerialService.showBookSerials({ bookId })
+        if (response) {
+          this.selectedBookSerials = response.data.bookSerials
+        }
+      } catch (error) {
+        this.snackbarMessage = error.response.data.error
+        this._pushSnackBar()
+      }
+    },
+
+    async addSerial(bookId) {
+      try {
+        const response = await SerialService.addSerial({ bookId })
+        if (response) {
+          this.snackbarMessage = '등록성공'
+          this._pushSnackBar()
+          this.showBookSerials(bookId)
+        }
+      } catch (error) {
+        this.snackbarMessage = error.response.data.error
+        this._pushSnackBar()
+      }
+    },
+
+    async removeSerial(id) {
+      try {
+        const response = await SerialService.removeSerial({ id })
+        if (response) {
+          this.snackbarMessage = response.data.message
+          this._pushSnackBar()
+          this.showBookSerials(this.selectedBook.id)
+        }
+      } catch (error) {
+        this.snackbarMessage = error.response
+        this._pushSnackBar()
+      }
+    },
+
+    openBookButtonHandler(book) {
+      this.selectedBook = book;
+      this.showBookSerials(this.selectedBook.id)
+      this.bookEditDialog = true;
+    },
+
+    addButtonHandler() {
+      this.addSerial(this.selectedBook.id)
+    },
+
+    removeButtonHandler(id) {
+      this.removeSerial(id)
+    },
+
+    _pushSnackBar() {
+      this.snackbar = true;
+    },
+
+    _statusParser(status) {
+      if (status) {
+        return '대출중'
+      } else {
+        return '비치중'
+      }
     }
   },
 

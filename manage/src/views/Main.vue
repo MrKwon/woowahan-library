@@ -81,7 +81,6 @@ export default {
             this._showDialog(_accessTokenFailed, _error)
           } else {
             const { user } = response.data
-            console.log(user.authorization)
             if (user.authorization === 'none' || user.authorization === 'user') {
               this._loadingDialogChaneger()
               this._showDialog('권한이 없습니다.', _warning)
@@ -118,11 +117,6 @@ export default {
       }
     }
 
-  },
-
-  // beforeRouteEnter(to, from, next) {
-  //   console.log(to)
-  //   console.log(from)
-  // }
+  }
 }
 </script>

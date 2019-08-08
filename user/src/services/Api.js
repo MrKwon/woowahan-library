@@ -41,5 +41,20 @@ export default {
     return axios.create({
       baseURL: `${base}/request`,
     })
+  },
+
+  serials() {
+    return axios.create({
+      baseURL: `${base}/serials`
+    })
+  },
+
+  rent(header) {
+    return axios.create({
+      baseURL: `${base}/rents`,
+      headers: {
+        Authorization: `Bearer ${header}`
+      }
+    })
   }
 }
