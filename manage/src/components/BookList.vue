@@ -6,7 +6,6 @@
       <v-btn flat color="white" v-if="!editMode" @click="editMode = !editMode">관리모드</v-btn>
       <v-btn flat color="white" v-if="editMode" @click="editMode = !editMode">완료</v-btn>
     </v-toolbar>
-    <!--TODO: 리스트 컴포넌트로-->
     <v-layout row ma-1 pa-2>
       <v-flex xs1>
         커버
@@ -264,7 +263,6 @@ export default {
       try {
         const response = await SerialService.removeSerial({ id })
         if (response) {
-          console.log(response.data.message)
           this.snackbarMessage = response.data.message
           this._pushSnackBar()
           this.showBookSerials(this.selectedBook.id)

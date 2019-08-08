@@ -8,6 +8,7 @@ import DashBoard from './views/DashBoard.vue'
 import Requested from './views/Requested.vue'
 import Books from './views/Books'
 import Users from './views/Users'
+import RentStatus from './views/RentStatus'
 
 import store from '@/store'
 
@@ -32,5 +33,6 @@ export default new Router({
     { path: '/requested', name: 'requested', component: Requested, beforeEnter: requireAuth },
     { path: '/books', name: 'books', component: Books, beforeEnter: requireAuth },
     { path: '/users', name: 'users', component: Users, beforeEnter: requireAuth },
+    { path: '/rentstatus', name: 'rentstatus', component: RentStatus, beforeEnter: requireAuth },
   ]
 })

@@ -45,5 +45,14 @@ export default {
     return axios.create({
       baseURL: `${hostUrl}/serials`
     })
+  },
+
+  rent(header) {
+    return axios.create({
+      baseURL: `${hostUrl}/rents`,
+      headers: {
+        Authorization: `Bearer ${header}`
+      }
+    })
   }
 }
