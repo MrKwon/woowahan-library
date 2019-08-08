@@ -64,7 +64,6 @@ export default {
   },
 
   beforeMount () {
-    const token = this.$store.state.user.token
     this.getRentStatus()
   },
 }

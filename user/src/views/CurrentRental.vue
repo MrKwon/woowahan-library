@@ -19,7 +19,7 @@
           <v-flex xs1>
             <v-layout fill-height justify-center align-center>
               <div>
-                {{ rent.id }}
+                {{ rent.serial }}
               </div>
             </v-layout>
           </v-flex>
@@ -40,7 +40,7 @@
           <v-flex xs2>
             <v-layout fill-height justify-center align-center>
               <div>
-                1일
+                {{ _calculatePeriod(rent.rentDate) }} 일
               </div>
             </v-layout>
           </v-flex>
@@ -123,6 +123,12 @@ export default {
         this._popSnackbar(error.response.data.error, _error)
         this._initializeSnackBar()
       }
+    },
+
+    _calculatePeriod(startDate) {
+      const rentDate = new Date(startDate)
+      const today = Date.now()
+      return Math.round((today - rentDate) / (24 * 60 * 60 * 1000))
     },
 
     _titleParser(title) {

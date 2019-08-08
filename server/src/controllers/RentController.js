@@ -111,7 +111,7 @@ const allUserRentStatus = async(req, res) => {
       const { serial_id, user_id } = rentStatus[i]
       const rentUser = await User.findOne({ where: { id: user_id } })
       const book = await Serial.findOne({ where: { id: serial_id } })
-      const rentBook = await Book.findOne({ where: { id: book.id } })
+      const rentBook = await Book.findOne({ where: { id: book.book_id } })
 
       const id = rentStatus[i].id
       const userName = rentUser.name
@@ -141,7 +141,7 @@ const userRentStatus = async(req, res) => {
     for (let i = 0; i < rentStatus.length; i++) {
       const { serial_id } = rentStatus[i]
       const book = await Serial.findOne({ where: { id: serial_id } })
-      const rentBook = await Book.findOne({ where: { id: book.id } })
+      const rentBook = await Book.findOne({ where: { id: book.book_id } })
 
       const id = rentStatus[i].id
       const rentDate = rentStatus[i].createdAt

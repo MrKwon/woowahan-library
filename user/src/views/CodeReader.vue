@@ -127,11 +127,11 @@ export default {
         this._popSnackbar(error.response.data.error, _error)
       }
     },
-    
+
     closeHandler() {
       this.dialog = false
       setTimeout(() => {
-        this.$router.go(-1)
+        this.$route.go(-1)
       }, _snackBarTimeout)
     },
 
