@@ -1,4 +1,5 @@
 const { User, Book, Serial, RentStatus } = require('../models')
+const logger = require('../logger')
 
 const _RENT = true
 const _ONLIBRARY = false
@@ -9,6 +10,7 @@ const _BOOK_ALREADY_RENT = 'BookAlreadyRentError'
 
 const rentBook = async(req, res) => {
   const rentInfo = req.rentInfo
+  logger.info(rentInfo)
   try {
     const serial = await Serial.findOne({ where: { id: rentInfo.serial } })
     if (serial == null) {
@@ -33,7 +35,7 @@ const rentBook = async(req, res) => {
       rental
     })
   } catch (error) {
-    console.log(error)
+    logger.error(error)
     if (error.message === _BOOK_NOT_FOUND) {
       res.status(404).send({
         error: '보유중인 도서가 아닙니다.'
@@ -52,7 +54,7 @@ const rentBook = async(req, res) => {
 
 const returnBook = async(req, res) => {
   const rentInfo = req.rentInfo
-  console.log(rentInfo)
+  logger.info(rentInfo)
   try {
     const serial = await Serial.findOne({ where: { id: rentInfo.serial } })
     if (serial == null) {
@@ -76,7 +78,7 @@ const returnBook = async(req, res) => {
       message: `${foundBook.title} 반납 성공`
     })
   } catch (error) {
-    console.log(error)
+    logger.error(error)
     if (error.message === _BOOK_NOT_FOUND) {
       res.status(404).send({
         error: '보유중이 아닌 도서입니다.'

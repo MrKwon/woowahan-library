@@ -1,4 +1,5 @@
 const passport = require('passport')
+const logger = require('../logger')
 
 const _AUTH_NONE = 'none'
 const _AUTH_USER = 'user'
@@ -10,7 +11,7 @@ const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user
 
 const userAuth = (req, res, next) => {
   passport.authenticate('jwt', function(err, user) {
-    console.log(err)
+    logger.error(err)
     if (err || !user) {
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
@@ -34,6 +35,7 @@ const userAuth = (req, res, next) => {
 
 const manageAuth = (req, res, next) => {
   passport.authenticate('jwt', function(err, user) {
+    logger.error(err)
     const userJson = user.toJSON()
     if (err || !user) {
       res.status(403).send({

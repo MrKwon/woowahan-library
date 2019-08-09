@@ -1,4 +1,5 @@
 const { Request, Book, User } = require('../models')
+const logger = require('../logger')
 
 function parseTitle(title) {
   if (title.length >= 25) {
@@ -37,6 +38,7 @@ module.exports = {
         message: `[${parseTitle(requestJson.title)}] 신청 성공`
       })
     } catch (err) {
+      logger.error(err)
       if (err.name === 'SequelizeUniqueConstraintError') {
         res.status(400).send({
           error: '이미 신청된 도서입니다.'
@@ -71,6 +73,7 @@ module.exports = {
       }
       res.send(parsedRequests)
     } catch (error) {
+      logger.error(error)
       res.status(404).send({
         error: error
       })
@@ -95,6 +98,7 @@ module.exports = {
         message: "등록 성공"
       })
     } catch(error) {
+      logger.error(error)
       res.status(400).send({
         error: error
       })

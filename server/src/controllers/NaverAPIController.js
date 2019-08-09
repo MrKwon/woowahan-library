@@ -1,4 +1,6 @@
 const axios = require('axios')
+const logger = require('../logger')
+
 const { naverAPI } = require('../config/config')
 
 module.exports = {
@@ -23,8 +25,9 @@ module.exports = {
         items: parsedItems
       })
     } catch (error) {
+      logger.error(error)
       res.status(400).send({
-        error: error
+        error
       })
     }
   }

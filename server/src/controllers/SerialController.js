@@ -1,4 +1,5 @@
 const { Serial } = require('../models')
+const logger = require('../logger')
 
 const showBookSerials = async(req, res) => {
   try {
@@ -12,6 +13,7 @@ const showBookSerials = async(req, res) => {
       bookSerials
     })
   } catch (error) {
+    logger.error(error)
     res.status(404).send({
       error
     })
@@ -29,6 +31,7 @@ const addSerial = async(req, res) => {
       serial: serialJSON
     })
   } catch (error) {
+    logger.error(error)
     res.status(404).send({
       error
     })
@@ -45,6 +48,7 @@ const removeSerial = async(req, res) => {
       message: '삭제 성공'
     })
   } catch (error) {
+    logger.error(error)
     res.status(404).send({
       error
     })

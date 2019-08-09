@@ -1,4 +1,5 @@
 const { User } = require('../models')
+const logger = require('../logger')
 
 module.exports = {
   async all (req, res) {
@@ -19,6 +20,7 @@ module.exports = {
         users: parsedUsers
       })
     } catch (error) {
+      logger.error(error)
       res.status(400).send({
         error
       })
@@ -50,6 +52,7 @@ module.exports = {
         })
       }
     } catch (error) {
+      logger.error(error)
       res.status(400).send({
         error
       })

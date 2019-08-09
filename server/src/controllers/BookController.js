@@ -1,4 +1,5 @@
 const { Book } = require('../models')
+const logger = require('../logger')
 
 module.exports = {
   async index (req, res) {
@@ -14,6 +15,7 @@ module.exports = {
       })
       res.send(books)
     } catch (err) {
+      logger.error(err)
       res.status(500).send({
         error: '도서들을 fetch 시도 하는 중에 에러 발생'
       })
@@ -27,6 +29,7 @@ module.exports = {
         lastId: lastId.length
       })
     } catch (err) {
+      logger.error(err)
       res.status(500).send({
         error: '에러 발생'
       })
@@ -49,7 +52,7 @@ module.exports = {
         message: `[${bookJson.title}] 등록 성공`
       })
     } catch (err) {
-      console.log(err)
+      logger.error(err)
       res.status(400).send({
         error: '등록 실패'
       })
