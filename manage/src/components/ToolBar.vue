@@ -26,7 +26,7 @@
         v-if="$store.state.user !== null"
       ></v-toolbar-side-icon>
       <v-toolbar-title class="headline text-uppercase">
-        <span class="toolbar-title">우아한 테크도서관 [관리자]</span>
+        <span class="toolbar-title">테코브러리 [관리자]</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn flat icon color="black" to="/book/add"

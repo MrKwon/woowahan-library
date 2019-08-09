@@ -10,6 +10,7 @@ import Mypage from '@/views/Mypage'
 
 import RequestBook from '@/views/RequestBook'
 import RequestResult from '@/views/RequestResult'
+import MustRead from '@/views/MustRead'
 import CurrentRental from '@/views/CurrentRental'
 import Reservation from '@/views/Reservation'
 import Favorite from '@/views/Favorite'
@@ -45,6 +46,7 @@ export default new Router({
     { path: '/reservation', name: 'reservation', component: Reservation, beforeEnter: requireAuth },
     { path: '/favorite', name: 'favorite', component: Favorite, beforeEnter: requireAuth },
     { path: '/history', name: 'history', component: History, beforeEnter: requireAuth },
+    { path: '/mustread', name: 'mustread', component: MustRead, beforeEnter: requireAuth },
     { path: '*', component: NotFound }
   ],
   scrollBehavior () {

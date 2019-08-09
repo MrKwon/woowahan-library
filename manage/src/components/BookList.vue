@@ -203,8 +203,6 @@ export default {
       isbn: '',
     },
     selectedBookSerials: [
-      { id: 1, status: false },
-      { id: 2, status: false },
     ],
     editMode: false,
     page: 1,

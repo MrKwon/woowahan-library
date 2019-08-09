@@ -86,7 +86,6 @@ export default {
 
   methods: {
     onDecode (decodeString) {
-      console.log(decodeString)
       this.dialog = true
       this.qrText = decodeString
     },
