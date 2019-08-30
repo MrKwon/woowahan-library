@@ -17,7 +17,7 @@ module.exports = {
         const bookId = books[i].id
         const serials = await Serial.findAll({
           where: {
-            id: bookId
+            book_id: bookId
           }
         })
         const count = serials.length
