@@ -1,4 +1,4 @@
-const { Book } = require('../models')
+const { Book, Serial } = require('../models')
 const logger = require('../logger')
 
 module.exports = {
@@ -13,6 +13,16 @@ module.exports = {
         offset,
         limit: 10
       })
+      for (let i = 0; i < books.length; i++) {
+        const bookId = books[i].id
+        const serials = await Serial.findAll({
+          where: {
+            id: bookId
+          }
+        })
+        const count = serials.length
+        books[i].dataValues.count = count
+      }
       res.send(books)
     } catch (err) {
       logger.error(err)

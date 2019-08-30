@@ -28,7 +28,7 @@ module.exports = {
         token: jwtSignUser(userData)
       })
     } catch(error) {
-      logger.error(err)
+      logger.error(error)
       res.status(404).send({ error })
     }
   },
@@ -46,7 +46,7 @@ module.exports = {
         token: jwtSignUser(userData)
       })
     } catch(error) {
-      logger.error(err)
+      logger.error(error)
       res.status(404).send({ error })
     }
   },

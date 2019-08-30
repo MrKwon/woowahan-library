@@ -62,7 +62,7 @@
             <v-flex xs3>
               <v-layout column justify-center align-center fill-height>
                 <div>
-                  1 부
+                  {{ book.count }} 부
                 </div>
               </v-layout>
             </v-flex>

@@ -44,7 +44,8 @@ export default {
       { id: 1, userName: 'test', rentDate: '2019-07-05', bookTitle: 'test', serial: '1' }
     ],
     page: 1,
-    length: 1
+    length: 1,
+    error: ''
   }),
 
   components: {
@@ -65,7 +66,7 @@ export default {
         const response = await RentService.allUserRentStatus(token, { page: this.page })
         this.rentStatus = response.data
       } catch (error) {
-        console.log(error)
+        this.error = error
       }
     },
 
