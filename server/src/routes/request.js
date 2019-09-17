@@ -1,17 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const RequestController = require('../controllers/RequestController')
+const WishBookController = require('../controllers/WishBookController')
 
 router.post('/', 
-  RequestController.requestBook
+  WishBookController.requestBook
 )
 
 router.post('/list',
-  RequestController.requestList
+  WishBookController.requestList
 )
 
 router.post('/register',
-  RequestController.register
+  WishBookController.register
 )
 
 module.exports = router

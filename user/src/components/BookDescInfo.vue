@@ -4,7 +4,7 @@
       contain
       min-width="100"
       max-height="200"
-      :src="bookinfo.img_url"/>
+      :src="bookinfo.image"/>
     <v-layout column xs8 ma-2>
       <v-layout row>
         <v-flex xs3>

@@ -5,7 +5,7 @@
         <h3>이미지</h3>
         <v-layout row align-center justify-center>
           <v-img
-            v-bind:src="bookInfo.img_url"
+            v-bind:src="bookInfo.image"
             max-height="500px"
             max-width="200px"
             aspect-ratio="0.7"/>
@@ -38,7 +38,7 @@
           type="number"
         ></v-text-field>
         <div class="error-box">
-          {{this.error}}
+          {{message}}
         </div>
       </v-flex>
     </v-layout>
@@ -80,7 +80,7 @@ export default {
 
   data: () => ({
     eachBookCount: 0,
-    error: '',
+    message: '',
     bookNumbers: 1,
   }),
 
@@ -93,16 +93,17 @@ export default {
         // TODO: 성공 여부 Dialog 띄워줘야 함 
         // eslint-disable-next-line
         const response = await BookService.bookRegister({
-          img_url: this.bookInfo.img_url,
+          image: this.bookInfo.image,
           title: this.bookInfo.title,
           author: this.bookInfo.author,
           publisher: this.bookInfo.publisher,
           isbn: this.bookInfo.isbn,
           desc: this.bookInfo.desc
         })
-        this.$router.push('/')
+        this.message = response.data.message
+        this.clearBookInfo()
       } catch(error) {
-        this.error = error.response.data.error
+        this.message = error.response.data.error
       }
     },
   }
@@ -113,6 +114,6 @@ export default {
 <style scoped>
 .error-box {
   margin: 16px;
-  color: 'red';
+  color: red;
 }
 </style>

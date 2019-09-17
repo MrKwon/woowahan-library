@@ -19,7 +19,7 @@
           >
             <v-card class="image-container" flat tile ml-2 mr-2>
               <v-img
-                :src="book.img_url"
+                :src="book.image"
                 aspect-ratio="0.7"
               ></v-img>
             </v-card>
@@ -34,7 +34,7 @@
         @click="() => moveToSelected(book)">
         <v-layout class="list-item" row ma-2 pb-2>
           <v-img xs2
-            v-bind:src="book.img_url"
+            v-bind:src="book.image"
             aspect-ratio="0.7"/>
           <v-flex xs8>
             <v-layout column align-center justify-center fill-height pa-1>

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const BookController = require('../controllers/BookController')
+const LibraryBookController = require('../controllers/LibraryBookController')
 const NaverAPIController = require('../controllers/NaverAPIController')
 
 router.post('/search',
@@ -8,15 +8,15 @@ router.post('/search',
 )
 
 router.get('/total',
-  BookController.total
+  LibraryBookController.total
 )
 
 router.post('/index',
-  BookController.index
+  LibraryBookController.index
 )
 
 router.post('/register',
-  BookController.bookRegister
+  LibraryBookController.bookRegister
 )
 
 module.exports = router

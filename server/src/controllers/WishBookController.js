@@ -1,4 +1,4 @@
-const { Request, Book, User } = require('../models')
+const { WishBook, LibraryBook, User } = require('../models')
 const logger = require('../logger')
 
 function parseTitle(title) {
@@ -13,9 +13,10 @@ module.exports = {
     try {
       const { image, title, author, publisher, isbn, description } = req.body.book
       const { user_id } = req.body
-      const book = await Book.findOne({
+      console.log(user_id)
+      const book = await LibraryBook.findOne({
         where: {
-          title: title
+          isbn: isbn
         }
       })
       if (book) {
@@ -24,8 +25,8 @@ module.exports = {
         })
         return
       }
-      const request = await Request.create({
-        img_url: image,
+      const request = await WishBook.create({
+        image,
         title,
         author,
         publisher,
@@ -52,7 +53,7 @@ module.exports = {
 
   async requestList (req, res) {
     try {
-      const requests = await Request.findAll()
+      const requests = await WishBook.findAll()
       const parsedRequests = []
       for (let i = 0; i < requests.length; i++) {
         const element = requests[i]
@@ -83,11 +84,11 @@ module.exports = {
   async register(req, res) {
     try {
       const { id } = req.body
-      const requestedBook = await Request.findOne({ where: { id } })
-      await Request.destroy({ where: { id } })
-      const { img_url, title, author, publisher, isbn, desc } = requestedBook
-      const book = await Book.create({
-        img_url,
+      const requestedBook = await WishBook.findOne({ where: { id } })
+      await WishBook.destroy({ where: { id } })
+      const { image, title, author, publisher, isbn, desc } = requestedBook
+      const book = await LibraryBook.create({
+        image,
         title,
         author,
         publisher,

@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Book = sequelize.define('Book', {
-    img_url: {
+  const Request = sequelize.define('WishBook', {
+    image: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
     title: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      unique: true
     },
     author: {
       type: DataTypes.STRING(255),
@@ -20,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     isbn: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      unique: true,
     },
     desc: {
       type: DataTypes.STRING(255),
@@ -29,9 +29,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: true,
     paranoid: true,
+    freezeTableName: true,
     charset: 'utf8',
     collate: 'utf8_general_ci'
   })
 
-  return Book
+  return Request
 }

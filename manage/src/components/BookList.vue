@@ -33,7 +33,7 @@
           <v-layout ma-1 pa-2>
             <v-flex xs1>
               <v-img
-                v-bind:src="book.img_url"
+                v-bind:src="book.image"
                 max-height="300px"
                 max-width="100px"
                 aspect-ratio="0.7"/>
@@ -75,7 +75,7 @@
         <v-flex xs8>
           <v-pagination
             v-model="page"
-            :length="this.length"
+            :length="this.pageLength"
           ></v-pagination>
         </v-flex>
       </v-layout>
@@ -93,7 +93,7 @@
               <v-layout row>
                 <v-flex xs3>
                   <v-img
-                    v-bind:src="selectedBook.img_url"
+                    v-bind:src="selectedBook.image"
                     max-height="300px"
                     max-width="100px"
                     aspect-ratio="0.7"/>
@@ -161,8 +161,8 @@
           </div>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="red darken-1" flat @click="bookEditDialog = false">취소</v-btn>
-            <v-btn color="blue darken-1" flat @click="bookEditDialog = false">확인</v-btn>
+            <v-btn color="red darken-1" flat @click="bookEditDialogCloseButtonHandler">취소</v-btn>
+            <v-btn color="blue darken-1" flat @click="bookEditDialogCloseButtonHandler">확인</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -195,7 +195,7 @@ export default {
     books: null,
     selectedBook: {
       id: '',
-      img_url: '',
+      image: '',
       title: '',
       author: '',
       publisher: '',
@@ -206,7 +206,7 @@ export default {
     ],
     editMode: false,
     page: 1,
-    length: 1,
+    pageLength: 10,
     bookEditDialog: false,
     snackbar: false,
     snackbarTimeout: 2000,
@@ -295,12 +295,18 @@ export default {
       } else {
         return '비치중'
       }
+    },
+
+    async bookEditDialogCloseButtonHandler() {
+      this.bookEditDialog = false
+      this.books = (await BookService.index({ page: this.page })).data
+      this.pageLength = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
     }
   },
 
   async beforeMount () {
     this.books = (await BookService.index({ page: this.page })).data
-    this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
+    this.pageLength = Math.floor(((await BookService.total()).data.lastId - 1) / 10) + 1
   },
 }
 </script>

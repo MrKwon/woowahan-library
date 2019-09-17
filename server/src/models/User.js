@@ -1,15 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    email: {
+    github_id: {
       type: DataTypes.STRING(100),
       allowNull: false,
       unique: true
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false
     },
     name: {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    avatar: {
+    avatar_url: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
@@ -19,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    timestamps: true,
-    paranoid: true,
+    freezeTableName: true,
     charset: 'utf8',
     collate: 'utf8_general_ci'
   })

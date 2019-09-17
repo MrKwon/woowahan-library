@@ -13,7 +13,7 @@
           <v-list-tile-avatar
             v-if="$store.state.isUserLoggedIn">
             <img
-              :src="$store.state.user.user.avatar"/>
+              :src="$store.state.user.user.avatar_url"/>
           </v-list-tile-avatar>
 
           <v-list-tile-content>

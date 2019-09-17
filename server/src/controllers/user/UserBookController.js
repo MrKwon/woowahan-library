@@ -1,10 +1,10 @@
-const { Book } = require('../../models')
+const { LibraryBook } = require('../../models')
 const { Op } = require("sequelize")
 
 module.exports = {
   async total (req, res) {
     try {
-      const lastId = await Book.findAll()
+      const lastId = await LibraryBook.findAll()
       res.send({
         lastId: lastId.length
       })
@@ -22,7 +22,7 @@ module.exports = {
       if (page > 1) {
         offset = 12 * (page - 1);
       }
-      const books = await Book.findAll({
+      const books = await LibraryBook.findAll({
         offset,
         limit: 12
       })
@@ -30,7 +30,7 @@ module.exports = {
       books.forEach(element => {
         const parsedBook = {
           id: element.id,
-          img_url: element.img_url,
+          image: element.image,
           title: element.title,
           author: element.author,
           publisher: element.publisher
@@ -48,7 +48,7 @@ module.exports = {
   async search (req, res) {
     try {
       const { keyword } = req.body
-      const searchResult = await Book.findAll({
+      const searchResult = await LibraryBook.findAll({
         attributes: ['id', 'title'],
         where: {
           title: {
@@ -68,7 +68,7 @@ module.exports = {
   async book (req, res) {
     try {
       const { id } = req.body
-      const searchResult = await Book.findOne({
+      const searchResult = await LibraryBook.findOne({
         where: {
           id: {
             [Op.eq]: id

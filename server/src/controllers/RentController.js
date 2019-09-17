@@ -1,4 +1,4 @@
-const { User, Book, Serial, RentStatus } = require('../models')
+const { User, LibraryBook, Serial, RentHistory } = require('../models')
 const logger = require('../logger')
 
 const _RENT = true
@@ -20,9 +20,9 @@ const rentBook = async(req, res) => {
     if (foundSerial.status === _RENT) {
       throw new Error(_BOOK_ALREADY_RENT)
     }
-    const book = await Book.findOne({ where: { id: foundSerial.book_id } })
+    const book = await LibraryBook.findOne({ where: { id: foundSerial.book_id } })
     const foundBook = book.toJSON()
-    const rental = await RentStatus.create({
+    const rental = await RentHistory.create({
       serial_id: foundSerial.id,
       user_id: rentInfo.user
     })
@@ -64,9 +64,9 @@ const returnBook = async(req, res) => {
     if (foundSerial.status === _ONLIBRARY) {
       throw new Error(_BOOK_ALREADY_RENT)
     }
-    const book = await Book.findOne({ where: { id: foundSerial.book_id } })
+    const book = await LibraryBook.findOne({ where: { id: foundSerial.book_id } })
     const foundBook = book.toJSON()
-    RentStatus.destroy({ where: {
+    RentHistory.destroy({ where: {
         serial_id: foundSerial.id
       }
     })
@@ -102,7 +102,7 @@ const allUserRentStatus = async(req, res) => {
     if (page > 1) {
       offset = 10 * (page - 1)
     }
-    const rentStatus = await RentStatus.findAll({
+    const rentStatus = await RentHistory.findAll({
       offset,
       limit: 10
     })
@@ -113,7 +113,7 @@ const allUserRentStatus = async(req, res) => {
       const { serial_id, user_id } = rentStatus[i]
       const rentUser = await User.findOne({ where: { id: user_id } })
       const book = await Serial.findOne({ where: { id: serial_id } })
-      const rentBook = await Book.findOne({ where: { id: book.book_id } })
+      const rentBook = await LibraryBook.findOne({ where: { id: book.book_id } })
 
       const id = rentStatus[i].id
       const userName = rentUser.name
@@ -136,14 +136,14 @@ const allUserRentStatus = async(req, res) => {
 const userRentStatus = async(req, res) => {
   const user_id = req.user
   try {
-    const rentStatus = await RentStatus.findAll({ where: { user_id: user_id }})
+    const rentStatus = await RentHistory.findAll({ where: { user_id: user_id }})
 
     const responseRentStatus = []
 
     for (let i = 0; i < rentStatus.length; i++) {
       const { serial_id } = rentStatus[i]
       const book = await Serial.findOne({ where: { id: serial_id } })
-      const rentBook = await Book.findOne({ where: { id: book.book_id } })
+      const rentBook = await LibraryBook.findOne({ where: { id: book.book_id } })
 
       const id = rentStatus[i].id
       const rentDate = rentStatus[i].createdAt

@@ -67,6 +67,8 @@ const _snackBarTimeout = 2000
 const _error = 'error'
 const _success = 'success'
 
+const _INVALID_QRCODE_ERROR = '유효하지 않은 QRCODE'
+
 export default {
   data: () => ({
     dialog: false,
@@ -113,25 +115,46 @@ export default {
     async rentBook () {
       const token = this.$store.state.user.token
       try {
-        const rentInfo = JSON.parse(this.qrText)
+        const rentInfo = this._jsonParser(this.qrText)
         const response = await RentService.rentBook(token, { rentInfo })
         this.dialog = false
         this._initializeSnackBar()
         this._initQrText()
         this._popSnackbar(response.data.message, _success)
+        this._autoToMain()
       } catch (error) {
         this.dialog = false
         this._initializeSnackBar()
         this._initQrText()
-        this._popSnackbar(error.response.data.error, _error)
+        if (error.response) {
+          this._popSnackbar(error.response.data.error, _error)
+        } else {
+          this._popSnackbar(error.message, _error)
+        }
       }
+    },
+
+    _jsonParser(qrText) {
+      try {
+        const parsedQr = JSON.parse(qrText)
+        if (!parsedQr.hasOwnProperty('serial')) {
+          throw new Error(_INVALID_QRCODE_ERROR + "[1]")
+        }
+        return parsedQr
+      } catch (error) {
+        throw new Error(_INVALID_QRCODE_ERROR + "[2]")
+      }
+    },
+
+    _autoToMain() {
+      setTimeout(() => {
+        this.$route.go(-1)
+      }, _snackBarTimeout)
     },
 
     closeHandler() {
       this.dialog = false
-      setTimeout(() => {
-        this.$route.go(-1)
-      }, _snackBarTimeout)
+      this._autoToMain()
     },
 
     _initializeSnackBar() {

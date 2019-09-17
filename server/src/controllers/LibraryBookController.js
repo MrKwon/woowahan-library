@@ -1,4 +1,4 @@
-const { Book, Serial } = require('../models')
+const { LibraryBook, Serial } = require('../models')
 const logger = require('../logger')
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
       if (page > 1) {
         offset = 10 * (page - 1);
       }
-      const books = await Book.findAll({
+      const books = await LibraryBook.findAll({
         offset,
         limit: 10
       })
@@ -34,7 +34,7 @@ module.exports = {
 
   async total (req, res) {
     try {
-      const lastId = await Book.findAll()
+      const lastId = await LibraryBook.findAll()
       res.send({
         lastId: lastId.length
       })
@@ -48,9 +48,9 @@ module.exports = {
   
   async bookRegister (req, res) {
     try {
-      const { img_url, title, author, publisher, isbn, desc } = req.body
-      const book = await Book.create({
-        img_url,
+      const { image, title, author, publisher, isbn, desc } = req.body
+      const book = await LibraryBook.create({
+        image,
         title,
         author,
         publisher,

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const RentStatus = sequelize.define('RentStatus', {
+  const RentStatus = sequelize.define('RentHistory', {
     serial_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

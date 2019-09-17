@@ -70,7 +70,7 @@ import SearchListItem from '@/components/SearchListItem'
 export default {
   data: () => ({
     book: {
-      img_url: '',
+      image: '',
       title: '',
       author: '',
       publisher: '',
@@ -107,7 +107,7 @@ export default {
       }
     },
     selectedItem(item) {
-      this.book.img_url = item.image
+      this.book.image = item.image
       this.book.title = item.title
       this.book.author = item.author
       this.book.publisher = item.publisher

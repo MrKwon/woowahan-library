@@ -47,15 +47,17 @@ const getUserData = async (req, res, token) => {
     const userInfo = await _getUserInfo(token)
 
     const userData = {
+      github_id: userInfo.github_id,
       name: userInfo.name,
       email: email,
-      avatar: userInfo.avatar,
+      avatar_url: userInfo.avatar_url,
     }
 
     const user = await User.create({
+      github_id: userData.github_id,
       email: userData.email,
       name: userData.name,
-      avatar: userData.avatar
+      avatar_url: userData.avatar_url
     })
 
     return user.toJSON()
@@ -65,8 +67,9 @@ const getUserData = async (req, res, token) => {
 const _getUserInfo = async (token) => {
   const userInfoResponse = await axios.get('https://api.github.com/user', config(token))
   const userInfo = {
+    github_id: userInfoResponse.data.id,
     name: userInfoResponse.data.name,
-    avatar: userInfoResponse.data.avatar_url,
+    avatar_url: userInfoResponse.data.avatar_url,
   }
 
   return userInfo;

@@ -23,7 +23,7 @@
             class="black"
           >
             <div style="color: white; font-size: 20px;">
-            로그인 중...
+            로그인 중... 업데이트 BookList 하드 코딩
             </div>
           </v-card-title>
 

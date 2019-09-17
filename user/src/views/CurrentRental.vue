@@ -84,9 +84,7 @@ const _success = 'success'
 
 export default {
   data: () => ({
-    rentList: [
-      { id: 1, bookTitle: '나는 그 곳에서 코딩의 신을 보았다.', rentDate: '2019-01-01', period: '1일'},
-    ],
+    rentList: [],
     snackbar: {
       snackbar: false,
       color: 'error',

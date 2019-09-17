@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Request = sequelize.define('Request', {
-    img_url: {
+  const Book = sequelize.define('LibraryBook', {
+    image: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
     title: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      unique: true
     },
     author: {
       type: DataTypes.STRING(255),
@@ -20,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     isbn: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      unique: true,
     },
     desc: {
       type: DataTypes.STRING(255),
@@ -27,11 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: '내용 없음'
     }
   }, {
-    timestamps: true,
-    paranoid: true,
+    freezeTableName: true,
     charset: 'utf8',
     collate: 'utf8_general_ci'
   })
 
-  return Request
+  return Book
 }
