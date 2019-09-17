@@ -13,7 +13,6 @@ module.exports = {
     try {
       const { image, title, author, publisher, isbn, description } = req.body.book
       const { user_id } = req.body
-      console.log(user_id)
       const book = await LibraryBook.findOne({
         where: {
           isbn: isbn
