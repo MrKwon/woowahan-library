@@ -1,6 +1,8 @@
 const axios = require('axios')
 const qs = require('querystring')
 
+const logger = require('../../logger')
+
 const { User } = require('../../models')
 const { gitManagerOauth } = require('../../config/config')
 const { config, headers } = require('./headers')
@@ -30,6 +32,7 @@ const getManagerToken = async (req, res) => {
   const token = qs.parse(response.data).access_token
 
   if (!token) {
+    logger.error(`[GithubManagerOauth.js] : ${req.body}`)
     res.status(404).send({ error: 'lost token error' })
   }
 

@@ -25,7 +25,7 @@ module.exports = {
         items: parsedItems
       })
     } catch (error) {
-      logger.error(error)
+      logger.error(`[NaverApiController.js] : ${error}`)
       res.status(400).send({
         error
       })

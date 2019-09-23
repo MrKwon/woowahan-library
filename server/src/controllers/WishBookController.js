@@ -19,6 +19,7 @@ module.exports = {
         }
       })
       if (book) {
+        logger.info(`[WishBookController.js] : ${book}`)
         res.status(400).send({
           error: '현재 비치된 도서입니다.'
         })
@@ -37,9 +38,9 @@ module.exports = {
       res.send({
         message: `[${parseTitle(requestJson.title)}] 신청 성공`
       })
-    } catch (err) {
-      logger.error(err)
-      if (err.name === 'SequelizeUniqueConstraintError') {
+    } catch (error) {
+      logger.error(`[WishBookController.js] : ${error}`)
+      if (error.name === 'SequelizeUniqueConstraintError') {
         res.status(400).send({
           error: '이미 신청된 도서입니다.'
         })
@@ -73,7 +74,7 @@ module.exports = {
       }
       res.send(parsedRequests)
     } catch (error) {
-      logger.error(error)
+      logger.error(`[WishBookController.js] : ${error}`)
       res.status(404).send({
         error: error
       })
@@ -95,10 +96,10 @@ module.exports = {
         desc
       })
       res.send({
-        message: "등록 성공"
+        message: `${book.title} 등록 성공`
       })
     } catch(error) {
-      logger.error(error)
+      logger.error(`[WishBookController.js] : ${error}`)
       res.status(400).send({
         error: error
       })

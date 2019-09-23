@@ -10,13 +10,14 @@ const isUserAuthNone = (user) => user.authorization == _AUTH_NONE
 const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user.authorization == _AUTH_USER
 
 const userAuth = (req, res, next) => {
-  passport.authenticate('jwt', function(err, user) {
-    logger.error(err)
-    if (err || !user) {
+  passport.authenticate('jwt', function(error, user) {
+    logger.error(`[AuthorizationChecker.js] : ${error}`)
+    if (error || !user) {
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })
     } else if (isUserAuthNone(user)) {
+      logger.info(`[AuthorizationChecker.js] : ${user} ${_NO_AUTHORIZATION_ERROR}`)
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })
@@ -34,14 +35,16 @@ const userAuth = (req, res, next) => {
 }
 
 const manageAuth = (req, res, next) => {
-  passport.authenticate('jwt', function(err, user) {
-    logger.error(err)
+  passport.authenticate('jwt', function(error, user) {
+    logger.error(error)
     const userJson = user.toJSON()
-    if (err || !user) {
+    if (error || !user) {
+      logger.info(`[AuthorizationChecker.js] : ${user} ${_NO_AUTHORIZATION_ERROR}`)
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })
     } else if (isUserAuthUnderManage(userJson)) {
+      logger.info(`[AuthorizationChecker.js] : ${user} ${_NO_AUTHORIZATION_ERROR}`)
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
       })

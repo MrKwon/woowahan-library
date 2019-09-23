@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const passport = require('passport')
 const logger = require('../logger')
 
 const config = require('../config/config')
@@ -28,7 +27,7 @@ module.exports = {
         token: jwtSignUser(userData)
       })
     } catch(error) {
-      logger.error(error)
+      logger.error(`[GithubController] : ${error}`)
       res.status(404).send({ error })
     }
   },
@@ -46,7 +45,7 @@ module.exports = {
         token: jwtSignUser(userData)
       })
     } catch(error) {
-      logger.error(error)
+      logger.error(`[GithubController] : ${error}`)
       res.status(404).send({ error })
     }
   },
