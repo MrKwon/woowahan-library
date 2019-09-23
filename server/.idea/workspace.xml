@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="929d6cf6-7134-401d-b918-4848fe483c94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../manage/src/services/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../manage/src/services/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/AuthorizationChecker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AuthorizationChecker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GithubController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GithubController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/LibraryBookController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/LibraryBookController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/NaverAPIController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/NaverAPIController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/RentController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/RentController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/SerialController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/SerialController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/TokenAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/TokenAuth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/UsersController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/UsersController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/WishBookController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/WishBookController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/github/GithubManagerOauth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/github/GithubManagerOauth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/github/GithubUserOauth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/github/GithubUserOauth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user/MyInfoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user/MyInfoController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user/UserBookController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user/UserBookController.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1REQTBkGjtpS3oZhh584wvkez8U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="929d6cf6-7134-401d-b918-4848fe483c94" name="Default Changelist" comment="" />
+      <created>1569229781004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569229781004</updated>
+      <workItem from="1569229783170" duration="826000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
