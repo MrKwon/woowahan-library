@@ -243,12 +243,12 @@ export default {
     },
 
     async patchNewName() {
-      // TODO: send to server and this.$store.dispatch('editUserName')
       try {
         const response = await UserService.editName({
-          user: this.$store.state.user,
+          user: this.$store.state.user.user,
           newName: this.newName
         })
+        console.log(response.data)
         this.$store.dispatch('editUserName', response.data.newName)
         this._closeNameEditDialog()
         this._popSnackbar('변경 성공', 'success')
