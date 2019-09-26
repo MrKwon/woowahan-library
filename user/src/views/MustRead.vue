@@ -87,14 +87,15 @@ import ViewTitle from '@/components/ViewTitle'
 
 import level1Books from '@/hardcodes/Level1Books'
 import level2Books from '@/hardcodes/Level2Books'
+import level3Books from '@/hardcodes/Level3Books'
 
 export default {
   data:() => ({
-    tab: null,
+    tab: 2,
     items: [
       { label: '레벨 1', books: level1Books },
       { label: '레벨 2', books: level2Books },
-      { label: '레벨 3' },
+      { label: '레벨 3', books: level3Books },
       { label: '레벨 4' },
     ],
   }),

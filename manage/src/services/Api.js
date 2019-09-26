@@ -2,7 +2,8 @@ import axios from 'axios'
 // import config from '../config/config'
 
 // const hostUrl = 'https://d10qpmwsutokcb.cloudfront.net'
-const hostUrl = 'http://localhost:8081'
+// const hostUrl = 'http://localhost:8081'
+const hostUrl = 'https://d1e0ttqude6sum.cloudfront.net'
 
 export default {
   base() {

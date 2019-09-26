@@ -41,7 +41,6 @@ import RentService from '@/services/RentService'
 export default {
   data: () => ({
     rentStatus: [
-      { id: 1, userName: 'test', rentDate: '2019-07-05', bookTitle: 'test', serial: '1' }
     ],
     page: 1,
     length: 1,
