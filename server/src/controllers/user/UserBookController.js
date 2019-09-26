@@ -1,6 +1,8 @@
 const { LibraryBook } = require('../../models')
 const { Op } = require("sequelize")
 
+const logger = require('../../logger')
+
 module.exports = {
   async total (req, res) {
     try {
@@ -8,7 +10,8 @@ module.exports = {
       res.send({
         lastId: lastId.length
       })
-    } catch (err) {
+    } catch (error) {
+      logger.error(`[UserBookController.js] : ${error}`)
       res.status(500).send({
         error: '에러 발생'
       })
@@ -38,7 +41,8 @@ module.exports = {
         parsedBooks.push(parsedBook)
       })
       res.send(parsedBooks)
-    } catch (err) {
+    } catch (error) {
+      logger.error(`[UserBookController.js] : ${error}`)
       res.status(500).send({
         error: '도서들을 fetch 시도 하는 중에 에러 발생'
       })
@@ -58,7 +62,8 @@ module.exports = {
         limit: 10
       })
       res.send(searchResult)
-    } catch (err) {
+    } catch (error) {
+      logger.error(`[UserBookController.js] : ${error}`)
       res.status(500).send({
         error: '검색 중에 에러 발생'
       })
@@ -76,7 +81,8 @@ module.exports = {
         }
       })
       res.send(searchResult)
-    } catch (err) {
+    } catch (error) {
+      logger.error(`[UserBookController.js] : ${error}`)
       res.status(500).send({
         error: '해당 도서가 존재하지 않음'
       })

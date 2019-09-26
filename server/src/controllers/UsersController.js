@@ -20,7 +20,7 @@ module.exports = {
         users: parsedUsers
       })
     } catch (error) {
-      logger.error(error)
+      logger.error(`[UsersController.js] : ${error}`)
       res.status(400).send({
         error
       })
@@ -52,7 +52,7 @@ module.exports = {
         })
       }
     } catch (error) {
-      logger.error(error)
+      logger.error(`[UsersController.js] : ${error}`)
       res.status(400).send({
         error
       })

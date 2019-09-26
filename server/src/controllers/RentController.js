@@ -35,7 +35,7 @@ const rentBook = async(req, res) => {
       rental
     })
   } catch (error) {
-    logger.error(error)
+    logger.error(`[RentController.js] : ${error}`)
     if (error.message === _BOOK_NOT_FOUND) {
       res.status(404).send({
         error: '보유중인 도서가 아닙니다.'
@@ -78,7 +78,7 @@ const returnBook = async(req, res) => {
       message: `${foundBook.title} 반납 성공`
     })
   } catch (error) {
-    logger.error(error)
+    logger.error(`[RentController.js] : ${error}`)
     if (error.message === _BOOK_NOT_FOUND) {
       res.status(404).send({
         error: '보유중이 아닌 도서입니다.'
@@ -120,17 +120,17 @@ const allUserRentStatus = async(req, res) => {
       const rentDate = rentStatus[i].createdAt
       const bookTitle = rentBook.title
       const serial = serial_id
-      
+
       responseRentStatus.push({ id, userName, rentDate, bookTitle, serial })
     }
 
     res.send(responseRentStatus)
   } catch (error) {
-    console.log(error)
+    logger.error(`[RentController.js] : ${error}`)
     res.status(404).send({
       error
     })
-  } 
+  }
 }
 
 const userRentStatus = async(req, res) => {
@@ -154,7 +154,7 @@ const userRentStatus = async(req, res) => {
     }
     res.send(responseRentStatus)
   } catch (error) {
-    console.log(error)
+    logger.error(`[RentController.js] : ${error}`)
     res.status(404).send({
       error
     })

@@ -20,6 +20,8 @@ const rentRouter = require('./routes/rent')
 
 const app = express()
 
+sequelize.sync()
+
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'))
   app.use(helmet())

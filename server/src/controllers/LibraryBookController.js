@@ -20,12 +20,11 @@ module.exports = {
             book_id: bookId
           }
         })
-        const count = serials.length
-        books[i].dataValues.count = count
+        books[i].dataValues.count = serials.length
       }
       res.send(books)
-    } catch (err) {
-      logger.error(err)
+    } catch (error) {
+      logger.error(`[LibraryBookController.js] : ${error}`)
       res.status(500).send({
         error: '도서들을 fetch 시도 하는 중에 에러 발생'
       })
@@ -38,14 +37,14 @@ module.exports = {
       res.send({
         lastId: lastId.length
       })
-    } catch (err) {
-      logger.error(err)
+    } catch (error) {
+      logger.error(`[LibraryBookController.js] : ${error}`)
       res.status(500).send({
         error: '에러 발생'
       })
     }
   },
-  
+
   async bookRegister (req, res) {
     try {
       const { image, title, author, publisher, isbn, desc } = req.body
@@ -61,8 +60,8 @@ module.exports = {
       res.send({
         message: `[${bookJson.title}] 등록 성공`
       })
-    } catch (err) {
-      logger.error(err)
+    } catch (error) {
+      logger.error(`[LibraryBookController.js] : ${error}`)
       res.status(400).send({
         error: '등록 실패'
       })

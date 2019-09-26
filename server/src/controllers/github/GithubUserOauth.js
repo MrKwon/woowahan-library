@@ -1,6 +1,8 @@
 const axios = require('axios')
 const qs = require('querystring')
 
+const logger = require('../../logger')
+
 const { User } = require('../../models')
 const { gitUserOauth } = require('../../config/config')
 const { config, headers } = require('./headers')
@@ -30,6 +32,7 @@ const getUserToken = async (req, res) => {
   const token = qs.parse(response.data).access_token
 
   if (!token) {
+    logger.error(`[GithubManagerOauth.js] : ${req.body}`)
     res.status(404).send({ error: 'lost token error' })
   }
 
@@ -66,13 +69,11 @@ const getUserData = async (req, res, token) => {
 
 const _getUserInfo = async (token) => {
   const userInfoResponse = await axios.get('https://api.github.com/user', config(token))
-  const userInfo = {
+  return {
     github_id: userInfoResponse.data.id,
     name: userInfoResponse.data.name,
     avatar_url: userInfoResponse.data.avatar_url,
-  }
-
-  return userInfo;
+  };
 }
 
 const _getEmail = async (token) => {
