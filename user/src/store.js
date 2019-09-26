@@ -24,7 +24,7 @@ export default new Vuex.Store({
 
     editUserName(state, name) {
       if (state.isUserLoggedIn) {
-        state.user.name = name
+        state.user.user.name = name
       }
     },
 
