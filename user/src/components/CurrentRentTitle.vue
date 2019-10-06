@@ -20,7 +20,7 @@
         </v-flex>
         <v-flex xs2>
           <v-layout justify-center align-center>
-            몇일됨?
+            며칠됨?
           </v-layout>
         </v-flex>
         <v-flex xs2>

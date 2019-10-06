@@ -248,7 +248,6 @@ export default {
           user: this.$store.state.user.user,
           newName: this.newName
         })
-        console.log(response.data)
         this.$store.dispatch('editUserName', response.data.newName)
         this._closeNameEditDialog()
         this._popSnackbar('변경 성공', 'success')

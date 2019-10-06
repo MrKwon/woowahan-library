@@ -34,7 +34,8 @@
             </v-flex>
             <v-flex xs8>
               <v-layout column fill-height justify-center align-center>
-                <div>{{ _statusParser(serial.status) }}</div>
+                <div v-if="_statusParser(serial.status) === '대출중'" style="color: red;">대출중</div>
+                <div v-if="_statusParser(serial.status) === '비치중'" style="color: green;">비치중</div>
               </v-layout>
             </v-flex>
           </v-layout>
