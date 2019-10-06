@@ -5,7 +5,7 @@ import Main from '@/views/Main.vue'
 import Search from '@/views/Search'
 import BookDesc from '@/views/BookDesc'
 import CodeReader from '@/views/CodeReader'
-import Login from '@/views/Login'
+import Auth from '@/views/Auth'
 import Mypage from '@/views/Mypage'
 
 import RequestBook from '@/views/RequestBook'
@@ -38,7 +38,7 @@ export default new Router({
     { path: '/search', name: 'search', component: Search },
     { path: '/book', name: 'book', component: BookDesc, props: (route) => ({ id: route.query.id }) },
     { path: '/rent', name: 'rent', component: CodeReader, beforeEnter: requireAuth },
-    { path: '/login', name: 'login', component: Login },
+    { path: '/auth', name: 'auth', component: Auth, props: (route) => ({ code: route.query.code }) },
     { path: '/mypage', name: 'mypage', component: Mypage, beforeEnter: requireAuth },
     { path: '/request_book', name: 'request_book', component: RequestBook, beforeEnter: requireAuth },
     { path: '/request_result', name: 'request_result', component: RequestResult, props: { book: null }, beforeEnter: requireAuth},
