@@ -24,20 +24,18 @@ export default new Vuex.Store({
 
     editUserName(state, name) {
       if (state.isUserLoggedIn) {
-        state.user.user.name = name
+        state.user.name = name
       }
     },
 
     setToken(state, token) {
       state.token = token
-      localStorage.token = token
     },
 
     removeUser(state) {
       state.user = null
       state.token = null
       state.isUserLoggedIn = false
-      delete localStorage.token
     }
   },
   
