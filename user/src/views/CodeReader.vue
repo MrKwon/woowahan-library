@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import RentService from '@/services/RentService'
+import RentService from '@/services/node/RentService'
+
 import TitleToolBar from '@/components/TitleToolBar'
 
 const _snackBarTimeout = 2000

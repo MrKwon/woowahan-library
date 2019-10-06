@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import RentService from '@/services/RentService'
+import RentService from '@/services/node/RentService'
 
 import ViewTitle from '@/components/ViewTitle'
 import CurrentRentTitle from '@/components/CurrentRentTitle'

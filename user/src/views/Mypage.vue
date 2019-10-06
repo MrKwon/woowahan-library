@@ -141,7 +141,7 @@ import ViewTitle from '../components/ViewTitle'
 import AuthStateChip from '../components/AuthStateChip'
 import Divider from '../components/style/Divider'
 
-import UserService from '../services/UserService'
+import UserService from '../services/node/UserService'
 
 const _nickNamePattern = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]/gi;
 

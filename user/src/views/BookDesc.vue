@@ -46,8 +46,9 @@
 </template>
 
 <script>
-import BookService from '@/services/BookService'
-import SerialService from '@/services/SerialService'
+import BookService from '@/services/node/BookService'
+import SerialService from '@/services/node/SerialService'
+
 import TitleToolBar from '@/components/TitleToolBar'
 import BookDescInfo from '@/components/BookDescInfo'
 

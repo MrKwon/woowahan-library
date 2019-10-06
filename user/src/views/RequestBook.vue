@@ -111,9 +111,10 @@
 </template>
 
 <script>
-import NaverApiService from '@/services/NaverApiService'
+import NaverApiService from '@/services/node/NaverApiService'
+import RequestService from '@/services/node/RequestService'
+
 import ViewTitle from '@/components/ViewTitle'
-import RequestService from '@/services/RequestService'
 
 const _snackBarTimeout = 2000
 

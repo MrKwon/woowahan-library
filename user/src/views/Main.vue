@@ -42,9 +42,10 @@
 </template>
 
 <script>
+import BookService from '@/services/node/BookService'
+import GithubService from '@/services/node/GithubService'
+
 import BookList from '@/components/BookList'
-import BookService from '@/services/BookService'
-import GithubService from '@/services/GithubService'
 
 const _snackBarTimeout = 2000
 
