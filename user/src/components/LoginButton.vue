@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GithubService from '@/services/GithubService'
+import GithubService from '../services/node/GithubService'
 
 export default {
   methods: {

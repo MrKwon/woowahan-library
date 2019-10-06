@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BookService from '@/services/BookService'
+import BookService from '../services/node/BookService'
 
 export default {
   data: () => ({
