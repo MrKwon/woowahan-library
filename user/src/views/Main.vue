@@ -43,7 +43,6 @@
 
 <script>
 import BookService from '@/services/node/BookService'
-import GithubService from '@/services/node/GithubService'
 
 import BookList from '@/components/BookList'
 
@@ -51,10 +50,6 @@ const _snackBarTimeout = 2000
 
 const _error = 'error'
 const _success = 'success'
-
-const _requestFailedErrorMessage = '요청에 실패 하였습니다.'
-const _invalidTokenErrorMessage = '액세스 토큰을 받아올 수 없습니다.'
-const _successLoginMessage = '환영합니다 ! '
 
 export default {
   data: () => ({
@@ -83,41 +78,12 @@ export default {
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 12) + 1
-    this.userGithubLogin()
-    this.tokenLogin()
     this.messageShower()
   },
 
   methods: {
     scrollToTop() {
       window.scrollTo(0,0)
-    },
-
-    async userGithubLogin() {
-      const params = new URLSearchParams(window.location.search)
-      if (params.has('code')) {
-        const code = params.get('code')
-        try {
-          const response = await GithubService.user({ code: code })
-          if (!response.data) {
-            this._popSnackbar(_invalidTokenErrorMessage, _error)
-            this._initializeSnackBar()
-          } else {
-            this._dispatchUser(response.data)
-            this._popSnackbar(_successLoginMessage + this.$store.state.user.user.name + '님', _success)
-            this.$router.push('/')
-          }
-        } catch (error) {
-          this._popSnackbar(_requestFailedErrorMessage, _error)
-          this._initializeSnackBar()
-          this.$router.push('/')
-        }
-      }
-    },
-
-    _dispatchUser(data) {
-      this.$store.dispatch('setUser', data)
-      this.$store.dispatch('setToken', data.token)
     },
 
     _initializeSnackBar() {
@@ -131,18 +97,6 @@ export default {
       this.snackbar.snackbar = true
       this.snackbar.error = message
       this.snackbar.color = color
-    },
-
-    async tokenLogin() {
-      if (localStorage.token && !this.$store.state.isUserLoggedIn) {
-        try {
-          const response = await GithubService.tokenAuth(localStorage.token)
-          this._dispatchUser(response.data)
-          this._popSnackbar(_successLoginMessage + this.$store.state.user.user.name + '님', _success)
-        } catch (error) {
-          this._popSnackbar(error, _error)
-        }
-      }
     },
 
     messageShower() {

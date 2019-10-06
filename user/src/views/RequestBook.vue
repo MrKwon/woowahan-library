@@ -167,7 +167,7 @@ export default {
       try {
         const response = await RequestService.request({
           book: this.selectedItem,
-          user_id: this.$store.state.user.user.id
+          user_id: this.$store.state.user.userNo
         })
         this.$router.push({ name: 'main', params: { message: response.data.message }})
       } catch (error) {

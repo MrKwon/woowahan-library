@@ -25,18 +25,18 @@ export default {
         await this.$store.dispatch('setUser', user)
         await this.$store.dispatch('setToken', token)
         this.$router.push({
-          path: '/',
+          name: 'main',
           params: { message: `${this.$store.state.user.name} 님 환영합니다.` }
         })
       } else {
         this.$router.push({
-          path: '/',
+          name: 'main',
           params: { error: '응답 없음' }
         })
       }
     } catch (error) {
       this.$router.push({
-        path: '/',
+        name: 'main',
         params: { error: `${error.code} 로 인한 로그인 실패` }
       })
     }

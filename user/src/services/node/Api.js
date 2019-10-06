@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const base = "http://localhost:8081"
-const base = "https://d1e0ttqude6sum.cloudfront.net"
+const base = "http://localhost:8081"
+// const base = "https://d1e0ttqude6sum.cloudfront.net"
 
 export default {
   base() {
