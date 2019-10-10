@@ -100,7 +100,7 @@ export default {
 
   methods: {
     async getRentStatus() {
-      const token = this.$store.state.user.token
+      const token = this.$store.state.token
       try {
         const response = await RentService.userRentStatus(token, { body: "hi"})
         this.rentList = response.data
@@ -110,7 +110,7 @@ export default {
     },
 
     async _returnBtnHandler(serial) {
-      const token = this.$store.state.user.token
+      const token = this.$store.state.token
       try {
         const rentInfo = { serial: serial }
         const response = await RentService.returnBook(token, { rentInfo })
