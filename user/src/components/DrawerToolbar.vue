@@ -21,7 +21,7 @@
                     v-on:click="$router.push('/mypage')"
             >
                 <v-list-tile-avatar>
-                    <img :src="$store.state.user.avatarUrl"/>
+                    <img :src="$store.state.user.avatar_url"/>
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>

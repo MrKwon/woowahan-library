@@ -19,7 +19,7 @@
                             size="150px"
                             color="white"
                     >
-                        <img :src="$store.state.user.avatarUrl" alt="avatar">
+                        <img :src="$store.state.user.avatar_url" alt="avatar">
                     </v-avatar>
                 </v-layout>
                 <Divider></Divider>
