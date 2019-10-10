@@ -114,7 +114,7 @@ export default {
     },
 
     async rentBook () {
-      const token = this.$store.state.user.token
+      const token = this.$store.state.token
       try {
         const rentInfo = this._jsonParser(this.qrText)
         const response = await RentService.rentBook(token, { rentInfo })

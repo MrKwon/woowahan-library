@@ -6,9 +6,6 @@ module.exports = {
   async editName(req, res) {
     const user = req.body.user
     const newName = req.body.newName
-
-    console.log(user, newName)
-
     try {
       const updateResult = await User.update(
         { name: newName },

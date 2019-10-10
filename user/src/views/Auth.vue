@@ -11,6 +11,7 @@
 import GithubOAuthService from "../services/spring/GithubOAuthService";
 
 import ViewTitle from '../components/ViewTitle'
+import GithubService from "../services/node/GithubService";
 
 export default {
   components: {
@@ -19,9 +20,15 @@ export default {
 
   async beforeCreate() {
     try {
-      const response = await GithubOAuthService.login(this.$route.query.code)
+      const response = await GithubService.user({ code: this.$route.query.code })
       if (response.data) {
         const { user, token } = response.data
+        if (user.id) {
+          user.userNo = user.id
+        }
+        if (user.userNo) {
+          user.id = user.userNo
+        }
         await this.$store.dispatch('setUser', user)
         await this.$store.dispatch('setToken', token)
         this.$router.push({

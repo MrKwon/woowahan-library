@@ -1,17 +1,33 @@
 const passport = require('passport')
 const logger = require('../logger')
 
-const _AUTH_NONE = 'none'
-const _AUTH_USER = 'user'
+const _AUTH_NONE = 'NONE'
+const _AUTH_USER = 'USER'
 
 const _NO_AUTHORIZATION_ERROR = '권한이 없습니다.'
 
 const isUserAuthNone = (user) => user.authorization == _AUTH_NONE
 const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user.authorization == _AUTH_USER
 
+function authorizationParser(number) {
+  if (number === 0) {
+    return 'NONE'
+  }
+  if (number === 1) {
+    return 'USER'
+  }
+  if (number === 2) {
+    return 'MANAGER'
+  }
+  if (number === 3) {
+    return 'KING'
+  }
+}
+
 const userAuth = (req, res, next) => {
   passport.authenticate('jwt', function(error, user) {
     logger.error(`[AuthorizationChecker.js] : ${error}`)
+    user.authorization = authorizationParser(user.authorization)
     if (error || !user) {
       res.status(403).send({
         message: _NO_AUTHORIZATION_ERROR
@@ -38,6 +54,7 @@ const manageAuth = (req, res, next) => {
   passport.authenticate('jwt', function(error, user) {
     logger.error(error)
     const userJson = user.toJSON()
+    userJson.authorization = authorizationParser(userJson.authorization)
     if (error || !user) {
       logger.info(`[AuthorizationChecker.js] : ${user} ${_NO_AUTHORIZATION_ERROR}`)
       res.status(403).send({

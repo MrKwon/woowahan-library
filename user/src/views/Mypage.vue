@@ -245,10 +245,8 @@
 
       async patchNewName() {
         try {
-          const user = this.$store.state.user
-          user.id = user.userNo
           const response = await UserService.editName({
-            user: user,
+            user: this.$store.state.user,
             newName: this.newName
           })
           this.$store.dispatch('editUserName', response.data.newName)

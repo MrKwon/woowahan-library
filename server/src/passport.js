@@ -14,15 +14,16 @@ passport.use(
     try {
       const user = await User.findOne({
         where: {
-          email: jwtPayload.email
+          id: jwtPayload.id
         }
       })
+      console.log(user)
       if (!user) {
-        return done(new Error(), false)
+        return done(new Error("존재하지 않는 유저"), false)
       }
       return done(null, user)
     } catch (error) {
-      return done(new Error(), false)
+      return done(new Error("유효하지 않는 jwt"), false)
     }
   })
 )
