@@ -11,7 +11,6 @@
 import GithubOAuthService from "../services/spring/GithubOAuthService";
 
 import ViewTitle from '../components/ViewTitle'
-import GithubService from "../services/node/GithubService";
 
 export default {
   components: {
