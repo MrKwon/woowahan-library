@@ -20,7 +20,7 @@ export default {
 
   async beforeCreate() {
     try {
-      const response = await GithubService.user({ code: this.$route.query.code })
+      const response = await GithubOAuthService.login(this.$route.query.code)
       if (response.data) {
         const { user, token } = response.data
         if (user.id) {
