@@ -3,6 +3,8 @@ const logger = require('../logger')
 
 const _AUTH_NONE = 'NONE'
 const _AUTH_USER = 'USER'
+const _AUTH_MANAGER = 'MANAGER'
+const _AUTH_KING = 'KING'
 
 const _NO_AUTHORIZATION_ERROR = '권한이 없습니다.'
 
@@ -11,16 +13,16 @@ const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user
 
 function authorizationParser(number) {
   if (number === 0) {
-    return 'NONE'
+    return _AUTH_NONE
   }
   if (number === 1) {
-    return 'USER'
+    return _AUTH_USER
   }
   if (number === 2) {
-    return 'MANAGER'
+    return _AUTH_MANAGER
   }
   if (number === 3) {
-    return 'KING'
+    return _AUTH_KING
   }
 }
 
