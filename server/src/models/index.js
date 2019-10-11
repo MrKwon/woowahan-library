@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   process.env.NODE_ENV === 'production' ? config.production.database : config.development.database,
   process.env.NODE_ENV === 'production' ? config.production.username : config.development.username,
   process.env.NODE_ENV === 'production' ? config.production.password : config.development.password,
-  process.env.NODE_ENV === 'production' ? config.production : config.development
+  process.env.NODE_ENV === 'production' ? config.production.external : config.development
 )
 
 db.sequelize = sequelize
