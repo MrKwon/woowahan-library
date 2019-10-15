@@ -1,8 +1,5 @@
 import axios from 'axios'
-
-const config = {
-  nodeUrl: "http://localhost:8081"
-}
+import config from '../../config'
 
 export default {
   base() {
@@ -12,6 +9,8 @@ export default {
   },
 
   user() {
+    // eslint-disable-next-line no-console
+    console.log(config)
     return axios.create({
       baseURL: `${config.nodeUrl}/user`
     })

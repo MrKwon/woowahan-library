@@ -1,6 +1,6 @@
 require('dotenv').config()
 
 module.exports = {
-  nodeUrl: process.env.NODE_URL,
-  springUrl: process.env.SPRING_URL
+  nodeUrl: process.env.VUE_APP_NODE_URL,
+  springUrl: process.env.VUE_APP_SPRING_URL
 }

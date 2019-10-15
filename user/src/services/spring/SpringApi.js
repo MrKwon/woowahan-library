@@ -1,8 +1,5 @@
 import axios from 'axios'
-
-const config = {
-  springUrl: "http://localhost:9090"
-}
+import config from '../../config'
 
 const base = () => (
   axios.create({
