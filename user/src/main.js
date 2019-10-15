@@ -6,8 +6,10 @@ import App from './App.vue'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 import store from './store'
+import VueCookie from 'vue-cookie'
 
 Vue.config.productionTip = false
+Vue.use(VueCookie);
 
 sync(store, router)
 
