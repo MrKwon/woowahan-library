@@ -1,5 +1,6 @@
 const { Serial } = require('../models')
 const logger = require('../logger')
+const SerialService = require('../service/SerialService')
 
 const showBookSerials = async(req, res) => {
   try {
@@ -22,15 +23,29 @@ const showBookSerials = async(req, res) => {
 
 const addSerial = async(req, res) => {
   try {
-    const { bookId } = req.body
-    const savedSerial = await Serial.create({
-      book_id: bookId
-    })
-    const serialJSON = savedSerial.toJSON()
+    const { bookId, inputSerial } = req.body
+    if (!inputSerial) {
+      const serial = await SerialService.create(bookId);
+      res.send({
+        serial
+      })
+      return
+    }
+    console.log("input serial", inputSerial)
+    const serial = await SerialService.findById(inputSerial)
+      if (serial) {
+      res.status(400).send({
+        error: `이미 존재하는 serial 입니다.`
+      })
+      return
+    }
+    const createdSerial = await SerialService.createWithSerial(bookId, inputSerial)
+    console.log(createdSerial)
     res.send({
-      serial: serialJSON
+      serial: createdSerial
     })
   } catch (error) {
+    console.error(error)
     logger.error(`[SerialController.js] : ${error}`)
     res.status(404).send({
       error

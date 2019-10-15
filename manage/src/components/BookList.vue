@@ -117,6 +117,7 @@
             </v-toolbar-title>
             <v-spacer>
             </v-spacer>
+            <v-text-field xs3 dark type="number" min="1" width="60px" v-model="inputSerial"/>
             <v-btn small flat @click="addButtonHandler">
               추가
             </v-btn>
@@ -211,6 +212,7 @@ export default {
     snackbar: false,
     snackbarTimeout: 2000,
     snackbarMessage: 'temp message',
+    inputSerial: ''
   }),
 
   components: {
@@ -243,9 +245,11 @@ export default {
       }
     },
 
-    async addSerial(bookId) {
+    async addSerial(bookId, inputSerial) {
       try {
-        const response = await SerialService.addSerial({ bookId })
+        const response = inputSerial ?
+                await SerialService.addSerial({ bookId, inputSerial }):
+                await SerialService.addSerial({ bookId })
         if (response) {
           this.snackbarMessage = '등록성공'
           this._pushSnackBar()
@@ -278,7 +282,12 @@ export default {
     },
 
     addButtonHandler() {
-      this.addSerial(this.selectedBook.id)
+      if (this.inputSerial === '') {
+        this.addSerial(this.selectedBook.id, null)
+      } else if (this.inputSerial !== '') {
+        this.addSerial(this.selectedBook.id, this.inputSerial)
+      }
+      this.inputSerial = ''
     },
 
     removeButtonHandler(id) {

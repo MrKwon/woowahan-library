@@ -13,10 +13,15 @@ module.exports = {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
     dialect: process.env.DB_DIAL,
-    logging: false
-  },
+    logging: true,
+    external: {
+      port: process.env.REMOTE_PORT,
+      host: process.env.REMOTE_HOST,
+      dialect: process.env.DB_DIAL
+    }
+  }
+  ,
   authentication: {
     jwtSecret: process.env.JWT_SECRET || 'secret'
   },
