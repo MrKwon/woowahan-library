@@ -9,8 +9,6 @@ export default {
   },
 
   user() {
-    // eslint-disable-next-line no-console
-    console.log(config)
     return axios.create({
       baseURL: `${config.nodeUrl}/user`
     })

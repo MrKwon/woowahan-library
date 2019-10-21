@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-list dense class="auth-drawer pt-2"
-                v-if="$store.state.isUserLoggedIn && $store.state.user.user.authorization !== 'none'">
+                v-if="$store.state.isUserLoggedIn && $store.state.user.authorization !== 'NONE'">
             <v-list-tile
                     v-for="(item, index) in items"
                     :key="index"
@@ -10,14 +10,13 @@
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
-
                 <v-list-tile-content>
                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
         <v-list dense class="pa-3"
-                v-if="!$store.state.isUserLoggedIn || $store.state.user.user.authorization === 'none'"
+                v-if="!$store.state.isUserLoggedIn || $store.state.user.authorization === 'NONE'"
         >
             <div>이용 권한이 없습니다.</div>
         </v-list>

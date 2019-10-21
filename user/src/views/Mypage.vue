@@ -179,6 +179,8 @@
     methods: {
       logout: function () {
         this.$store.dispatch('removeUser')
+        this.$cookie.delete('token')
+        this.$cookie.delete('user')
         this.$router.push('/')
       },
 
@@ -249,7 +251,7 @@
             user: this.$store.state.user,
             newName: this.newName
           })
-          this.$store.dispatch('editUserName', response.data.newName)
+          await this.$store.dispatch('editUserName', response.data.newName)
           this._closeNameEditDialog()
           this._popSnackbar('변경 성공', 'success')
         } catch (error) {

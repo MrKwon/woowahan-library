@@ -42,9 +42,9 @@
 </template>
 
 <script>
-import BookService from '@/services/node/BookService'
+import BookService from '../services/node/BookService'
 
-import BookList from '@/components/BookList'
+import BookList from '../components/BookList'
 
 const _snackBarTimeout = 2000
 
@@ -78,6 +78,7 @@ export default {
   async beforeMount() {
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 12) + 1
+    this.autoLoginProcessing()
     this.messageShower()
   },
 
@@ -105,6 +106,17 @@ export default {
       }
       if (this.$route.params.error) {
         this._popSnackbar(this.$route.params.error, _error)
+      }
+    },
+
+    async autoLoginProcessing() {
+      const user = JSON.parse(this.$cookie.get('user'))
+      const token = this.$cookie.get('token')
+
+      const isUserLoggedIn = this.$store.state.isUserLoggedIn
+      if (token && user && !isUserLoggedIn) {
+        await this.$store.dispatch('setUser', user)
+        await this.$store.dispatch('setToken', user)
       }
     }
   }

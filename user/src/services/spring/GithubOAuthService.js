@@ -5,7 +5,7 @@ const oauth = () => (
 )
 
 const login = (code) => (
-  SpringApi.base().get('github/user/api', {
+  SpringApi.base().get('api/v1/tecobrary/auth', {
     params: { code: code }
   })
 )
