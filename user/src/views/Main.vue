@@ -76,6 +76,7 @@ export default {
   },
 
   async beforeMount() {
+    this.clearLocalStorageToken()
     this.books = (await BookService.books({ page: this.page })).data
     this.length = Math.floor(((await BookService.total()).data.lastId - 1) / 12) + 1
     this.autoLoginProcessing()
@@ -117,6 +118,12 @@ export default {
       if (token && user && !isUserLoggedIn) {
         await this.$store.dispatch('setUser', user)
         await this.$store.dispatch('setToken', user)
+      }
+    },
+
+    clearLocalStorageToken() {
+      if (localStorage.token) {
+        delete localStorage.token
       }
     }
   }
