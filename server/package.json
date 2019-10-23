@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "tecobrary_node_server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "serve": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
     "lint": "./node_modules/.bin/eslint \"**/*.js\"",
     "test": "cross-env NODE_ENV=production PORT=80 node src/app.js",
-    "deploy": "cross-env NODE_ENV=production PORT=80 pm2 start src/app.js -i 0"
+    "deploy": "cross-env NODE_ENV=production PORT=80 pm2 start src/app.js"
   },
   "keywords": [],
   "author": "",
